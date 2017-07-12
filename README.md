@@ -1,22 +1,24 @@
 #TravelPack
 
 ## Team ##
- Product Owner: Rose Espiritu
- Scrum Master: David Delgado
- Development Team: Taijon Robinson
+ > Product Owner: Rose Espiritu
+ > Scrum Master: David Delgado
+ > Development Team: Taijon Robinson
 
 ## Wireframes ##
 ![img](http://imgh.us/Screen_Shot_2017-07-10_at_10.39.00_PM.png)
 
 ## Database Schema ##
-![img]()
+![img](http://imgh.us/Screen_Shot_2017-07-11_at_6.39.06_PM.png)
 
 ## Tech Stack ##
-![img]()
-
+![img](http://imgh.us/tech-stack.png)
 
 ## Development ##
 > System Requirements
+
+
+
 
 
 
