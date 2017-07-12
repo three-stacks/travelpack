@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar hideBackButton="true">
+    <ion-buttons end>
+      <button ion-button (click)="newPack()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Packs</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content class="card-background-page">
+
+  <ion-card (click)="packChat()">
+    <img src="https://images7.alphacoders.com/590/thumb-350-590652.jpg"/>
+    <div class="card-title">Colorado</div>
+    <div class="card-subtitle">4 Day Trip</div>
+  </ion-card>
+
+</ion-content>
