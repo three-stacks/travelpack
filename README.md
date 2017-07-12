@@ -24,6 +24,11 @@
 
 
 
+to start front end run
+ionic server
+
+
+
 
 This is a starter template for [Ionic](http://ionicframework.com/docs/) projects.
 
