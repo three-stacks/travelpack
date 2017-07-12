@@ -9,7 +9,7 @@
 ![img](http://imgh.us/Screen_Shot_2017-07-10_at_10.39.00_PM.png)
 
 ## Database Schema ##
-![img](http://imgh.us/Screen_Shot_2017-07-11_at_6.39.06_PM.png)
+![img](http://imgh.us/Screen_Shot_2017-07-12_at_10.53.34_AM.png)
 
 ## Tech Stack ##
 ![img](http://imgh.us/tech-stack.png)
