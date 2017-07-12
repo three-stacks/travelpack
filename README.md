@@ -1,3 +1,35 @@
+#TravelPack
+
+## Team ##
+ > Product Owner: Rose Espiritu
+ > Scrum Master: David Delgado
+ > Development Team: Taijon Robinson
+
+## Wireframes ##
+![img](http://imgh.us/Screen_Shot_2017-07-10_at_10.39.00_PM.png)
+
+## Database Schema ##
+![img](http://imgh.us/Screen_Shot_2017-07-12_at_10.53.34_AM.png)
+
+## Tech Stack ##
+![img](http://imgh.us/tech-stack.png)
+
+## Development ##
+> System Requirements
+
+
+
+
+
+
+
+
+to start front end run
+ionic server
+
+
+
+
 This is a starter template for [Ionic](http://ionicframework.com/docs/) projects.
 
 ## How to use this template
