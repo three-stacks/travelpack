@@ -29,6 +29,11 @@ const IndexController = Nodal.require('app/controllers/index_controller.js');
 
 /* generator: begin imports */
 
+const V1PacksController = Nodal.require('app/controllers/v1/packs_controller.js');
+const V1PhotosController = Nodal.require('app/controllers/v1/photos_controller.js');
+const V1BudgetsController = Nodal.require('app/controllers/v1/budgets_controller.js');
+const V1ItinerariesController = Nodal.require('app/controllers/v1/itineraries_controller.js');
+const V1UsersController = Nodal.require('app/controllers/v1/users_controller.js');
 
 /* generator: end imports */
 
@@ -36,6 +41,11 @@ router.route('/').use(IndexController);
 
 /* generator: begin routes */
 
+router.route('/v1/packs/{id}').use(V1PacksController);
+router.route('/v1/photos/{id}').use(V1PhotosController);
+router.route('/v1/budgets/{id}').use(V1BudgetsController);
+router.route('/v1/itineraries/{id}').use(V1ItinerariesController);
+router.route('/v1/users/{id}').use(V1UsersController);
 
 /* generator: end routes */
 

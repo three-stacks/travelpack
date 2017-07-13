@@ -1,5 +1,90 @@
 {
 
-  "migration_id": null
+  "migration_id": 2017071315164760,
+
+  "models": {
+
+    "Budget": {
+
+      "table": "budgets",
+
+      "columns": [
+        {"name": "id", "type": "serial", "properties": {"nullable":false,"primary_key":true,"auto_increment":true}},
+        {"name": "pack_id", "type": "int", "properties": {}},
+        {"name": "item", "type": "string", "properties": {}},
+        {"name": "number", "type": "int", "properties": {}},
+        {"name": "cost", "type": "int", "properties": {}},
+        {"name": "total_cost", "type": "int", "properties": {}},
+        {"name": "cost_per_person", "type": "int", "properties": {}},
+        {"name": "created_at", "type": "datetime", "properties": {}},
+        {"name": "updated_at", "type": "datetime", "properties": {}}
+      ]
+
+    },
+
+    "Itinerary": {
+
+      "table": "itineraries",
+
+      "columns": [
+        {"name": "id", "type": "serial", "properties": {"nullable":false,"primary_key":true,"auto_increment":true}},
+        {"name": "pack_id", "type": "int", "properties": {}},
+        {"name": "name", "type": "string", "properties": {}},
+        {"name": "activity", "type": "string", "properties": {}},
+        {"name": "url", "type": "string", "properties": {}},
+        {"name": "photo", "type": "string", "properties": {}},
+        {"name": "date", "type": "string", "properties": {}},
+        {"name": "time", "type": "string", "properties": {}},
+        {"name": "like", "type": "int", "properties": {}},
+        {"name": "unlike", "type": "int", "properties": {}},
+        {"name": "created_at", "type": "datetime", "properties": {}},
+        {"name": "updated_at", "type": "datetime", "properties": {}}
+      ]
+
+    },
+
+    "Pack": {
+
+      "table": "packs",
+
+      "columns": [
+        {"name": "id", "type": "serial", "properties": {"nullable":false,"primary_key":true,"auto_increment":true}},
+        {"name": "name", "type": "string", "properties": {}},
+        {"name": "created_at", "type": "datetime", "properties": {}},
+        {"name": "updated_at", "type": "datetime", "properties": {}}
+      ]
+
+    },
+
+    "Photo": {
+
+      "table": "photos",
+
+      "columns": [
+        {"name": "id", "type": "serial", "properties": {"nullable":false,"primary_key":true,"auto_increment":true}},
+        {"name": "pack_id", "type": "int", "properties": {}},
+        {"name": "url", "type": "string", "properties": {}},
+        {"name": "created_at", "type": "datetime", "properties": {}},
+        {"name": "updated_at", "type": "datetime", "properties": {}}
+      ]
+
+    },
+
+    "User": {
+
+      "table": "users",
+
+      "columns": [
+        {"name": "id", "type": "serial", "properties": {"nullable":false,"primary_key":true,"auto_increment":true}},
+        {"name": "email", "type": "string", "properties": {"unique":true}},
+        {"name": "password", "type": "string", "properties": {}},
+        {"name": "username", "type": "string", "properties": {}},
+        {"name": "created_at", "type": "datetime", "properties": {}},
+        {"name": "updated_at", "type": "datetime", "properties": {}}
+      ]
+
+    }
+
+  }
 
 }
