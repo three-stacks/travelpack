@@ -10,9 +10,7 @@ export class HomePage {
   username = '';
   password = '';
 
-  constructor(public navCtrl: NavController) {
-
-  }
+  constructor(public navCtrl: NavController) {}
   login(){
     console.log(this.username);
     this.navCtrl.push(Packs);
