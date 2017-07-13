@@ -1,16 +1,19 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { Chat } from "../chat/chat";
 
 @Component({
-  selector: 'page-chat',
-  templateUrl: 'chat.html'
+  selector: 'page-photos',
+  templateUrl: 'photos.html'
 })
-export class Chat {
+export class Photos {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ChatPagePage');
+    console.log('ionViewDidLoad PhotosPagePage');
   }
-  
+  backClick(){
+    this.navCtrl.push(Chat);
+  }
 }

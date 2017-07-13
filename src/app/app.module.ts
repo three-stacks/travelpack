@@ -8,13 +8,17 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { Packs } from '../pages/packs/packs';
 import { Chat } from '../pages/chat/chat';
+import { Itinerary } from '../pages/itinerary/itinerary';
+import { Photos } from '../pages/photos/photos';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     Packs,
-    Chat
+    Chat,
+    Itinerary,
+    Photos
   ],
   imports: [
     BrowserModule,
@@ -25,7 +29,9 @@ import { Chat } from '../pages/chat/chat';
     MyApp,
     HomePage,
     Packs,
-    Chat
+    Chat,
+    Itinerary,
+    Photos
   ],
   providers: [
     // StatusBar,
