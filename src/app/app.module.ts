@@ -10,6 +10,7 @@ import { Packs } from '../pages/packs/packs';
 import { Chat } from '../pages/chat/chat';
 import { Itinerary } from '../pages/itinerary/itinerary';
 import { Photos } from '../pages/photos/photos';
+import { PackForm } from "../pages/pack-form/pack-form";
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { Photos } from '../pages/photos/photos';
     Packs,
     Chat,
     Itinerary,
-    Photos
+    Photos,
+    PackForm
   ],
   imports: [
     BrowserModule,
@@ -31,7 +33,8 @@ import { Photos } from '../pages/photos/photos';
     Packs,
     Chat,
     Itinerary,
-    Photos
+    Photos,
+    PackForm
   ],
   providers: [
     // StatusBar,
