@@ -34,7 +34,7 @@
 ## Development
 
 ## Architecture
-![img](http://i68.tinypic.com/2mr7d6x.png)
+![img](http://i65.tinypic.com/o5yl1v.png)
 ## Requirements
 - Node.js 8.1.4
 - Postgresql 9.6
