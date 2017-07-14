@@ -34,7 +34,7 @@
 ## Development
 
 ## Architecture
-![img](http://i65.tinypic.com/2mhddw9.png)
+![img](http://i65.tinypic.com/2mhddw9.jpg)
 
 ## Requirements
 - Node.js 8.1.4
