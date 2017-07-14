@@ -1,28 +1,21 @@
 # Travelpack #
 
 ## Heading ##
-  > Name the product in a way the reader (i.e. your target customers) will understand.
+  > Think of us as GroupMe for planning trips!
 
 ## Sub-Heading ##
-  > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+  > We take the headache out of planning groups! Everything from itinerary, budgeting, and messaging in one place. 
 
 ## Summary ##
-  > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+  > Travelpack is a native, cross platform application that allows users search through activities, restaurants, as they create and manage their itinerary. Each item on the itinerary allows users to vote for or against the activity so that the pack knows what ideas are popular or unpopular. There is also a built in budget calculator that sources the price of hotels and flights to help the pack estimate the cost of the trip.
+
+During the trip users utilize travelpack's find my pack feature to pin point the real time locations of the pack members and upload photos to the pack photo album to keeps all of the photos from the trip in one place!
 
 ## Problem ##
-  > Describe the problem your product solves.
+  > Travelpack aims to take the stress out of planning group trips by creating a central location for messaging, planning an itinerary, and managing a budget. 
 
 ## Solution ##
-  > Describe how your product elegantly solves the problem.
-
-## Quote from You ##
-  > A quote from a spokesperson in your company.
+  > We've created a seemless messaging application to make it easier to communicate with your family and friends while planning a trip.
 
 ## How to Get Started ##
-  > Describe how easy it is to get started.
-
-## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
-
-## Closing and Call to Action ##
-  > Wrap it up and give pointers where the reader should go next.
+  > Just download the app and start planning with your pack!
