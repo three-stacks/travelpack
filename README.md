@@ -1,20 +1,35 @@
 #TravelPack
+> 
 
-## Team ##
+## Team 
  > Product Owner: Rose Espiritu
  > Scrum Master: David Delgado
  > Development Team: Taijon Robinson
 
-## Wireframes ##
+## Wireframes 
 ![img](http://imgh.us/Screen_Shot_2017-07-10_at_10.39.00_PM.png)
 
-## Database Schema ##
+## Database Schema 
 ![img](http://imgh.us/Screen_Shot_2017-07-12_at_10.53.34_AM.png)
 
-## Tech Stack ##
+## Tech Stack 
 ![img](http://imgh.us/tech-stack.png)
 
-## Development ##
+## Requirements
+- Node.js
+- Postgresql 9.6
+
+### Installing Dependencies
+
+From within the root directory:
+
+
+
+
+
+
+
+
 > System Requirements
 
 
