@@ -45,8 +45,9 @@ Eazy peazy!
 
 ### Requirements
 - Node.js 8.1.4
-- Socket 2.0.3
-- Redis 3.2.9
+- NPM 5.0.3
+- Ionic 3.5.0
+- Cordova 7.0.1
 - Postgresql 9.6
 
 ### Installing Dependencies
