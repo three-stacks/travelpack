@@ -13,5 +13,8 @@
       <ion-input [(ngModel)]='packName' type="text" placeholder="Pack Name"></ion-input>
     </ion-item>
   </ion-list>
+  <ion-searchbar placeholder="Destination City...">
+  </ion-searchbar>
   <button (click)="submitPack(packName)" ion-button full>Submit</button>
+  <button navPop ion-button full>Cancel</button>
 </ion-content>
