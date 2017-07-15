@@ -1,3 +1,18 @@
 page-home {
-
+  .button-md, .button-ios {
+    background-color: #82CADA,
+  }
+  .toolbar-title-md, .toolbar-title-ios {
+    font-size: 4rem;
+    font-weight: 100;
+  }
+  ion-list {
+    padding-top: 150px;
+  }
+  ion-content {
+    background-image: url("https://s-media-cache-ak0.pinimg.com/originals/f8/8e/b7/f88eb7f7e873e32ea99a49ebbbd284fc.jpg")
+  }
+  ion-item {
+    opacity: .70
+  }
 }

@@ -7,6 +7,8 @@ import { HomePage } from '../pages/home/home';
 import { Packs } from '../pages/packs/packs';
 import { Itinerary } from '../pages/itinerary/itinerary';
 import { Photos } from '../pages/photos/photos';
+import { Budget } from "../pages/budget/budget";
+import { FindMyPack } from "../pages/find-my-pack/find-my-pack";
 
 @Component({
   templateUrl: 'app.html'
@@ -22,7 +24,9 @@ export class MyApp {
     this.pages = [
       {title: 'Packs', component: Packs},
       {title: 'Itinerary', component: Itinerary},
-      {title: 'Pack Pics', component: Photos}
+      {title: 'Pack Pics', component: Photos},
+      {title: 'Budget', component: Budget},
+      {title: 'Find My Pack', component: FindMyPack}
     ]
   }
 

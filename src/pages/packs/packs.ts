@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { Chat } from '../chat/chat';
+import { PackForm } from "../pack-form/pack-form";
 
 @Component({
   selector: 'page-packs',
@@ -8,13 +9,19 @@ import { Chat } from '../chat/chat';
 })
 export class Packs {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PacksPagePage');
   }
+
+  presentProfileModal() {
+    let profileModal = this.modalCtrl.create(PackForm, {});
+    profileModal.present();
+  }
+
   newPack() {
-    console.log('new pack');
+    this.navCtrl.push(PackForm);
   }
   packChat() {
     this.navCtrl.push(Chat);

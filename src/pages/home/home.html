@@ -1,12 +1,7 @@
-<ion-header>
-  <ion-navbar color="travel-nav">
-    <ion-title text-center>
-      Travel Pack
-    </ion-title>
-  </ion-navbar>
-</ion-header>
-
 <ion-content padding>
+  <ion-title text-center>
+      Travel Pack
+  </ion-title>
   <ion-list>
   <ion-item>
     <ion-input [(ngModel)]='username' type="text" placeholder="Username"></ion-input>
@@ -14,6 +9,6 @@
   <ion-item>
     <ion-input [(ngModel)]='password'type="password" placeholder="Password"></ion-input>
   </ion-item>
-</ion-list>
-<button (click)="login()" ion-button full>LogIn</button>
+  </ion-list>
+  <button (click)="login()" ion-button full>LogIn</button>
 </ion-content>

@@ -10,6 +10,10 @@ import { Packs } from '../pages/packs/packs';
 import { Chat } from '../pages/chat/chat';
 import { Itinerary } from '../pages/itinerary/itinerary';
 import { Photos } from '../pages/photos/photos';
+import { PackForm } from "../pages/pack-form/pack-form";
+import { Contacts } from "../pages/contacts/contacts";
+import { Budget } from "../pages/budget/budget";
+import { FindMyPack } from "../pages/find-my-pack/find-my-pack";
 
 @NgModule({
   declarations: [
@@ -18,7 +22,11 @@ import { Photos } from '../pages/photos/photos';
     Packs,
     Chat,
     Itinerary,
-    Photos
+    Photos,
+    PackForm,
+    Contacts,
+    Budget,
+    FindMyPack
   ],
   imports: [
     BrowserModule,
@@ -31,11 +39,13 @@ import { Photos } from '../pages/photos/photos';
     Packs,
     Chat,
     Itinerary,
-    Photos
+    Photos,
+    PackForm,
+    Contacts,
+    Budget,
+    FindMyPack
   ],
   providers: [
-    // StatusBar,
-    // SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

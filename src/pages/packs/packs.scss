@@ -1,4 +1,8 @@
 page-packs {
+  .toolbar-title-md, .toolbar-title-ios {
+    font-size: 3rem;
+    font-weight: 300;
+  }
   .card-background-page {
 
     ion-card {
@@ -12,7 +16,7 @@ page-packs {
       top: 36%;
       font-size: 2.0em;
       width: 100%;
-      font-weight: bold;
+      font-weight: 300;
       color: #fff;
     }
 
