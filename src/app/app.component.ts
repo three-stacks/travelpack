@@ -10,6 +10,7 @@ import { Photos } from '../pages/photos/photos';
 import { Budget } from "../pages/budget/budget";
 import { FindMyPack } from "../pages/find-my-pack/find-my-pack";
 
+
 @Component({
   templateUrl: 'app.html'
 })
