@@ -1,5 +1,11 @@
 {
   "name": "travelpack",
   "app_id": "ae29ecbd",
-  "type": "ionic-angular"
+  "type": "ionic-angular",
+  "proxies": [
+    {
+      "path": "/users",
+      "proxyUrl": "http://localhost:3030/users"
+    }
+  ]
 }
