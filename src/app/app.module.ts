@@ -14,8 +14,9 @@ import { PackForm } from "../pages/pack-form/pack-form";
 import { Contacts } from "../pages/contacts/contacts";
 import { Budget } from "../pages/budget/budget";
 import { FindMyPack } from "../pages/find-my-pack/find-my-pack";
-import { BudgetProvider } from '../providers/budget/budget';
 import { BudgetAddon } from "../pages/budget-addon/budget-addon";
+import { AuthService } from "../services/auth.service";
+import { PackService } from "../services/pack.service";
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { BudgetAddon } from "../pages/budget-addon/budget-addon";
     Contacts,
     Budget,
     FindMyPack,
-    BudgetAddon
+    BudgetAddon,
   ],
   imports: [
     BrowserModule,
@@ -47,11 +48,11 @@ import { BudgetAddon } from "../pages/budget-addon/budget-addon";
     Contacts,
     Budget,
     FindMyPack,
-    BudgetAddon
+    BudgetAddon,
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    BudgetProvider
-  ]
+    AuthService, PackService,
+  ],
 })
 export class AppModule {}
