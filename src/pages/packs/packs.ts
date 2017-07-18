@@ -1,29 +1,49 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
 import { Chat } from '../chat/chat';
 import { PackForm } from "../pack-form/pack-form";
+import { PackService } from "../../services/pack.service";
 
 @Component({
   selector: 'page-packs',
-  templateUrl: 'packs.html'
+  templateUrl: 'packs.html',
 })
 export class Packs {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {}
+  public packNames: any;
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad PacksPagePage');
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public modalCtrl: ModalController,
+    public pkSvs: PackService) {
+    this.packNames = [
+      { name: "Vegas Baby!!",
+        img: "http://s1.picswalls.com/wallpapers/2015/09/27/hd-las-vegas-wall_030837845_281.jpg" },
+      { name: "Colorado Trip",
+        img: "http://trunkweed.com/uploads/posts/images/50923-colorado-mountain.jpg" },
+      { name: "Panama Beach",
+        img: "http://cdn.wonderfulengineering.com/wp-content/uploads/2016/01/beach-wallpaper-6.jpg" }
+    ];
   }
 
-  presentProfileModal() {
-    let profileModal = this.modalCtrl.create(PackForm, {});
+  public ionViewDidLoad() {
+    console.log('ionViewDidLoad PacksPagePage');
+    this.pkSvs.getPacks(this.newPacks.bind(this));
+  }
+
+  public presentProfileModal() {
+    const profileModal = this.modalCtrl.create(PackForm, {});
     profileModal.present();
   }
-
-  newPack() {
-    this.navCtrl.push(PackForm);
+  public newPacks(packs) {
+    if (packs) {
+      this.packNames = packs;
+    }
   }
-  packChat() {
+  public packChat() {
     this.navCtrl.push(Chat);
   }
 
