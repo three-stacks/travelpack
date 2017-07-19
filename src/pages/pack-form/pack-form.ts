@@ -1,25 +1,26 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { PackService } from "../../services/pack.service";
 
 @Component({
   selector: 'page-pack-form',
-  templateUrl: 'pack-form.html'
+  templateUrl: 'pack-form.html',
 })
 export class PackForm {
-  public packName: string
+  public packName: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-
+  constructor(public navCtrl: NavController, public navParams: NavParams, public pkSvs: PackService) {
   }
 
-  ionViewDidLoad() {
+  public ionViewDidLoad() {
     console.log('ionViewDidLoad PackFormPagePage');
   }
-  submitPack() {
-    console.log(this.packName)
+  public submitPack() {
+    console.log(this.packName);
+    this.pkSvs.addPacks(this.packName);
     this.navCtrl.pop();
   }
-  cancelPack(){
+  public cancelPack() {
     this.navCtrl.pop();
   }
 

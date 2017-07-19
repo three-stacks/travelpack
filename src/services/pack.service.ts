@@ -12,8 +12,7 @@ export class PackService {
     .map(res => res.json())
     .subscribe((data) => {
       console.log(data, 'data');
-      cb([{ name: "Montreal",
-        img: "http://s1.picswalls.com/wallpapers/2015/09/27/hd-las-vegas-wall_030837845_281.jpg" }]);
+      // cb(data);
     }, (err) => {
       cb([{ name: "Montreal",
         img: "http://s1.picswalls.com/wallpapers/2015/09/27/hd-las-vegas-wall_030837845_281.jpg" }]);

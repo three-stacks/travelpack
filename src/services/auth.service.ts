@@ -9,7 +9,7 @@ export class AuthService {
 
   public loginUser(user) {
     console.log(user);
-    this.http.post('/users', user)
+    this.http.post("http://172.24.3.132:3030/authentication", user)
       .map(res => res.json())
       .subscribe((data) => {
         console.log(data, 'data');
@@ -20,7 +20,7 @@ export class AuthService {
 
   public signupUser(user) {
     console.log(user);
-    this.http.post('/users', user)
+    this.http.post("http://172.24.3.132:3030/users", user)
       .map(res => res.json())
       .subscribe((data) => {
         console.log(data, 'data');
