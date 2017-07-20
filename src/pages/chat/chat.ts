@@ -43,7 +43,7 @@ export class Chat {
   public chatSend(val) {
     let data = {
       message: val,
-      username: 'David D.',
+      username: 'david',
     };
     this.socket.emit('new message', data);
     this.chat = '';
