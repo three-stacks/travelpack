@@ -1,0 +1,22 @@
+<ion-content padding>
+  <ion-title text-center>
+      Sign Up
+  </ion-title>
+  <ion-list>
+    <ion-item>
+      <img style="align-items: center" src="{{pathForImage(lastImage)}}" style="width: 100%" [hidden]="lastImage === null">
+      <button ion-button style="background-color: clear" (click)="avatarPic()">Add Avatar</button>
+    </ion-item>  
+    <ion-item>
+      <ion-input [(ngModel)]='user.username' type="text" placeholder="Username"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input [(ngModel)]='user.email' type="text" placeholder="Email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input [(ngModel)]='user.password'type="password" placeholder="Password"></ion-input>
+    </ion-item>
+  </ion-list>
+  <button (click)="signupAuth()" ion-button full>Signup</button>
+  <button navPop ion-button full>Cancel</button>
+</ion-content>

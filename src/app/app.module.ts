@@ -1,9 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { File } from '@ionic-native/file';
+import { Transfer } from '@ionic-native/transfer';
+import { FilePath } from '@ionic-native/file-path';
+import { Camera } from '@ionic-native/camera';
 // import { SplashScreen } from '@ionic-native/splash-screen';
 // import { StatusBar } from '@ionic-native/status-bar';
-
+import { IonicStorageModule } from '@ionic/storage';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { Packs } from '../pages/packs/packs';
@@ -17,6 +21,7 @@ import { FindMyPack } from "../pages/find-my-pack/find-my-pack";
 import { BudgetAddon } from "../pages/budget-addon/budget-addon";
 import { AuthService } from "../services/auth.service";
 import { PackService } from "../services/pack.service";
+import { Signup } from "../pages/signup/signup";
 
 @NgModule({
   declarations: [
@@ -31,10 +36,12 @@ import { PackService } from "../services/pack.service";
     Budget,
     FindMyPack,
     BudgetAddon,
+    Signup,
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot(),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -49,10 +56,15 @@ import { PackService } from "../services/pack.service";
     Budget,
     FindMyPack,
     BudgetAddon,
+    Signup,
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthService, PackService,
+    File,
+    Transfer,
+    Camera,
+    FilePath,
   ],
 })
 export class AppModule {}

@@ -1,24 +1,52 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController } from 'ionic-angular';
+import { Component, ViewChild, NgZone } from '@angular/core';
+import { NavController, NavParams, ModalController, Content } from 'ionic-angular';
 import { Contacts } from "../contacts/contacts";
+import * as io from "socket.io-client";
 
 @Component({
   selector: 'page-chat',
-  templateUrl: 'chat.html'
+  templateUrl: 'chat.html',
 })
 export class Chat {
+  @ViewChild(Content) content: Content;
+  public text: string;
+  public messages: any = [];
+  public socketHost: string = "http://172.24.3.132:3030/";
+  public socket: any;
+  public chat: any;
+  public username: string;
+  public zone: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
+    this.socket = io.connect(this.socketHost);
+    this.zone = new NgZone({enableLongStackTrace: false});
+    this.socket.on('chat message', (msg) => {
+      this.zone.run(() => {
+        this.messages.push(msg);
+        this.content.scrollToBottom();
+      });
+    });
+  }
 
-  ionViewDidLoad() {
+  public ionViewDidLoad() {
     console.log('ionViewDidLoad ChatPagePage');
   }
 
-  presentProfileModal() {
+  public presentProfileModal() {
     let profileModal = this.modalCtrl.create(Contacts, {});
     profileModal.present();
   }
-  contacts() {
+  public contacts() {
     this.navCtrl.push(Contacts);
   }
+
+  public chatSend(val) {
+    let data = {
+      message: val,
+      username: 'David D.',
+    };
+    this.socket.emit('new message', data);
+    this.chat = '';
+  }
+
 }

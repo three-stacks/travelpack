@@ -2,26 +2,29 @@ import { Component } from "@angular/core";
 import { NavController } from "ionic-angular";
 import { Packs } from "../packs/packs";
 import { AuthService } from "../../services/auth.service";
+import { Storage } from "@ionic/storage";
+import { Signup } from "../signup/signup";
 
 @Component({
   selector: "page-home",
   templateUrl: "home.html",
 })
 export class HomePage {
-  public user = { username: "", password: ""};
+  public user: any = { username: "", password: "", strategy: "local"};
 
-  constructor(public navCtrl: NavController, public authSvs: AuthService) {
+  constructor(private storage: Storage, public navCtrl: NavController, public authSvs: AuthService) {
   }
-
+  public tokenAuth(token) {
+    if (token) {
+      this.navCtrl.push(Packs);
+    }
+  }
   public login() {
-    console.log(this.user, "in home page");
-    this.authSvs.loginUser(this.user);
-    this.navCtrl.push(Packs);
+    this.authSvs.loginUser(this.user, this.tokenAuth.bind(this));
   }
 
   public signup() {
-    this.authSvs.signupUser(this.user);
-    this.navCtrl.push(Packs);
+    this.navCtrl.push(Signup);
   }
 
 }
