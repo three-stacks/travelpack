@@ -1,3 +1,20 @@
-page-find-my-pack {
+// page-find-my-pack {
 
+// }
+
+.ios, .md {
+ 
+    page-find-my-pack {
+ 
+      .scroll {
+        height: 100%
+      }
+ 
+      #map {
+        width: 100%;
+        height: 100%;
+      }
+ 
+    }
+ 
 }

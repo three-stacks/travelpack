@@ -22,6 +22,7 @@ import { BudgetAddon } from "../pages/budget-addon/budget-addon";
 import { AuthService } from "../services/auth.service";
 import { PackService } from "../services/pack.service";
 import { Signup } from "../pages/signup/signup";
+import { Geolocation } from '@ionic-native/geolocation';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { Signup } from "../pages/signup/signup";
     Transfer,
     Camera,
     FilePath,
+    Geolocation,
   ],
 })
 export class AppModule {}
