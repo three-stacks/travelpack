@@ -4,8 +4,8 @@
   "type": "ionic-angular",
   "proxies": [
     {
-      "path": "/users",
-      "proxyUrl": "http://172.24.3.132:3030/users"
+      "path": "/avatar",
+      "proxyUrl": "http://localhost:3030/avatar"
     }
   ]
 }

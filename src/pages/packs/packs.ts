@@ -28,8 +28,8 @@ export class Packs {
     //   { name: "Panama Beach",
     //     img: "http://cdn.wonderfulengineering.com/wp-content/uploads/2016/01/beach-wallpaper-6.jpg" }
     // ];
-    events.subscribe("pack:submited", (res) => {
-      this.pkSvs.getPacks(this.newPacks.bind(this));
+    events.subscribe("pack:submited", () => {
+      pkSvs.getPacks(this.newPacks.bind(this));
     });
   }
 
