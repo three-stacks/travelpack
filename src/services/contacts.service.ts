@@ -26,7 +26,7 @@ export class ContactsService {
           text: 'Save',
           handler: (data) => {
             console.log(data);
-            this.http.post('http://localhost:3030/contacts', data)
+            this.http.post('/groups', data)
               .subscribe((response) => {
                 console.log("All good");
               }, (error) => {
