@@ -1,29 +1,36 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Storage } from '@ionic/storage';
+import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 @Injectable()
 
 export class PackService {
-  constructor(public http: Http) {}
+  constructor(private storage: Storage, public http: Http) {}
 
   public getPacks(cb) {
-    this.http.get('/packs')
+    // let headers = new Headers();
+    // headers.append("Authorization", `Bearer ${this.storage.get('token')}`);
+    this.http.get("http://172.24.3.132:3030/packs")
     .map(res => res.json())
-    .subscribe((data) => {
-      console.log(data, 'data');
-      // cb(data);
+    .subscribe(({data}) => {
+      console.log(data, 'pack data');
+      cb(data);
     }, (err) => {
-      cb([{ name: "Montreal",
-        img: "http://s1.picswalls.com/wallpapers/2015/09/27/hd-las-vegas-wall_030837845_281.jpg" }]);
       console.error(err);
     });
   }
   public addPacks(newPack) {
-    this.http.post('/packs', newPack)
+    // let headers;
+    // this.storage.get('token').then(val => {
+    //   console.log(JSON.stringify(val), "token");
+    //   headers = {'authorization': `Bearer ${val}`};
+    // });
+    // console.log(headers, "headers");
+    this.http.post("http://172.24.3.132:3030/packs", newPack)
     .map((res) => res.json())
     .subscribe((data) => {
-      console.log(data, 'data');
+      console.log(data, 'post pack data');
     }, (err) => {
       console.error(err);
     });

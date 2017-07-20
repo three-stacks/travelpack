@@ -10,20 +10,20 @@ import { Signup } from "../signup/signup";
   templateUrl: "home.html",
 })
 export class HomePage {
-  public user: any = { email: "", password: "", strategy: "local"};
+  public user: any = { username: "", password: "", strategy: "local"};
 
   constructor(private storage: Storage, public navCtrl: NavController, public authSvs: AuthService) {
   }
-
+  public tokenAuth(token) {
+    if (token) {
+      this.navCtrl.push(Packs);
+    }
+  }
   public login() {
-    console.log(this.user, "in home page");
-    this.authSvs.loginUser(this.user);
-    // this.storage.set('user', this.user.username);
-    this.navCtrl.push(Packs);
+    this.authSvs.loginUser(this.user, this.tokenAuth.bind(this));
   }
 
   public signup() {
-    // this.authSvs.signupUser(this.user);
     this.navCtrl.push(Signup);
   }
 

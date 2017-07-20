@@ -10,7 +10,7 @@
 <ion-content padding>
   <ion-list>
     <ion-item>
-      <ion-input [(ngModel)]='packName' type="text" placeholder="Pack Name"></ion-input>
+      <ion-input [(ngModel)]='packName.name' type="text" placeholder="Pack Name"></ion-input>
     </ion-item>
   </ion-list>
   <button (click)="submitPack(packName)" ion-button full>Submit</button>
