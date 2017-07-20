@@ -23,6 +23,7 @@ import { AuthService } from "../services/auth.service";
 import { PackService } from "../services/pack.service";
 import { Signup } from "../pages/signup/signup";
 import { Geolocation } from '@ionic-native/geolocation';
+import { JwtHelper } from 'angular2-jwt';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { Geolocation } from '@ionic-native/geolocation';
     Camera,
     FilePath,
     Geolocation,
+    JwtHelper,
   ],
 })
 export class AppModule {}
