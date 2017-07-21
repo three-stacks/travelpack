@@ -14,13 +14,14 @@ export class AuthService {
 
   public loginUser(user, cb) {
     console.log(user);
-    this.http.post("http://172.24.3.132:3030/authentication", user)
+    this.http.post("http://ec2-18-220-15-216.us-east-2.compute.amazonaws.com:3030/authentication", user)
       .map(res => res.json())
       .subscribe((data) => {
+        console.log(data.accessToken);
         this.storage.set('jwt', data.accessToken);
         this.storage.get('jwt').then(token => {
           console.log(`your access token is ${token}`)
-          this.headers.append("authorization", `Bearer ${this.storage.get('jwt')}`);
+          this.headers.append("authorization", `Bearer ${token} ; charset=utf-8`);
           console.log(this.headers);
         });
 
@@ -41,7 +42,7 @@ export class AuthService {
 
   public signupUser(user) {
     console.log(user);
-    this.http.post("http://172.24.3.132:3030/users", user)
+    this.http.post("http://ec2-18-220-15-216.us-east-2.compute.amazonaws.com:3030/users", user)
       .map(res => res.json())
       .subscribe((data) => {
         console.log(data, 'data');

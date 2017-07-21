@@ -11,7 +11,7 @@ export class PackService {
   public getPacks(cb) {
     // let headers = new Headers();
     // headers.append("Authorization", `Bearer ${this.storage.get('token')}`);
-    this.http.get("http://172.24.3.132:3030/packs")
+    this.http.get("http://ec2-18-220-15-216.us-east-2.compute.amazonaws.com:3030/packs")
     .map(res => res.json())
     .subscribe(({data}) => {
       console.log(data, 'pack data');
@@ -27,7 +27,7 @@ export class PackService {
     //   headers = {'authorization': `Bearer ${val}`};
     // });
     // console.log(headers, "headers");
-    this.http.post("http://172.24.3.132:3030/packs", newPack)
+    this.http.post("http://ec2-18-220-15-216.us-east-2.compute.amazonaws.com:3030/packs", newPack)
     .map((res) => res.json())
     .subscribe((data) => {
       console.log(data, 'post pack data');
