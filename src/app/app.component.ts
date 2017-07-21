@@ -33,10 +33,6 @@ export class MyApp {
   }
 
   openPage(page){
-    console.log(page, 'in menu page');
-    // if(page.title === 'Packs'){
-    //   // this.storage.remove('packId')
-    // }
     this.nav.setRoot(page.component);
   }
 }
