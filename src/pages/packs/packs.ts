@@ -49,9 +49,12 @@ export class Packs {
       this.packNames = packs;
     }
   }
+
   public packChat(pn) {
-    this.storage.set('packId', pn.id),
-    console.log(`your pack id is ${pn.id}`)
+    console.log(pn)
+    this.storage.set('packId', pn.id).then(val => {
+      console.log(`your pack id is ${val}`)
+    })
     this.navCtrl.push(Chat);
   }
 
