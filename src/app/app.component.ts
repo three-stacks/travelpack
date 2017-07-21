@@ -3,6 +3,7 @@ import { Nav, Platform } from 'ionic-angular';
 // import { StatusBar } from '@ionic-native/status-bar';
 // import { SplashScreen } from '@ionic-native/splash-screen';
 
+import { Storage } from '@ionic/storage';
 import { HomePage } from '../pages/home/home';
 import { Packs } from '../pages/packs/packs';
 import { Itinerary } from '../pages/itinerary/itinerary';
@@ -19,7 +20,7 @@ export class MyApp {
   rootPage:any = HomePage;
   pages: Array<{title: string, component: any}>;
 
-  constructor(platform: Platform) {
+  constructor(platform: Platform, public storage: Storage) {
     platform.ready().then(() => {
     });
     this.pages = [
