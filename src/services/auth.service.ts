@@ -7,13 +7,13 @@ import 'rxjs/add/operator/map';
 @Injectable()
 
 export class AuthService {
-  constructor(private storage: Storage, public http: Http) {}
+  constructor(public storage: Storage, public http: Http) {}
   public jwtHelper : JwtHelper = new JwtHelper();
   public payload : any;
   public headers = new Headers({ 'Content-Type': 'application/json' });
 
   public loginUser(user, cb) {
-    console.log(user);
+    // console.log(user);
     this.http.post("http://localhost:3030/authentication", user)
       .map(res => res.json())
       .subscribe((data) => {
@@ -22,8 +22,10 @@ export class AuthService {
         this.storage.get('jwt').then(token => {
           console.log(`your access token is ${token}`)
           this.payload = this.jwtHelper.decodeToken(token);
+          console.log(this.payload);
           this.storage.set('userId', this.payload.userId)
-          this.headers.append("authorization", `Bearer ${token} ; charset=utf-8`);
+          // this.headers.append("authorization", `Bearer ${token} ; charset=utf-8`);
+          console.log(this.headers);
         });
         
         this.storage.get('userId').then(id => {
