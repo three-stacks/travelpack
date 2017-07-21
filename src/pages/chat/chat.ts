@@ -9,9 +9,11 @@ import * as io from "socket.io-client";
 })
 export class Chat {
   @ViewChild(Content) content: Content;
+  public SERVER_DEPLOY = 'http://ec2-18-220-15-216.us-east-2.compute.amazonaws.com:3030';
+  public SERVER_ROSE = 'http://172.24.3.132:3030';
   public text: string;
   public messages: any = [];
-  public socketHost: string = "http://ec2-18-220-15-216.us-east-2.compute.amazonaws.com:3030/";
+  public socketHost: string = this.SERVER_ROSE;
   public socket: any;
   public chat: any;
   public username: string;

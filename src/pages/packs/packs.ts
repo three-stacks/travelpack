@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController, Events } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Chat } from '../chat/chat';
@@ -19,7 +20,8 @@ export class Packs {
     public navParams: NavParams,
     public modalCtrl: ModalController,
     public pkSvs: PackService,
-    public events: Events) {
+    public events: Events,
+    public storage: Storage) {
     // this.packNames = [
     //   { name: "Vegas Baby!!",
     //     img: "http://s1.picswalls.com/wallpapers/2015/09/27/hd-las-vegas-wall_030837845_281.jpg" },
@@ -47,7 +49,9 @@ export class Packs {
       this.packNames = packs;
     }
   }
-  public packChat() {
+  public packChat(pn) {
+    console.log(pn);
+    this.storage.set('packId', pn.id);
     this.navCtrl.push(Chat);
   }
 
