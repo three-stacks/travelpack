@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map';
 import { Chat } from '../chat/chat';
 import { PackForm } from "../pack-form/pack-form";
 import { PackService } from "../../services/pack.service";
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-packs',
@@ -17,6 +18,7 @@ export class Packs {
 
   constructor(
     public navCtrl: NavController,
+    public storage: Storage,
     public navParams: NavParams,
     public modalCtrl: ModalController,
     public pkSvs: PackService,
@@ -49,9 +51,18 @@ export class Packs {
       this.packNames = packs;
     }
   }
+<<<<<<< HEAD
   public packChat(pn) {
     console.log(pn);
     this.storage.set('packId', pn.id);
+=======
+
+  public packChat(pn) {
+    console.log(pn)
+    this.storage.set('packId', pn.id).then(val => {
+      console.log(`your pack id is ${val}`)
+    })
+>>>>>>> 87895f80299b567f6e8de1b35c228fbf136deba2
     this.navCtrl.push(Chat);
   }
 

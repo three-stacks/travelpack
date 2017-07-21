@@ -17,20 +17,18 @@ export class AuthService {
 
   public loginUser(user, cb) {
     console.log(user);
-    this.http.post(`${this.SERVER_DEPLOY}/authentication`, user)
-      .map((res) => res.json())
+    this.http.post("http://localhost:3030/authentication", user)
+      .map(res => res.json())
       .subscribe((data) => {
-        this.storage.set('jwt', data.accessToken);
-        this.storage.get('jwt').then((token) => {
-          console.log(`your access token is ${token}`);
-          this.headers.append("authorization", `Bearer ${this.storage.get('jwt')}`);
-          console.log(this.headers);
-        });
-
-        this.payload = this.jwtHelper.decodeToken(data.accessToken);
-        this.storage.set('userId', this.payload.userId);
-        this.storage.get('userId').then((id) => {
-          console.log(`your userId is ${id}`);
+        console.log(data.accessToken);
+        this.storage.set('jwt', data.accessToken).then(token => {
+          this.payload = this.jwtHelper.decodeToken(token)
+          this.storage.set('userId', this.payload.userId).then(userId => {
+            console.log(`your user id is ${userId}`)
+          })
+        })
+        this.storage.get('userId').then(id => {
+          console.log(`your userId is ${id}`)
         });
 
         cb(data.accessToken);

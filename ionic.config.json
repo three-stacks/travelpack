@@ -4,8 +4,8 @@
   "type": "ionic-angular",
   "proxies": [
     {
-      "path": "/avatar",
-      "proxyUrl": "http://localhost:3030/avatar"
+      "path": "/users",
+      "proxyUrl": "http://ec2-18-220-15-216.us-east-2.compute.amazonaws.com:3030/users"
     }
   ]
 }
