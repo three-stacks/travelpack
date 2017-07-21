@@ -11,7 +11,7 @@ export class Chat {
   @ViewChild(Content) content: Content;
   public text: string;
   public messages: any = [];
-  public socketHost: string = "http://172.24.3.132:3030/";
+  public socketHost: string = "http://ec2-18-220-15-216.us-east-2.compute.amazonaws.com:3030/";
   public socket: any;
   public chat: any;
   public username: string;
