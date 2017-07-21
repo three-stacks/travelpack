@@ -12,9 +12,7 @@ export class PackService {
   constructor(private storage: Storage, public http: Http, public events: Events) {}
 
   public getPacks(cb) {
-    // let headers = new Headers();
-    // headers.append("Authorization", `Bearer ${this.storage.get('token')}`);
-    this.http.get(`${this.SERVER_ROSE}/packs`)
+    this.http.get(`${this.SERVER_DEPLOY}/packs`)
     .map(res => res.json())
     .subscribe(({data}) => {
       console.log(data, 'pack data');
@@ -24,13 +22,7 @@ export class PackService {
     });
   }
   public addPacks(newPack) {
-    // let headers;
-    // this.storage.get('token').then(val => {
-    //   console.log(JSON.stringify(val), "token");
-    //   headers = {'authorization': `Bearer ${val}`};
-    // });
-    // console.log(headers, "headers");
-    this.http.post(`${this.SERVER_ROSE}/packs`, newPack)
+    this.http.post(`${this.SERVER_DEPLOY}/packs`, newPack)
     .map((res) => res.json())
     .subscribe((data) => {
       console.log(data, 'post pack data');
