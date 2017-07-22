@@ -8,7 +8,7 @@ import 'rxjs/add/operator/map';
 
 export class ContactsService {
   public SERVER_DEPLOY = 'http://ec2-18-220-15-216.us-east-2.compute.amazonaws.com:3030';
-  public SERVER_ROSE = 'http://172.24.3.132:3030';
+  public SERVER_ROSE = 'http://192.168.1.113:3030';
   public packID: number;
   constructor(public alertCtrl: AlertController, public http: Http, public storage: Storage, public events: Events) {
     this.storage.get('packId').then((val) => this.packID = val);
@@ -49,14 +49,15 @@ export class ContactsService {
   }
 
   public getContacts(cb) {
-    this.http.get('/groups')
-      .map(res => res.json())
-      .subscribe(response => {
-        console.log(response);
-        cb(response);
-      }, error => {
-        console.error(error);
-      });
+    this.storage.get('packId').then((val) => {
+      this.http.get(`${this.SERVER_ROSE}/groups?packId=${val}`)
+        .map(res => res.json())
+        .subscribe(response => {
+          console.log(response);
+          cb(response);
+        }, error => {
+          console.error(error);
+        });
+    });
   }
-
 }

@@ -11,13 +11,13 @@ export class AuthService {
   public payload: any;
   public headers = new Headers({ 'Content-Type': 'application/json' });
   public SERVER_DEPLOY = 'http://ec2-18-220-15-216.us-east-2.compute.amazonaws.com:3030';
-  public SERVER_ROSE = 'http://172.24.3.132:3030';
+  public SERVER_ROSE = 'http://192.168.1.113:3030';
 
   constructor(private storage: Storage, public http: Http) {}
 
   public loginUser(user, cb) {
     console.log(user);
-    this.http.post(`${this.SERVER_DEPLOY}/authentication`, user)
+    this.http.post(`${this.SERVER_ROSE}/authentication`, user)
       .map(res => res.json())
       .subscribe((data) => {
         console.log(data.accessToken);
@@ -41,7 +41,7 @@ export class AuthService {
   }
 
   public signupUser(user) {
-    this.http.post(`${this.SERVER_DEPLOY}/users`, user)
+    this.http.post(`${this.SERVER_ROSE}/users`, user)
       .map((res) => res.json())
       .subscribe((data) => {
         console.log(data, 'data');

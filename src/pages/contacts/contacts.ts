@@ -13,20 +13,18 @@ export class Contacts {
   constructor(public contactSvs: ContactsService,
               public navCtrl: NavController,
               public navParams: NavParams,
-              public alertCtrl: AlertController) {
-                
-  }
+              public alertCtrl: AlertController) {}
 
   public ionViewDidLoad() {
     console.log('ionViewDidLoad ContactsPagePage');
   }
 
   public listContacts(contacts) {
-    this.allContacts = contacts;
+    // this.allContacts = contacts;
   }
 
   public ionViewDidEnter() {
-    // this.contactSvs.getContacts();
+    this.contactSvs.getContacts(this.listContacts);
   }
 
 }
