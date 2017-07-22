@@ -56,5 +56,4 @@ export class Packs {
     })
     this.navCtrl.push(Chat);
   }
-
 }
