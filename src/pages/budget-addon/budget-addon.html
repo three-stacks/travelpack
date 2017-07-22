@@ -15,5 +15,18 @@
 
 <ion-content padding>
   <ion-icon name="plane"></ion-icon>
+  <ion-list>
 
+  <ion-item>
+    <ion-label stacked>event</ion-label>
+    <ion-input [(ngModel)]="eventEntry" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label stacked>budget</ion-label>
+    <ion-input [(ngModel)]="budgetEntry" type="text"></ion-input>
+  </ion-item>
+
+</ion-list>
+<button (click)="submitBud(eventEntry, budgetEntry)" ion-button full>Submit</button>
 </ion-content>
