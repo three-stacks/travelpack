@@ -20,14 +20,11 @@ export class AuthService {
         console.log(data.accessToken);
         this.storage.set('jwt', data.accessToken).then(token => {
           this.payload = this.jwtHelper.decodeToken(token)
+          console.log(this.payload, 'my payload')
           this.storage.set('userId', this.payload.userId).then(userId => {
             console.log(`your user id is ${userId}`)
           })
         })
-        this.storage.get('userId').then(id => {
-          console.log(`your userId is ${id}`)
-        });
-        
         cb(data.accessToken);
         // this.storage.set("token", data.accessToken);
         // let headers = new Headers();
