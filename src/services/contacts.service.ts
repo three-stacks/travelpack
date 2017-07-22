@@ -34,7 +34,8 @@ export class ContactsService {
             console.log(data);
             let contact = { packId: this.packID, username: data.contact };
             console.log(contact, 'contact');
-            this.http.post('/groups', data)
+            // console.log(data)
+            this.http.post(`${this.SERVER_ROSE}/groups`, contact)
               .subscribe((response) => {
                 console.log("All good");
                 // if(response){ this.events.pubish('get:contacts')}
