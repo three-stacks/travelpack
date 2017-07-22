@@ -50,13 +50,15 @@ export class ContactsService {
   }
 
   public getContacts(cb) {
-    this.http.get(`${this.SERVER_ROSE}/groups`)
-      .map(res => res.json())
-      .subscribe(response => {
-        console.log(response);
-        cb(response);
-      }, error => {
-        console.error(error);
-      });
+    this.storage.get('packId').then((val) => {
+      this.http.get(`${this.SERVER_ROSE}/groups?packId=${val}`)
+        .map(res => res.json())
+        .subscribe(response => {
+          console.log(response);
+          cb(response);
+        }, error => {
+          console.error(error);
+        });
+    });
   }
 }
