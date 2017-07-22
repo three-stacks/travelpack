@@ -99,7 +99,7 @@ export class Signup {
   }
   public uploadImage() {
     // Destination URL
-    var url = "https://api.cloudinary.com/v1_1/djdelgado/image/upload";
+    var url = "https://localhost:3030/avatar";
     // File for Upload
     var targetPath = this.pathForImage(this.lastImage);
 

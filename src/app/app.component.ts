@@ -11,14 +11,13 @@ import { Photos } from '../pages/photos/photos';
 import { Budget } from "../pages/budget/budget";
 import { FindMyPack } from "../pages/find-my-pack/find-my-pack";
 
-
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  rootPage:any = HomePage;
-  pages: Array<{title: string, component: any}>;
+  public rootPage: any = HomePage;
+  public pages: Array<{title: string, component: any}>;
 
   constructor(platform: Platform, public storage: Storage) {
     platform.ready().then(() => {
@@ -28,12 +27,11 @@ export class MyApp {
       {title: 'Itinerary', component: Itinerary},
       {title: 'Pack Pics', component: Photos},
       {title: 'Budget', component: Budget},
-      {title: 'Find My Pack', component: FindMyPack}
-    ]
+      {title: 'Find My Pack', component: FindMyPack},
+    ];
   }
 
-  openPage(page){
+  public openPage(page) {
     this.nav.setRoot(page.component);
   }
 }
-
