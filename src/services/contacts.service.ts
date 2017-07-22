@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
-import { AlertController } from 'ionic-angular';
+import { AlertController, Events } from 'ionic-angular';
+import { Storage } from "@ionic/storage";
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { Storage } from '@ionic/storage';
 
 @Injectable()
 
 export class ContactsService {
-  constructor(public alertCtrl: AlertController, public http: Http, public storage: Storage) {}
-    
+  public packID: number;
+  constructor(public alertCtrl: AlertController, public http: Http, public storage: Storage, public events: Events) {
+    this.storage.get('packId').then((val) => this.packID = val);
+  }
 
   public showPrompt() {
-    // this.storage.get('packId').then((val) => this.packID = val);
     const prompt = this.alertCtrl.create({
       title: 'Add new user to Pack',
       message: "Enter the email of the user you wish to add to this Pack",
@@ -28,21 +29,32 @@ export class ContactsService {
         {
           text: 'Save',
           handler: (data) => {
-            let contact = { packId: this.storage.get('packId'), username: data.contact };
-
-            console.log(contact, 'is this my data?');
+            console.log(data);
+            let contact = { packId: this.packID, username: data.contact };
+            console.log(contact, 'contact');
             this.http.post('http://localhost:3030/groups', contact)
               .subscribe((response) => {
                 console.log("All good");
+                // if(response){ this.events.pubish('get:contacts')}
               }, (error) => {
                 console.error(error, "ERROR");
               });
-            console.log('Saved clicked');
           },
         },
       ],
     });
     prompt.present();
+  }
+
+  public getContacts(cb) {
+    this.http.get('/groups')
+      .map(res => res.json())
+      .subscribe(response => {
+        console.log(response);
+        cb(response);
+      }, error => {
+        console.error(error);
+      });
   }
 
 }

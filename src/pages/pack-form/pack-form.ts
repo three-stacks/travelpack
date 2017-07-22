@@ -8,14 +8,12 @@ import { Storage } from '@ionic/storage';
   templateUrl: 'pack-form.html',
 })
 export class PackForm {
+  public packID: number;
   public packName: any = { 
     name: "",
     url: "http://wallpapersdsc.net/wp-content/uploads/2016/09/New-Orleans-Wallpapers.jpg",   
     userId: this.storage.get('userId')
   };
-    // this.storage.get('userId').(val => {
-    // id: val  
-    // })
 
   constructor(public events: Events,
               public storage: Storage,
