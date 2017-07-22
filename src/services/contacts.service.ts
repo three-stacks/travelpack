@@ -47,7 +47,7 @@ export class ContactsService {
   }
 
   public getContacts(cb) {
-    this.http.get('/groups')
+    this.http.get('http://localhost:3030/groups')
       .map(res => res.json())
       .subscribe(response => {
         console.log(response);

@@ -6,7 +6,10 @@ import 'rxjs/add/operator/map';
 @Injectable()
 
 export class PackService {
-  constructor(private storage: Storage, public http: Http) {}
+  public userID: number;
+  constructor(public storage: Storage, public http: Http) {
+    this.storage.get('userId').then((val) => this.userID = val);
+  }
 
   public getPacks(cb) {
     // let headers = new Headers();
