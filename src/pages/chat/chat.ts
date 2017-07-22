@@ -14,14 +14,18 @@ export class Chat {
   public SERVER_ROSE = 'http://172.24.3.132:3030';
   public text: string;
   public messages: any = [];
-  public socketHost: string = this.SERVER_ROSE;
+  public socketHost: string = this.SERVER_DEPLOY;
   public socket: any;
   public chat: any;
   public username: string;
   public zone: any;
   public userId: any;
+  public packname: string;
 
-  constructor(public storage: Storage, public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
+  constructor(public storage: Storage,
+              public navCtrl: NavController,
+              public navParams: NavParams,
+              public modalCtrl: ModalController) {
     this.socket = io.connect(this.socketHost);
     this.zone = new NgZone({enableLongStackTrace: false});
     this.socket.on('chat message', (msg) => {
@@ -36,6 +40,9 @@ export class Chat {
   public ionViewDidLoad() {
     console.log('ionViewDidLoad ChatPagePage');
   }
+  public ionViewDidEnter() {
+    this.storage.get('packName').then(val => this.packname = val);
+  }
 
   public presentProfileModal() {
     let profileModal = this.modalCtrl.create(Contacts, {});
@@ -48,13 +55,13 @@ export class Chat {
   public chatSend(val) {
     this.storage.get('userId').then(id => {
       console.log(`your userId in chat ${id}`)
-      this.userId;
+      // this.userId;
     })
     let data = {
-        message: val,
-        username: 'david',
-        // username: this.userId,
-      };
+      message: val,
+      username: 'david',
+      // username: this.userId,
+    };
 
     this.socket.emit('new message', data);
     this.chat = '';

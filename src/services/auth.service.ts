@@ -17,7 +17,7 @@ export class AuthService {
 
   public loginUser(user, cb) {
     console.log(user);
-    this.http.post("http://localhost:3030/authentication", user)
+    this.http.post(`${this.SERVER_DEPLOY}/authentication`, user)
       .map(res => res.json())
       .subscribe((data) => {
         console.log(data.accessToken);

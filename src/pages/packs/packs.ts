@@ -6,7 +6,6 @@ import 'rxjs/add/operator/map';
 import { Chat } from '../chat/chat';
 import { PackForm } from "../pack-form/pack-form";
 import { PackService } from "../../services/pack.service";
-import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-packs',
@@ -22,8 +21,7 @@ export class Packs {
     public navParams: NavParams,
     public modalCtrl: ModalController,
     public pkSvs: PackService,
-    public events: Events,
-    public storage: Storage) {
+    public events: Events) {
     // this.packNames = [
     //   { name: "Vegas Baby!!",
     //     img: "http://s1.picswalls.com/wallpapers/2015/09/27/hd-las-vegas-wall_030837845_281.jpg" },
@@ -51,18 +49,10 @@ export class Packs {
       this.packNames = packs;
     }
   }
-<<<<<<< HEAD
   public packChat(pn) {
     console.log(pn);
+    this.storage.set('packName', pn.name);
     this.storage.set('packId', pn.id);
-=======
-
-  public packChat(pn) {
-    console.log(pn)
-    this.storage.set('packId', pn.id).then(val => {
-      console.log(`your pack id is ${val}`)
-    })
->>>>>>> 87895f80299b567f6e8de1b35c228fbf136deba2
     this.navCtrl.push(Chat);
   }
 
