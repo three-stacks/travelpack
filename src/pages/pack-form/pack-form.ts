@@ -28,7 +28,6 @@ export class PackForm {
   public submitPack() {
     console.log(this.packName);
     this.pkSvs.addPacks(this.packName);
-    this.events.publish("pack:submited");
     this.navCtrl.pop();
   }
   public cancelPack() {

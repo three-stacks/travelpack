@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController, Events } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Chat } from '../chat/chat';
 import { PackForm } from "../pack-form/pack-form";
 import { PackService } from "../../services/pack.service";
-import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-packs',
@@ -30,8 +30,8 @@ export class Packs {
     //   { name: "Panama Beach",
     //     img: "http://cdn.wonderfulengineering.com/wp-content/uploads/2016/01/beach-wallpaper-6.jpg" }
     // ];
-    events.subscribe("pack:submited", (res) => {
-      this.pkSvs.getPacks(this.newPacks.bind(this));
+    events.subscribe("pack:submited", () => {
+      pkSvs.getPacks(this.newPacks.bind(this));
     });
   }
 
@@ -49,7 +49,6 @@ export class Packs {
       this.packNames = packs;
     }
   }
-
   public packChat(pn) {
     this.storage.set('packId', pn.id).then(val => {
       console.log(`your pack id is ${val}`)
