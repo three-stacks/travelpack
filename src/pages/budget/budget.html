@@ -1,6 +1,6 @@
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="secondary">
     <ion-buttons left>
       <button ion-button (click)="backClick()">
         <ion-icon name="arrow-dropleft" style="font-size: 2.5em"></ion-icon>
@@ -11,13 +11,28 @@
         <ion-icon name="add" style="font-size: 25px"></ion-icon>
       </button>
     </ion-buttons> 
-    <ion-title>Budget</ion-title>
+    <ion-title text-center>Budget</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let bud of budget">
+      <ion-item>
+      {{bud.event}}
+      <a>${{bud.price}}</a>
+      </ion-item>
+      <ion-item-options>
+      <ion-buttons>  
+        <button ion-button color="danger" (click)="removeItem(bud)"><ion-icon trash></ion-icon> Delete</button>
+      </ion-buttons>  
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>  
+
   <ion-item>
     Total
     <a>${{totalCost}}</a>

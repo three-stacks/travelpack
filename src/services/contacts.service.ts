@@ -31,10 +31,8 @@ export class ContactsService {
         {
           text: 'Save',
           handler: (data) => {
-            console.log(data);
             let contact = { packId: this.packID, username: data.contact };
             console.log(contact, 'contact');
-            // console.log(data)
             this.http.post(`${this.SERVER_ROSE}/groups`, contact)
               .subscribe((response) => {
                 console.log("All good");

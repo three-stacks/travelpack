@@ -21,6 +21,7 @@ import { FindMyPack } from "../pages/find-my-pack/find-my-pack";
 import { BudgetAddon } from "../pages/budget-addon/budget-addon";
 import { AuthService } from "../services/auth.service";
 import { PackService } from "../services/pack.service";
+import { BudgetService } from "../services/budget.service";
 import { Signup } from "../pages/signup/signup";
 import { Geolocation } from '@ionic-native/geolocation';
 import { JwtHelper } from 'angular2-jwt';
@@ -62,7 +63,7 @@ import { JwtHelper } from 'angular2-jwt';
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthService, PackService,
+    AuthService, PackService, BudgetService,
     File,
     Transfer,
     Camera,
