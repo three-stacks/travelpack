@@ -17,10 +17,16 @@ export class Contacts {
 
   public ionViewDidLoad() {
     console.log('ionViewDidLoad ContactsPagePage');
+    this.contactSvs.getContacts(this.newContacts.bind(this))
+  }
+
+  public newContacts(contacts){
+    if(contacts){
+      this.allContacts = contacts;
+    }
   }
 
   public listContacts(contacts) {
-    // this.allContacts = contacts;
   }
 
   public ionViewDidEnter() {
