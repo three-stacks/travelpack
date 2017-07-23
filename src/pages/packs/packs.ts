@@ -44,6 +44,7 @@ export class Packs {
     const profileModal = this.modalCtrl.create(PackForm, {});
     profileModal.present();
   }
+  
   public newPacks(packs) {
     if (packs) {
       this.packNames = packs;

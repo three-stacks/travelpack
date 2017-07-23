@@ -1,4 +1,4 @@
-  import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { AlertController, Events } from 'ionic-angular';
 import { Storage } from "@ionic/storage";
 import { Http } from '@angular/http';
@@ -36,7 +36,9 @@ export class ContactsService {
             this.http.post(`${this.SERVER_ROSE}/groups`, contact)
               .subscribe((response) => {
                 console.log("All good");
-                // if(response){ this.events.pubish('get:contacts')}
+                if(response){ 
+                  this.events.publish('get:contacts')
+                }
               }, (error) => {
                 console.error(error, "ERROR");
               });

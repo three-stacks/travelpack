@@ -26,6 +26,7 @@ export class PackService {
       });
     });
   }
+  
   public addPacks(newPack) {
     this.http.post(`${this.SERVER_ROSE}/packs`, newPack)
     .map((res) => res.json())

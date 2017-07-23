@@ -13,6 +13,7 @@ import { HomePage } from '../pages/home/home';
 import { Packs } from '../pages/packs/packs';
 import { Chat } from '../pages/chat/chat';
 import { Itinerary } from '../pages/itinerary/itinerary';
+import { ItineraryForm } from '../pages/itinerary-form/itinerary-form';
 import { Photos } from '../pages/photos/photos';
 import { PackForm } from "../pages/pack-form/pack-form";
 import { Contacts } from "../pages/contacts/contacts";
@@ -34,6 +35,7 @@ import { JwtHelper } from 'angular2-jwt';
     Packs,
     Chat,
     Itinerary,
+    ItineraryForm,
     Photos,
     PackForm,
     Contacts,
@@ -54,6 +56,7 @@ import { JwtHelper } from 'angular2-jwt';
     Packs,
     Chat,
     Itinerary,
+    ItineraryForm,
     Photos,
     PackForm,
     Contacts,
