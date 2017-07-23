@@ -53,9 +53,10 @@ export class ContactsService {
     this.storage.get('packId').then((val) => {
       this.http.get(`${this.SERVER_ROSE}/groups?packId=${val}`)
         .map(res => res.json())
-        .subscribe(response => {
-          console.log(response);
-          cb(response);
+        .subscribe(({data}) => {
+          data = data.map((group) => group.user)
+          console.log(data, 'contact data');
+          cb(data);
         }, error => {
           console.error(error);
         });
