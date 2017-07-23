@@ -22,6 +22,7 @@ import { BudgetAddon } from "../pages/budget-addon/budget-addon";
 import { AuthService } from "../services/auth.service";
 import { PackService } from "../services/pack.service";
 import { YelpService } from "../services/yelp.service";
+import { BudgetService } from "../services/budget.service";
 import { Signup } from "../pages/signup/signup";
 import { Geolocation } from '@ionic-native/geolocation';
 import { JwtHelper } from 'angular2-jwt';
@@ -63,7 +64,7 @@ import { JwtHelper } from 'angular2-jwt';
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthService, PackService, YelpService,
+    AuthService, PackService, BudgetService, YelpService,
     File,
     Transfer,
     Camera,

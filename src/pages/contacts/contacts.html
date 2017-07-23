@@ -14,12 +14,11 @@
 
 <ion-content padding>
   <ion-list>
-  <ion-item>
+  <ion-item *ngFor="let contact of allContacts">
     <ion-avatar item-start>
       <img src="https://avatars5.githubusercontent.com/u/24818343?v=4&s=460">
     </ion-avatar>
-    <h2>David</h2>
-    <p>Pack Manager</p>
+    <h2>{{contact.username}}</h2>
   </ion-item>
 </ion-list>
 </ion-content>
