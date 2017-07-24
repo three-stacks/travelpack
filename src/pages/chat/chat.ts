@@ -21,11 +21,7 @@ export class Chat {
   public zone: any;
   public userId: any;
   public packname: string;
-<<<<<<< HEAD
-  public message: any;
-=======
   public packId: number;
->>>>>>> ab6da70201d584a8845212bac2185e8701eac923
 
   constructor(public storage: Storage,
               public navCtrl: NavController,
@@ -35,12 +31,7 @@ export class Chat {
     this.socket = io.connect(this.socketHost);
     this.zone = new NgZone({enableLongStackTrace: false});
     this.socket.on('chat message', (msg) => {
-<<<<<<< HEAD
-      this.messages.push(msg);
-      // console.log(this.messages, 'messages array')
-=======
       console.log(msg, 'in chat message');
->>>>>>> ab6da70201d584a8845212bac2185e8701eac923
       this.zone.run(() => {
         // this.messages.push(msg);
         this.content.scrollToBottom();
@@ -68,12 +59,6 @@ export class Chat {
   }
 
   public chatSend(val) {
-<<<<<<< HEAD
-    this.storage.get('userId').then(id => {
-      console.log(`your userId in chat ${id}`)
-    })
-=======
->>>>>>> ab6da70201d584a8845212bac2185e8701eac923
     let data = {
       message: val,
       userId: this.userId,
