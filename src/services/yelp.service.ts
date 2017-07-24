@@ -5,8 +5,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { JwtHelper } from 'angular2-jwt';
 import 'rxjs/add/operator/map';
-// import { ItineraryForm } from '../pages/itinerary-form/itinerary-form';
-
+import { ItineraryForm } from '../pages/itinerary-form/itinerary-form';
 
 @Injectable()
 
@@ -15,10 +14,17 @@ export class YelpService {
   public header = new Headers({ 
   'Access-Control-Allow-Origin': 'http://localhost:8100',  
   'Content-Type' :'application/x-www-form-urlencoded',
-  'Authorization': 'Bearer THJYyJORXl0mdxDKw8GcPqKU5dHHYWRP70WX33mO-S_TNYs5iq7pjZHYy4oP4yX0LgwcV0JeXmljRIhiq-X_iBRA5rJDbPESvqeeifbcJTo90GdmcEC4JjimQP9oWXYx'
+  'Authorization': 'Bearer jhsfakangnalfa',
   });
+  public yelp: any;
 
-constructor(public navCtrl: NavController, public alertCtrl: AlertController, public http: Http, public storage: Storage, public events: Events, public modalCtrl: ModalController){
+constructor(
+  public navCtrl: NavController, 
+  public alertCtrl: AlertController, 
+  public http: Http, 
+  public storage: Storage, 
+  public events: Events, 
+  public modalCtrl: ModalController){
   this.storage.get('packId').then((val) => this.packID = val);
 }
   
@@ -39,6 +45,9 @@ constructor(public navCtrl: NavController, public alertCtrl: AlertController, pu
   }
 
   public addItem(yelpData){
+    this.yelp = yelpData;
+    // const itineraryModal = this.modalCtrl.create(ItineraryForm);
+    // itineraryModal.present()
     const prompt = this.alertCtrl.create({
       title: "Add to your itinerary?",
       message: `Do you want to add ${yelpData.name} to your itinerary?`,
@@ -52,15 +61,18 @@ constructor(public navCtrl: NavController, public alertCtrl: AlertController, pu
         {
           text: 'Add',
           handler: data => {
-            console.log(yelpData, `for packId ${this.packID} Add Clicked`)
-            // const itineraryModal = this.modalCtrl.create(ItineraryForm)
-            // itineraryModal.present();
-            // this.navCtrl.push(ItineraryForm);
+            console.log(this.yelp, 'it works');
           }
         },
       ]
     });
     prompt.present();
   }
+
+  public addYelpData(time){
+    console.log(this.yelp, 'insert into database')
+
+  }
+
     
 }

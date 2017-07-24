@@ -9,13 +9,15 @@ import { ItinerarySearch } from '../itinerary-search/itinerary-search';
 })
 
 export class ItineraryForm {
-  // public itineraryItem: any;
+  public date: any;
+  public time: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events, public yelpSvs: YelpService) {}
-
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public events: Events, 
+    public yelpSvs: YelpService) {}
 
   public backClick(){
     this.navCtrl.push(ItinerarySearch);
   }
-
 }
