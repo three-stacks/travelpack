@@ -5,6 +5,7 @@ import { File } from '@ionic-native/file';
 import { Transfer, TransferObject } from '@ionic-native/transfer';
 import { FilePath } from '@ionic-native/file-path';
 import { Camera } from '@ionic-native/camera';
+import { HomePage } from "../home/home";
 
 declare var cordova: any;
 
@@ -33,9 +34,16 @@ export class Signup {
     console.log('ionViewDidLoad SignupPagePage');
   }
 
-  public signupAuth() {
-    this.authSvs.signupUser(this.user);
+  public sendToPackPage(data){
+    if(data){
+      this.navCtrl.push(HomePage);
+    }
   }
+
+  public signupAuth() {
+    this.authSvs.signupUser(this.user, this.sendToPackPage.bind(this));
+  }
+
 
   public avatarPic() {
     let actionSheet = this.actionSheetCtrl.create({

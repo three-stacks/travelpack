@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Storage } from '@ionic/storage';
+import { Storage} from '@ionic/storage';
 import { Http, Headers } from '@angular/http';
 import { JwtHelper } from 'angular2-jwt';
 import 'rxjs/add/operator/map';
@@ -36,10 +36,11 @@ export class AuthService {
       });
   }
 
-  public signupUser(user) {
+  public signupUser(user, cb) {
     this.http.post(`${this.SERVER_ROSE}/users`, user)
       .map((res) => res.json())
       .subscribe((data) => {
+        cb(data);
         console.log(data, 'data');
       }, (err) => {
         console.error(err);
