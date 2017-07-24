@@ -25,6 +25,7 @@ export class PackForm {
   public ionViewDidLoad() {
     console.log('ionViewDidLoad PackFormPagePage');
   }
+  
   public submitPack() {
     console.log(this.packName);
     this.pkSvs.addPacks(this.packName);
