@@ -7,32 +7,9 @@
     </ion-buttons>
     <ion-title text-center>Add to Your Activities</ion-title>
   </ion-navbar>
+  
 </ion-header>
 
-<ion-content padding> 
-<ion-searchbar ionInput
-[(ngModel)]='search.term' type='text' placeholder='search restuaurants, museums, and more'> 
-</ion-searchbar>
-<ion-searchbar ionInput
-[(ngModel)]='search.location' type='text' placeholder='desination'>
-</ion-searchbar>
-<button (click)='submitSearch()' ion-button full> Enter </button>
+<ion-content padding>
 
-<ion-list>
-
-  <!-- <ion-item *ngFor="let result of yelpResults"> -->
-    <ion-card>
-      <img src="https://s3-media2.fl.yelpcdn.com/bphoto/gckFoYHCcWscOxzW18ufPw/o.jpg">
-        <div class="card-title">Sushi</div>
-        <div class="card-subtitle">4 stars</div>
-        <p>hello</p>
-    </ion-card> 
-
-  <!-- </ion-item>   -->
-
-</ion-list>  
-
-</ion-content> 
-
-
-
+</ion-content>

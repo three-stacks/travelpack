@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Chat } from '../chat/chat';
-import { ItineraryForm } from '../itinerary-form/itinerary-form';
+import { ItinerarySearch } from '../itinerary-search/itinerary-search';
 
 @Component({
   selector: 'page-itinerary',
@@ -17,7 +17,7 @@ export class Itinerary {
   }
 
   public itinerarySearch(){
-    this.navCtrl.push(ItineraryForm);
+    this.navCtrl.push(ItinerarySearch);
   }
 
   public backClick(){
