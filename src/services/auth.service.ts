@@ -22,12 +22,11 @@ export class AuthService {
       .subscribe((data) => {
         console.log(data.accessToken);
         this.storage.set('jwt', data.accessToken).then(token => {
-          this.payload = this.jwtHelper.decodeToken(token)
-          console.log(this.payload, 'my payload')
-          this.storage.set('userId', this.payload.userId).then(userId => {
-            console.log(`your user id is ${userId}`)
-          })
-        })
+          this.payload = this.jwtHelper.decodeToken(token);
+          console.log(this.payload, 'my payload');
+          this.storage.set('userId', this.payload.userId);
+          // this.storage.set('userName', this.payload.userName);
+        });
         cb(data.accessToken);
         // this.storage.set("token", data.accessToken);
         // let headers = new Headers();
