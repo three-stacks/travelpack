@@ -9,11 +9,8 @@ import 'rxjs/add/operator/map';
 export class PackService {
   public SERVER_DEPLOY = 'http://ec2-18-220-15-216.us-east-2.compute.amazonaws.com:3030';
   public SERVER_ROSE = 'http://192.168.1.113:3030';
-  public userId: string;
 
-  constructor(private storage: Storage, public http: Http, public events: Events) {
-    // this.storage.get('userId').then(val => this.userId = val);
-  }
+  constructor(private storage: Storage, public http: Http, public events: Events) {}
 
   public getPacks(cb) {
     this.storage.get('userId').then(val => {
@@ -21,6 +18,7 @@ export class PackService {
       this.http.get(`${this.SERVER_ROSE}/groups?userId=${val}`)
       .map(res => res.json())
       .subscribe(({data}) => {
+        data = data.map((group) => group.pack)
         console.log(data, 'pack data');
         cb(data);
       }, (err) => {
@@ -28,6 +26,7 @@ export class PackService {
       });
     });
   }
+  
   public addPacks(newPack) {
     this.http.post(`${this.SERVER_ROSE}/packs`, newPack)
     .map((res) => res.json())

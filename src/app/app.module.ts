@@ -13,6 +13,8 @@ import { HomePage } from '../pages/home/home';
 import { Packs } from '../pages/packs/packs';
 import { Chat } from '../pages/chat/chat';
 import { Itinerary } from '../pages/itinerary/itinerary';
+import { ItineraryForm } from '../pages/itinerary-form/itinerary-form';
+import { ItinerarySearch } from '../pages/itinerary-search/itinerary-search';
 import { Photos } from '../pages/photos/photos';
 import { PackForm } from "../pages/pack-form/pack-form";
 import { Contacts } from "../pages/contacts/contacts";
@@ -21,6 +23,7 @@ import { FindMyPack } from "../pages/find-my-pack/find-my-pack";
 import { BudgetAddon } from "../pages/budget-addon/budget-addon";
 import { AuthService } from "../services/auth.service";
 import { PackService } from "../services/pack.service";
+import { YelpService } from "../services/yelp.service";
 import { BudgetService } from "../services/budget.service";
 import { Signup } from "../pages/signup/signup";
 import { Geolocation } from '@ionic-native/geolocation';
@@ -33,6 +36,8 @@ import { JwtHelper } from 'angular2-jwt';
     Packs,
     Chat,
     Itinerary,
+    ItineraryForm,
+    ItinerarySearch,
     Photos,
     PackForm,
     Contacts,
@@ -53,6 +58,8 @@ import { JwtHelper } from 'angular2-jwt';
     Packs,
     Chat,
     Itinerary,
+    ItineraryForm,
+    ItinerarySearch,
     Photos,
     PackForm,
     Contacts,
@@ -63,7 +70,7 @@ import { JwtHelper } from 'angular2-jwt';
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthService, PackService, BudgetService,
+    AuthService, PackService, BudgetService, YelpService,
     File,
     Transfer,
     Camera,

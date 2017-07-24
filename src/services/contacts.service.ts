@@ -36,7 +36,9 @@ export class ContactsService {
             this.http.post(`${this.SERVER_ROSE}/groups`, contact)
               .subscribe((response) => {
                 console.log("All good");
-                // if(response){ this.events.pubish('get:contacts')}
+                if(response){ 
+                  this.events.publish('get:contacts')
+                }
               }, (error) => {
                 console.error(error, "ERROR");
               });
@@ -51,9 +53,10 @@ export class ContactsService {
     this.storage.get('packId').then((val) => {
       this.http.get(`${this.SERVER_ROSE}/groups?packId=${val}`)
         .map(res => res.json())
-        .subscribe(response => {
-          console.log(response);
-          cb(response);
+        .subscribe(({data}) => {
+          data = data.map((group) => group.user)
+          console.log(data, 'contact data');
+          cb(data);
         }, error => {
           console.error(error);
         });
