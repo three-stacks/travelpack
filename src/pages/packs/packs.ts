@@ -35,8 +35,8 @@ export class Packs {
     });
   }
 
-  public ionViewDidLoad() {
-    console.log('ionViewDidLoad PacksPagePage');
+  public ionViewDidEnter(){
+    console.log('should print after auth service')
     this.pkSvs.getPacks(this.newPacks.bind(this));
   }
 
