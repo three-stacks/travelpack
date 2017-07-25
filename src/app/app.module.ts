@@ -24,10 +24,12 @@ import { BudgetAddon } from "../pages/budget-addon/budget-addon";
 import { AuthService } from "../services/auth.service";
 import { PackService } from "../services/pack.service";
 import { YelpService } from "../services/yelp.service";
+import { ChatService } from "../services/chat.service";
 import { BudgetService } from "../services/budget.service";
 import { Signup } from "../pages/signup/signup";
 import { Geolocation } from '@ionic-native/geolocation';
 import { JwtHelper } from 'angular2-jwt';
+import { Config } from './config';
 
 @NgModule({
   declarations: [
@@ -70,13 +72,14 @@ import { JwtHelper } from 'angular2-jwt';
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthService, PackService, BudgetService, YelpService,
+    AuthService, PackService, BudgetService, YelpService, ChatService,
     File,
     Transfer,
     Camera,
     FilePath,
     Geolocation,
     JwtHelper,
+    Config,
   ],
 })
 export class AppModule {}

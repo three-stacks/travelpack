@@ -3,6 +3,7 @@ import { NavController, NavParams, ModalController, Content } from 'ionic-angula
 import { Contacts } from "../contacts/contacts";
 import * as io from "socket.io-client";
 import { Storage } from '@ionic/storage';
+import { ChatService } from '../../services/chat.service'; 
 
 @Component({
   selector: 'page-chat',
@@ -27,7 +28,8 @@ export class Chat {
   constructor(public storage: Storage,
               public navCtrl: NavController,
               public navParams: NavParams,
-              public modalCtrl: ModalController) {
+              public modalCtrl: ModalController,
+              public chatSvs: ChatService) {
     this.storage.get('username').then(val => this.username = val);
     this.storage.get('userId').then(val => this.userId = val);
     this.storage.get('avatar').then(val => this.avatar = val);
@@ -45,6 +47,18 @@ export class Chat {
   public ionViewDidLoad() {
     console.log('ionViewDidLoad ChatPagePage');
   }
+
+  public ionViewWillEnter(){
+    this.chatSvs.getMessages(this.loadMessages.bind(this))
+  }
+
+  public loadMessages(data){
+    if(data){
+      this.messages = data;
+      console.log(this.messages, 'in chat')
+    }
+  }
+
   public ionViewDidEnter() {
     this.storage.get('packName').then(val => this.packname = val);
     this.storage.get('packId').then(id => {

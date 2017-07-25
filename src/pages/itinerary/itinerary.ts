@@ -27,7 +27,7 @@ export class Itinerary {
       })
     }
 
-  public ionViewDidLoad() {
+  public ionViewWillEnter() {
     console.log('ionViewDidLoad ItineraryPagePage');
       this.yelpSvs.fetchItinerary(this.getItinerary.bind(this))
   }
@@ -40,18 +40,20 @@ export class Itinerary {
     this.navCtrl.push(ItinerarySearch);
   }
   public updatePoll(data){
-    for(var i = 0; i < this.todos.length; i++){
-      if(this.todos[i].id === data.id){
-        this.todos[i].id = data.id;
-        console.log(this.todos[i].id)
-      }
-    }
+    console.log(data);
+    // this.todos = data;
+    // for(var i = 0; i < this.todos.length; i++){
+    //   if(this.todos[i].id === data.id){
+    //     this.todos[i].id = data.id;
+    //     console.log(this.todos[i].id)
+    //   }
+    // }
   }
-  public postUnlike(id, unlikes, cb){
-    this.yelpSvs.unlike(id, unlikes, this.updatePoll.bind(this))
+  public postUnlike(id, unlikes){
+    this.yelpSvs.unlike(id, unlikes)
   }
-  public postLike(id, likes, cb){
-    this.yelpSvs.like(id, likes, this.updatePoll.bind(this))
+  public postLike(id, likes){
+    this.yelpSvs.like(id, likes)
   }
   public updateLikes
   public backClick(){

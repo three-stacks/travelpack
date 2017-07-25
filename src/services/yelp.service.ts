@@ -22,7 +22,7 @@ export class YelpService {
   public header = new Headers({ 
   'Access-Control-Allow-Origin': 'http://192.168.1.113:8100',  
   'Content-Type' :'application/x-www-form-urlencoded',
-  'Authorization': 'Bearer jhsfakangnalfa',
+  'Authorization': 'Bearer',
   });
 
 constructor(
@@ -109,7 +109,7 @@ constructor(
     })
   }
 
-  public like(id, likes, cb){
+  public like(id, likes){
     console.log(id, likes, 'in like')
     this.countLikes = { like: (likes += 1) };
     console.log(this.countLikes);
@@ -117,7 +117,6 @@ constructor(
     .map(res => res.json())
     .subscribe((data) => {
       if(data){
-        cb(data)
         this.events.publish("like:added")
       }
       console.log(data, 'likes');
@@ -126,7 +125,7 @@ constructor(
     })
   }
 
-  public unlike(id, unlikes, cb){
+  public unlike(id, unlikes){
     console.log(unlikes, 'unliking')
     this.countUnlikes = { unlike: (unlikes += 1) };
     console.log(this.countUnlikes);
@@ -134,7 +133,6 @@ constructor(
     .map(res => res.json())
     .subscribe((data) => {
       if(data){
-        cb(data);
         this.events.publish("unlike:added")
       }
     }, (err) => {
@@ -142,5 +140,3 @@ constructor(
     })
   }  
 }
-
-

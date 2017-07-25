@@ -17,18 +17,19 @@
 
 <ion-content>
   <ion-card *ngFor="let todo of todos"> 
-  <ion-item>
+  <ion-item> 
     <h2>{{todo.name}}</h2>
-    <p>November 10, 2017</p>
-  </ion-item>
+    <p>November 10, 2017</p> 
+  </ion-item> 
 
-  <img src="{{todo.img}}">
-
+  <a ion-item href="{{todo.link}}">
+      <img src="{{todo.img}}"></a>   
+  
   <ion-row>
     <ion-col>
       <button ion-button icon-left clear small (click)="postLike(todo.id, todo.like)">
         <ion-icon name="thumbs-up"></ion-icon>
-        <div>{{todo.like}} Let's Go</div>
+        <div>{{todo.like}} Good Idea </div>
       </button>
     </ion-col>
     <ion-col>
