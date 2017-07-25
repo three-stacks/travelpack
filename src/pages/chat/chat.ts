@@ -33,7 +33,7 @@ export class Chat {
     this.socket.on('chat message', (msg) => {
       console.log(msg, 'in chat message');
       this.zone.run(() => {
-        // this.messages.push(msg);
+        this.messages.push(msg);
         this.content.scrollToBottom();
       });
     });

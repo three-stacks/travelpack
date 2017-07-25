@@ -1,8 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
-// import { StatusBar } from '@ionic-native/status-bar';
-// import { SplashScreen } from '@ionic-native/splash-screen';
-
 import { Storage } from '@ionic/storage';
 import { HomePage } from '../pages/home/home';
 import { Packs } from '../pages/packs/packs';
@@ -20,7 +17,7 @@ export class MyApp {
   public pages: Array<{title: string, component: any}>;
 
   constructor(platform: Platform, public storage: Storage) {
-    platform.ready().then(() => {
+    platform.ready().then(() => { // idk
     });
     this.pages = [
       {title: 'Packs', component: Packs},
@@ -33,5 +30,9 @@ export class MyApp {
 
   public openPage(page) {
     this.nav.setRoot(page.component);
+  }
+
+  public logOut() {
+    this.nav.setRoot(this.rootPage);
   }
 }
