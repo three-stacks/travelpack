@@ -11,7 +11,7 @@ import { Storage } from '@ionic/storage';
 export class Chat {
   @ViewChild(Content) content: Content;
   public SERVER_DEPLOY = 'http://ec2-18-220-15-216.us-east-2.compute.amazonaws.com:3030';
-  public SERVER_ROSE = 'http://localhost:3030';
+  public SERVER_ROSE = 'http://192.168.1.113:3030';
   public text: string;
   public messages: any = [];
   public socketHost: string = this.SERVER_ROSE;

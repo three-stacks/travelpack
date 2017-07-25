@@ -12,7 +12,7 @@ import { ItineraryForm } from '../pages/itinerary-form/itinerary-form';
 export class YelpService {
   public packID: number;
   public header = new Headers({ 
-  'Access-Control-Allow-Origin': 'http://localhost:8100',  
+  'Access-Control-Allow-Origin': 'http://192.168.1.113:8100',  
   'Content-Type' :'application/x-www-form-urlencoded',
   'Authorization': 'Bearer jhsfakangnalfa',
   });

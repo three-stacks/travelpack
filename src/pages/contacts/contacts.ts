@@ -8,7 +8,7 @@ import { ContactsService } from '../../services/contacts.service';
   providers: [ContactsService],
 })
 export class Contacts {
-  public allContacts = [{ username: "David", avatar: ""}];
+  public allContacts = [{ username: "", avatar: ""}];
 
   constructor(
     public contactSvs: ContactsService,
