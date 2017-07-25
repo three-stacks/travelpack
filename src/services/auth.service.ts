@@ -11,7 +11,7 @@ export class AuthService {
   public payload: any;
   public headers = new Headers({ 'Content-Type': 'application/json' });
   public SERVER_DEPLOY = 'http://ec2-18-220-15-216.us-east-2.compute.amazonaws.com:3030';
-  public SERVER_ROSE = 'http://192.168.1.113:3030';
+  public SERVER_ROSE = 'http://localhost:3030';
 
   constructor(private storage: Storage, public http: Http) {}
 
@@ -25,7 +25,8 @@ export class AuthService {
           this.payload = this.jwtHelper.decodeToken(token);
           console.log(this.payload, 'my payload');
           this.storage.set('userId', this.payload.userId);
-          // this.storage.set('userName', this.payload.userName);
+          this.storage.set('username', this.payload.username);
+          this.storage.set('avatar', this.payload.avatar);
         });
         cb(data.accessToken);
         // this.storage.set("token", data.accessToken);

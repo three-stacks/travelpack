@@ -19,7 +19,7 @@
     <ion-card *ngFor="let data of messages"> 
       <ion-item>
         <ion-avatar item-left>
-          <img src="https://avatars5.githubusercontent.com/u/24818343?v=4&s=460">
+          <img src="{{data.avatar}}">
         </ion-avatar>
         <h2>{{data.username}}</h2>
         <p>{{data.date | date: 'dd/MM/yyyy'}}</p>
