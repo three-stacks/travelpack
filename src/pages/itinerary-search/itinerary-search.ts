@@ -25,12 +25,6 @@ export class ItinerarySearch {
     console.log('ionViewDidLoad ItineraryFormPage');
   }
 
-  public openItineraryModel(yelpData){
-    // console.log(yelpData, 'it it logged ');
-    // const itineraryModal = this.modalCtrl.create(ItineraryForm, {});
-    // itineraryModal.present();
-  }
-
   public backClick(){
     this.navCtrl.push(Itinerary);
   }

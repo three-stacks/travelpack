@@ -1,5 +1,4 @@
 <ion-header>
-
   <ion-navbar color="travel-nav">
     <ion-buttons left>
       <button ion-button (click)="backClick()">
@@ -13,9 +12,37 @@
     </ion-buttons>
     <ion-title text-center>Itinerary</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content>
+  <ion-card *ngFor="let todo of todos"> 
+  <ion-item>
+    <h2>{{todo.name}}</h2>
+    <p>November 10, 2017</p>
+  </ion-item>
+
+  <img src="{{todo.img}}">
+
+  <ion-row>
+    <ion-col>
+      <button ion-button icon-left clear small (click)="postLike(todo.id, todo.like)">
+        <ion-icon name="thumbs-up"></ion-icon>
+        <div>{{todo.like}} Let's Go</div>
+      </button>
+    </ion-col>
+    <ion-col>
+      <button ion-button icon-left clear small (click)="postUnlike(todo.id, todo.unlike)">
+        <ion-icon name="thumbs-down"></ion-icon>
+        <div>{{todo.unlike}} Nah</div>
+      </button>
+    </ion-col>
+    <ion-col center text-center>
+      <ion-note>
+      </ion-note>
+    </ion-col>
+  </ion-row>
+
+</ion-card> 
+
 </ion-content>

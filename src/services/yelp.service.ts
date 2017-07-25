@@ -10,13 +10,20 @@ import { ItineraryForm } from '../pages/itinerary-form/itinerary-form';
 @Injectable()
 
 export class YelpService {
+  public SERVER_DEPLOY = 'http://ec2-18-220-15-216.us-east-2.compute.amazonaws.com:3030';
+  public SERVER_ROSE = 'http://192.168.1.113:3030';
+  public userId: string;
   public packID: number;
+  public userID: number;
+  public yelp: any;
+  public countLikes: any;
+  public countUnlikes: any;
+
   public header = new Headers({ 
   'Access-Control-Allow-Origin': 'http://192.168.1.113:8100',  
   'Content-Type' :'application/x-www-form-urlencoded',
   'Authorization': 'Bearer jhsfakangnalfa',
   });
-  public yelp: any;
 
 constructor(
   public navCtrl: NavController, 
@@ -26,6 +33,7 @@ constructor(
   public events: Events, 
   public modalCtrl: ModalController){
   this.storage.get('packId').then((val) => this.packID = val);
+  this.storage.get('userId').then((val)=> this.userID = val);
 }
   
   public g_options = new RequestOptions({
@@ -46,8 +54,6 @@ constructor(
 
   public addItem(yelpData){
     this.yelp = yelpData;
-    // const itineraryModal = this.modalCtrl.create(ItineraryForm);
-    // itineraryModal.present()
     const prompt = this.alertCtrl.create({
       title: "Add to your itinerary?",
       message: `Do you want to add ${yelpData.name} to your itinerary?`,
@@ -61,7 +67,7 @@ constructor(
         {
           text: 'Add',
           handler: data => {
-            console.log(this.yelp, 'it works');
+            this.addYelpData(this.yelp);
           }
         },
       ]
@@ -69,10 +75,72 @@ constructor(
     prompt.present();
   }
 
-  public addYelpData(time){
-    console.log(this.yelp, 'insert into database')
+  public addYelpData(yelp){
+    let item = {
+      name: this.yelp.name,
+      img: this.yelp.image_url,
+      link: this.yelp.url,
+      userId: this.userID,
+      packId: this.packID,
+      like: 0,
+      unlike: 0,
+    }
 
+    console.log(item, 'post to db')
+    this.http.post(`${this.SERVER_ROSE}/itineraries`, item)
+    .map((res) => res.json())
+    .subscribe((data) => {
+      console.log(data);
+    }, (err) => {
+      console.error(err);
+    });
   }
 
-    
+  public fetchItinerary(cb){
+    this.storage.get('packId').then(val => {
+      this.http.get(`${this.SERVER_ROSE}/itineraries?packId=${val}`)
+      .map(res => res.json())
+      .subscribe(({data}) => {
+        console.log(data, 'itinerary data');
+        cb(data)
+      }, (err) => {
+        console.error(err);
+      });
+    })
+  }
+
+  public like(id, likes, cb){
+    console.log(id, likes, 'in like')
+    this.countLikes = { like: (likes += 1) };
+    console.log(this.countLikes);
+    this.http.patch(`${this.SERVER_ROSE}/itineraries/${id}`, this.countLikes)
+    .map(res => res.json())
+    .subscribe((data) => {
+      if(data){
+        cb(data)
+        this.events.publish("like:added")
+      }
+      console.log(data, 'likes');
+    }, (err) => {
+      console.error(err);
+    })
+  }
+
+  public unlike(id, unlikes, cb){
+    console.log(unlikes, 'unliking')
+    this.countUnlikes = { unlike: (unlikes += 1) };
+    console.log(this.countUnlikes);
+    this.http.patch(`${this.SERVER_ROSE}/itineraries/${id}`, this.countUnlikes)
+    .map(res => res.json())
+    .subscribe((data) => {
+      if(data){
+        cb(data);
+        this.events.publish("unlike:added")
+      }
+    }, (err) => {
+      console.error(err);
+    })
+  }  
 }
+
+
