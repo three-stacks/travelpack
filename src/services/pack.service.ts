@@ -17,7 +17,7 @@ export class PackService {
       console.log(val, 'userId in get');
       this.http.get(`${this.SERVER_ROSE}/groups?userId=${val}`)
       .map(res => res.json())
-      .subscribe(({data}) => {
+      .subscribe(({ data }) => {
         data = data.map((group) => group.pack)
         console.log(data, 'pack data');
         cb(data);

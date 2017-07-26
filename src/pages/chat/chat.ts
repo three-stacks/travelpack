@@ -46,9 +46,6 @@ export class Chat {
 
   public ionViewDidLoad() {
     console.log('ionViewDidLoad ChatPagePage');
-  }
-
-  public ionViewWillEnter(){
     this.chatSvs.getMessages(this.loadMessages.bind(this))
   }
 
@@ -65,12 +62,10 @@ export class Chat {
     let messageData = {
       message: mes.text,
       username: mes.users.username,
-      // avatar: mes.users.avatar,
+      avatar: mes.users.avatar,
     }
     return messageData;
   }
-
-
 
   public ionViewDidEnter() {
     this.storage.get('packName').then(val => this.packname = val);
