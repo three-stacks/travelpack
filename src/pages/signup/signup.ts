@@ -17,6 +17,7 @@ declare var cordova: any;
 export class Signup {
   public user: any = { email: "", username: "", password: "", avatar: ""};
   public lastImage: string = null;
+  public base64Image: string;
   public loading: Loading;
 
   constructor(public authSvs: AuthService,
@@ -73,38 +74,39 @@ export class Signup {
       targetWidth: 300,
       targetHeight: 300,
       sourceType,
-      targetWidth: 150,
-      targetHeight: 150,
       saveToPhotoAlbum: false,
+      correctOrientation: true,
+      destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      correctOrientation: true,
-      mediaType: this.camera.MediaType.PICTURE,
-      destinationType: this.camera.DestinationType.DATA_URL,
     };
     // Get the data of an image
-     this.camera.getPicture(options).then((imageData) => {
-       console.log(imageData, "imageData in camera")
-       this.presentToast(JSON.stringify(imageData) + "  image data")
-        imageData = imageData.replace(/\r?\n|\r/g, "");
-        console.log(imageData, "imageData in camera")
-        this.lastImage = 'data:image/jpeg;base64,' + imageData;
-        console.log(this.lastImage, "last image in camera")
-        // var newForm = new FormData();
-        // newForm.append("file", this.base64Image);
-        // newForm.append("upload_preset", this.config.cloudinary.uploadPreset);
-        // this.photo = this.base64Image;
-        // return newForm;
-      })
-      // .then(imgFormatted => {
-      //   this.transImageService.sendPic(imgFormatted)
-      //   this.transImageService.showLoading(5000);
-      //   setTimeout(() => {
-      //     this.fourN = this.transImageService.getWord();
-      //     this.native = this.transImageService.getNativeWord();
-      //   }, 3000)
-      // })
+    this.camera.getPicture(options).then((imageData) => {
+      // imageData = imageData.replace(/\r?\n|\r/g, "");
+      this.base64Image = 'data:image/jpeg;base64,' + imageData;
+      var newForm = new FormData();
+      newForm.append("file", this.base64Image);
+      newForm.append("upload_preset", 'lfgdxmzd');
+      console.log(this.base64Image, "THIS BASE64IMAGE");
+      return newForm;
+      // Special handling for Android library
+      // if (this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY) {
+      //   this.filePath.resolveNativePath(imageData)
+      //     .then(filePath => {
+      //       let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
+      //       let currentName = imageData.substring(imageData.lastIndexOf('/') + 1, imageData.lastIndexOf('?'));
+      //       this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
+      //     });
+      // } else {
+      //   var currentName = imageData.substr(imageData.lastIndexOf('/') + 1);
+      //   var correctPath = imageData.substr(0, imageData.lastIndexOf('/') + 1);
+      //   this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
+      // }
+    // }, (err) => {
+    //   this.presentToast('Error while selecting image.');
+    }).then(form => {
+      this.uploadImage(form);
+    });
   }
 
   public pathForImage(img) {
@@ -114,12 +116,13 @@ export class Signup {
       return cordova.file.dataDirectory + img;
     }
   }
-  public uploadImage() {
+  public uploadImage(form) {
     // Destination URL
-    var url = "https://172.24.3.44:3030/avatar";
+    var url = "https://localhost:3030/avatar";
+    var testUrl = "http://172.24.3.44:3030/avatar";
+    var cloudinaryUpload = 'https://api.cloudinary.com/v1_1/djdelgado/image/upload';
     // File for Upload
     var targetPath = this.pathForImage(this.lastImage);
-    console.log(targetPath);
 
     // File name only
     var filename = this.lastImage;
@@ -133,7 +136,6 @@ export class Signup {
     };
 
     const fileTransfer: TransferObject = this.transfer.create();
-    console.log(fileTransfer);
 
     this.loading = this.loadingCtrl.create({
       content: 'Uploading...',
@@ -142,15 +144,12 @@ export class Signup {
 
     // Use the FileTransfer to upload the image
     // fileTransfer.upload(targetPath, url, options).then(data => {
-    this.http.post('https://api.cloudinary.com/v1_1/djdelgado/image/upload', options)
+    this.http.post(cloudinaryUpload, form)
     .subscribe(data => {
       this.loading.dismissAll();
       this.presentToast('Image succesful uploaded.');
-      console.log(targetPath, "PATH", "IMPOSSIBLE");
-      console.log(url, "URL", "IMPOSSIBLE");
-      console.log(options, "OPTIONS", "IMPOSSIBLE");
     }, err => {
-      console.log(err, "upload targetpath error");
+      console.log(err, "THIS IS POST ERROR");
       this.loading.dismissAll();
       this.presentToast('Error while uploading file.');
     });
@@ -165,9 +164,16 @@ export class Signup {
   private copyFileToLocalDir(namePath, currentName, newFileName) {
     this.file.copyFile(namePath, currentName, cordova.file.dataDirectory, newFileName).then(success => {
       this.lastImage = newFileName;
-      console.log("HIT THIS LITTLE PITTLE");
+      var targetPath = this.pathForImage(this.lastImage);
+      var newForm = new FormData();
+      newForm.append("file", this.base64Image);
+      newForm.append("upload_preset", 'lfgdxmzd');
+      console.log(JSON.stringify(newForm), "NEW FORM");
+      console.log("NEW FORM");
+      console.log(this.base64Image, "THIS BASE64IMAGE");
+      this.uploadImage(newForm);
     }, error => {
-      console.log(error, "ERROR IN COPYFILE");
+      console.log(error, "this is error is copyfile");
       this.presentToast('Error while storing file.');
     });
   }
