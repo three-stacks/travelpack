@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Storage} from '@ionic/storage';
-import { Http, Headers } from '@angular/http';
+import { Http, Headers, RequestOptions } from '@angular/http';
 import { JwtHelper } from 'angular2-jwt';
 import 'rxjs/add/operator/map';
 
@@ -13,11 +13,15 @@ export class AuthService {
   public SERVER_DEPLOY = 'http://ec2-18-220-15-216.us-east-2.compute.amazonaws.com:3030';
   public SERVER_ROSE = 'http://192.168.1.113:3030';
 
-  constructor(private storage: Storage, public http: Http) {}
+  constructor(private storage: Storage, public http: Http, public reqOptions: RequestOptions) {}
 
   public loginUser(user, cb) {
     console.log(user);
+<<<<<<< HEAD
+    this.http.post(`${this.SERVER_DEPLOY}/auth`, user)
+=======
     this.http.post(`${this.SERVER_ROSE}/auth`, user)
+>>>>>>> a3b2b42d8040d408d4848c449912b960c1ee858f
       .map(res => res.json())
       .subscribe((data) => {
         console.log(data.accessToken);
@@ -38,7 +42,7 @@ export class AuthService {
   }
 
   public signupUser(user, cb) {
-    this.http.post(`${this.SERVER_ROSE}/users`, user)
+    this.http.post(`${this.SERVER_DEPLOY}/users`, user)
       .map((res) => res.json())
       .subscribe((data) => {
         cb(data);
@@ -46,6 +50,24 @@ export class AuthService {
       }, (err) => {
         console.error(err);
       });
+  }
+
+  public logoutUser() {
+    this.storage.get('token').then(val => {
+      const headers = new Headers();
+      // console.log(val, "token");
+      headers.append("Authorization", `Bearer ${val}`);
+      let options = new RequestOptions({headers});
+      console.log(headers, "headers")
+      this.http.delete(`${this.SERVER_ROSE}/auth`, options)
+      .map((res) => res.json())
+      .subscribe((data) => {
+        // cb(data);
+        console.log(data, 'data');
+      }, (err) => {
+        console.error(err);
+      });
+    });
   }
 
 }
