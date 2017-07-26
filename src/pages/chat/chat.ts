@@ -18,6 +18,7 @@ export class Chat {
   public socket: any;
   public chat: any;
   public username: string;
+  public avatar: string;
   public zone: any;
   public userId: any;
   public packname: string;
@@ -27,7 +28,9 @@ export class Chat {
               public navCtrl: NavController,
               public navParams: NavParams,
               public modalCtrl: ModalController) {
+    this.storage.get('username').then(val => this.username = val);
     this.storage.get('userId').then(val => this.userId = val);
+    this.storage.get('avatar').then(val => this.avatar = val);
     this.socket = io.connect(this.socketHost);
     this.zone = new NgZone({enableLongStackTrace: false});
     this.socket.on('chat message', (msg) => {
@@ -62,7 +65,8 @@ export class Chat {
     let data = {
       message: val,
       userId: this.userId,
-      username: 'david',
+      username: this.username,
+      avatar: this.avatar,
     };
 
     this.socket.emit('new message', data);

@@ -17,7 +17,11 @@ export class AuthService {
 
   public loginUser(user, cb) {
     console.log(user);
+<<<<<<< HEAD
     this.http.post(`${this.SERVER_DEPLOY}/auth`, user)
+=======
+    this.http.post(`${this.SERVER_ROSE}/auth`, user)
+>>>>>>> a3b2b42d8040d408d4848c449912b960c1ee858f
       .map(res => res.json())
       .subscribe((data) => {
         console.log(data.accessToken);
@@ -25,7 +29,8 @@ export class AuthService {
           this.payload = this.jwtHelper.decodeToken(token);
           console.log(this.payload, 'my payload');
           this.storage.set('userId', this.payload.userId);
-          // this.storage.set('userName', this.payload.userName);
+          this.storage.set('username', this.payload.username);
+          this.storage.set('avatar', this.payload.avatar);
         });
         cb(data.accessToken);
         // this.storage.set("token", data.accessToken);
