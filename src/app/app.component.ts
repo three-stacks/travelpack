@@ -7,6 +7,7 @@ import { Itinerary } from '../pages/itinerary/itinerary';
 import { Photos } from '../pages/photos/photos';
 import { Budget } from "../pages/budget/budget";
 import { FindMyPack } from "../pages/find-my-pack/find-my-pack";
+import { AuthService } from "../services/auth.service";
 
 @Component({
   templateUrl: 'app.html',
@@ -16,7 +17,7 @@ export class MyApp {
   public rootPage: any = HomePage;
   public pages: Array<{title: string, component: any}>;
 
-  constructor(platform: Platform, public storage: Storage) {
+  constructor(platform: Platform, public storage: Storage, public authSvs: AuthService) {
     platform.ready().then(() => { // idk
     });
     this.pages = [
@@ -33,6 +34,7 @@ export class MyApp {
   }
 
   public logOut() {
+    this.authSvs.logoutUser();
     this.nav.setRoot(this.rootPage);
   }
 }
