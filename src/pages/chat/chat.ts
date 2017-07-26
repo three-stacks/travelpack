@@ -52,12 +52,25 @@ export class Chat {
     this.chatSvs.getMessages(this.loadMessages.bind(this))
   }
 
-  public loadMessages(data){
-    if(data){
-      this.messages = data;
-      console.log(this.messages, 'in chat')
+  public loadMessages(allMessages){
+    if(allMessages){
+      let result = [];
+      for(var i = 0; i < allMessages.length; i++){
+        this.messages.push(this.processMessage(allMessages[i]));
+      }      
     }
   }
+
+  public processMessage(mes) {
+    let messageData = {
+      message: mes.text,
+      username: mes.users.username,
+      // avatar: mes.users.avatar,
+    }
+    return messageData;
+  }
+
+
 
   public ionViewDidEnter() {
     this.storage.get('packName').then(val => this.packname = val);

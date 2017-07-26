@@ -13,7 +13,6 @@ import { YelpService } from '../../services/yelp.service';
 export class Itinerary {
   public todos: any = []
   
-
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
