@@ -6,6 +6,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { JwtHelper } from 'angular2-jwt';
 import 'rxjs/add/operator/map';
 import { ItineraryForm } from '../pages/itinerary-form/itinerary-form';
+import { Config } from '../app/config';
 
 @Injectable()
 
@@ -19,10 +20,9 @@ export class YelpService {
   public countLikes: any;
   public countUnlikes: any;
 
-  public header = new Headers({ 
-  'Access-Control-Allow-Origin': 'http://192.168.1.113:8100',  
+  public header = new Headers({   
   'Content-Type' :'application/x-www-form-urlencoded',
-  'Authorization': 'Bearer',
+  'Authorization': `Bearer ${this.config.YELP_ACCESS_TOKEN}`,
   });
 
 constructor(
@@ -31,7 +31,8 @@ constructor(
   public http: Http, 
   public storage: Storage, 
   public events: Events, 
-  public modalCtrl: ModalController){
+  public modalCtrl: ModalController,
+  public config: Config){
   this.storage.get('packId').then((val) => this.packID = val);
   this.storage.get('userId').then((val)=> this.userID = val);
 }
@@ -41,12 +42,16 @@ constructor(
   })
 
   public fetchYelpData(searchQuery){
-    console.log(searchQuery,'search query')
-        console.log(this.header, 'headers')
+    this.http.getBasicAuthHeader('Authorization', `${this.config.YELP_ACCESS_TOKEN}`).then(val => {
+      console.log(val, 'header')
+    })
+    // console.log(searchQuery,'search query')
+    //     console.log(this.header, 'headers')
+    //     console.log(this.g_options)
     this.http.get(`https://api.yelp.com/v3/businesses/search`, this.g_options )
       .map((res) => res.json())
       .subscribe((response) => {
-        console.log(response, 'yelp results');
+        console.log(response, 'It worked');
       }, error => {
         console.error(error);
       }); 
@@ -117,7 +122,7 @@ constructor(
     .map(res => res.json())
     .subscribe((data) => {
       if(data){
-        this.events.publish("like:added")
+        this.events.publish("update:like")
       }
       console.log(data, 'likes');
     }, (err) => {
@@ -133,7 +138,7 @@ constructor(
     .map(res => res.json())
     .subscribe((data) => {
       if(data){
-        this.events.publish("unlike:added")
+        this.events.publish("update:like")
       }
     }, (err) => {
       console.error(err);

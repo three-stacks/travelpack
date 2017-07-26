@@ -9,6 +9,7 @@ import { ChatService } from '../../services/chat.service';
   selector: 'page-chat',
   templateUrl: 'chat.html',
 })
+
 export class Chat {
   @ViewChild(Content) content: Content;
   public SERVER_DEPLOY = 'http://ec2-18-220-15-216.us-east-2.compute.amazonaws.com:3030';

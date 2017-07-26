@@ -18,10 +18,7 @@ export class Itinerary {
     public navParams: NavParams,
     public events: Events, 
     public yelpSvs: YelpService) {
-      events.subscribe("unlike:added", () => {
-        yelpSvs.fetchItinerary(this.getItinerary.bind(this))
-      })
-      events.subscribe("like:added", () => {
+      events.subscribe("update:like", () => {
         yelpSvs.fetchItinerary(this.getItinerary.bind(this))
       })
     }
