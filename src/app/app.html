@@ -11,6 +11,11 @@
       </button>
     </ion-list>
   </ion-content>
+  <ion-footer>
+      <button class="menuItems" menuClose ion-button (click)="logOut()" style="background-color: grey">
+        Logout
+      </button>
+    </ion-footer>
 </ion-menu>
 
 <ion-nav id="nav" #content [root]="rootPage"></ion-nav>

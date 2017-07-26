@@ -14,11 +14,13 @@ export class HomePage {
 
   constructor(private storage: Storage, public navCtrl: NavController, public authSvs: AuthService) {
   }
+
   public tokenAuth(token) {
     if (token) {
       this.navCtrl.push(Packs);
     }
   }
+  
   public login() {
     this.authSvs.loginUser(this.user, this.tokenAuth.bind(this));
   }

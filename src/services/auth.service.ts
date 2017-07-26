@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Storage } from '@ionic/storage';
-import { Http, Headers } from '@angular/http';
+import { Storage} from '@ionic/storage';
+import { Http, Headers, RequestOptions } from '@angular/http';
 import { JwtHelper } from 'angular2-jwt';
 import 'rxjs/add/operator/map';
 
@@ -13,21 +13,21 @@ export class AuthService {
   public SERVER_DEPLOY = 'http://ec2-18-220-15-216.us-east-2.compute.amazonaws.com:3030';
   public SERVER_ROSE = 'http://192.168.1.113:3030';
 
-  constructor(private storage: Storage, public http: Http) {}
+  constructor(private storage: Storage, public http: Http, public reqOptions: RequestOptions) {}
 
   public loginUser(user, cb) {
     console.log(user);
-    this.http.post(`${this.SERVER_DEPLOY}/authentication`, user)
+    this.http.post(`${this.SERVER_DEPLOY}/auth`, user)
       .map(res => res.json())
       .subscribe((data) => {
         console.log(data.accessToken);
         this.storage.set('jwt', data.accessToken).then(token => {
-          this.payload = this.jwtHelper.decodeToken(token)
-          console.log(this.payload, 'my payload')
-          this.storage.set('userId', this.payload.userId).then(userId => {
-            console.log(`your user id is ${userId}`)
-          })
-        })
+          this.payload = this.jwtHelper.decodeToken(token);
+          console.log(this.payload, 'my payload');
+          this.storage.set('userId', this.payload.userId);
+          this.storage.set('username', this.payload.username);
+          this.storage.set('avatar', this.payload.avatar);
+        });
         cb(data.accessToken);
         // this.storage.set("token", data.accessToken);
         // let headers = new Headers();
@@ -41,11 +41,30 @@ export class AuthService {
     this.http.post(`${this.SERVER_DEPLOY}/users`, user)
       .map((res) => res.json())
       .subscribe((data) => {
+        cb(data);
         console.log(data, 'data');
         cb(data)
       }, (err) => {
         console.error(err);
       });
+  }
+
+  public logoutUser() {
+    this.storage.get('token').then(val => {
+      const headers = new Headers();
+      // console.log(val, "token");
+      headers.append("Authorization", `Bearer ${val}`);
+      let options = new RequestOptions({headers});
+      console.log(headers, "headers")
+      this.http.delete(`${this.SERVER_ROSE}/auth`, options)
+      .map((res) => res.json())
+      .subscribe((data) => {
+        // cb(data);
+        console.log(data, 'data');
+      }, (err) => {
+        console.error(err);
+      });
+    });
   }
 
 }

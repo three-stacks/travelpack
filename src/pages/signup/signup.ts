@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ActionSheetController, ToastController, Platform, LoadingController, Loading } from 'ionic-angular';
 import { AuthService } from "../../services/auth.service";
+import { Http, Headers } from '@angular/http';
 import { File } from '@ionic-native/file';
 import { Transfer, TransferObject } from '@ionic-native/transfer';
 import { FilePath } from '@ionic-native/file-path';
 import { Camera } from '@ionic-native/camera';
-import { Http, Headers } from '@angular/http';
+import { HomePage } from "../home/home";
 
 declare var cordova: any;
 
@@ -31,12 +32,14 @@ export class Signup {
               public loadingCtrl: LoadingController,
               public http: Http) {}
 
-  public ionViewDidLoad() {
-    console.log('ionViewDidLoad SignupPagePage');
+  public sendToPackPage(data) {
+    if (data) {
+      this.navCtrl.push(HomePage);
+    }
   }
 
   public signupAuth() {
-    this.authSvs.signupUser(this.user);
+    this.authSvs.signupUser(this.user, this.sendToPackPage.bind(this));
   }
 
   public avatarPic() {
@@ -67,11 +70,15 @@ export class Signup {
   public takePicture(sourceType) {
     var options = {
       quality: 100,
+      targetWidth: 300,
+      targetHeight: 300,
       sourceType,
       targetWidth: 150,
       targetHeight: 150,
       saveToPhotoAlbum: false,
       encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      destinationType: this.camera.DestinationType.DATA_URL,
       correctOrientation: true,
       mediaType: this.camera.MediaType.PICTURE,
       destinationType: this.camera.DestinationType.DATA_URL,
@@ -134,7 +141,9 @@ export class Signup {
     this.loading.present();
 
     // Use the FileTransfer to upload the image
-    fileTransfer.upload(targetPath, encodeURI(url), options).then(data => {
+    // fileTransfer.upload(targetPath, url, options).then(data => {
+    this.http.post('https://api.cloudinary.com/v1_1/djdelgado/image/upload', options)
+    .subscribe(data => {
       this.loading.dismissAll();
       this.presentToast('Image succesful uploaded.');
       console.log(targetPath, "PATH", "IMPOSSIBLE");

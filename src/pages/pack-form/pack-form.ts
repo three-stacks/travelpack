@@ -11,7 +11,7 @@ export class PackForm {
   public packID: number;
   public packName: any = { 
     name: "",
-    url: "http://wallpapersdsc.net/wp-content/uploads/2016/09/New-Orleans-Wallpapers.jpg",   
+    url: "https://i.imgur.com/0rxFgqa.jpg",
     userId: this.storage.get('userId')
   };
 
@@ -25,6 +25,7 @@ export class PackForm {
   public ionViewDidLoad() {
     console.log('ionViewDidLoad PackFormPagePage');
   }
+  
   public submitPack() {
     console.log(this.packName);
     this.pkSvs.addPacks(this.packName);
