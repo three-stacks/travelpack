@@ -20,11 +20,12 @@ export class Chat {
   public chat: any;
   public username: string;
   public avatar: string;
+  public date: string = new Date().toISOString();
   public zone: any;
   public userId: any;
   public packname: string;
   public packId: number;
-
+  
   constructor(public storage: Storage,
               public navCtrl: NavController,
               public navParams: NavParams,
@@ -39,7 +40,7 @@ export class Chat {
       console.log(msg, 'in chat message');
       this.zone.run(() => {
         this.messages.push(msg);
-        this.content.scrollToBottom();
+        this.scrollToBottom();
       });
     });
   }
@@ -51,11 +52,16 @@ export class Chat {
 
   public loadMessages(allMessages){
     if(allMessages){
-      let result = [];
       for(var i = 0; i < allMessages.length; i++){
         this.messages.push(this.processMessage(allMessages[i]));
       }      
     }
+    this.scrollToBottom();
+  }
+
+  public scrollToBottom(){
+    let dimensions = this.content.getContentDimensions();
+    this.content.scrollTo(0, dimensions.contentHeight, 300);
   }
 
   public processMessage(mes) {
@@ -63,7 +69,9 @@ export class Chat {
       message: mes.text,
       username: mes.users.username,
       avatar: mes.users.avatar,
+      date: mes.users.createdAt,
     }
+    console.log(messageData);
     return messageData;
   }
 
@@ -89,8 +97,8 @@ export class Chat {
       userId: this.userId,
       username: this.username,
       avatar: this.avatar,
+      date: this.date,
     };
-
     this.socket.emit('new message', data);
     this.chat = '';
   }
