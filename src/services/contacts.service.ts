@@ -33,7 +33,7 @@ export class ContactsService {
           handler: (data) => {
             let contact = { packId: this.packID, username: data.contact };
             console.log(contact, 'contact');
-            this.http.post(`${this.SERVER_ROSE}/groups`, contact)
+            this.http.post(`${this.SERVER_DEPLOY}/groups`, contact)
               .subscribe((response) => {
                 console.log("All good");
                 if(response){ 
@@ -51,7 +51,7 @@ export class ContactsService {
 
   public getContacts(cb) {
     this.storage.get('packId').then((val) => {
-      this.http.get(`${this.SERVER_ROSE}/groups?packId=${val}`)
+      this.http.get(`${this.SERVER_DEPLOY}/groups?packId=${val}`)
         .map(res => res.json())
         .subscribe(({data}) => {
           data = data.map((group) => group.user)

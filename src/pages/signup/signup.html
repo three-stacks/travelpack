@@ -17,6 +17,6 @@
       <ion-input [(ngModel)]='user.password'type="password" placeholder="Password"></ion-input>
     </ion-item>
   </ion-list>
-  <button (click)="signupAuth()" ion-button full>Signup</button>
+  <button navPop (click)="signupAuth()" (click)="uploadImage()" ion-button full>Signup</button>
   <button navPop ion-button full>Cancel</button>
 </ion-content>

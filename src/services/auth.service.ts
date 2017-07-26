@@ -17,7 +17,7 @@ export class AuthService {
 
   public loginUser(user, cb) {
     console.log(user);
-    this.http.post(`${this.SERVER_ROSE}/authentication`, user)
+    this.http.post(`${this.SERVER_DEPLOY}/authentication`, user)
       .map(res => res.json())
       .subscribe((data) => {
         console.log(data.accessToken);
@@ -37,11 +37,12 @@ export class AuthService {
       });
   }
 
-  public signupUser(user) {
-    this.http.post(`${this.SERVER_ROSE}/users`, user)
+  public signupUser(user, cb) {
+    this.http.post(`${this.SERVER_DEPLOY}/users`, user)
       .map((res) => res.json())
       .subscribe((data) => {
         console.log(data, 'data');
+        cb(data)
       }, (err) => {
         console.error(err);
       });

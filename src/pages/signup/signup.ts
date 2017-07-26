@@ -5,6 +5,7 @@ import { File } from '@ionic-native/file';
 import { Transfer, TransferObject } from '@ionic-native/transfer';
 import { FilePath } from '@ionic-native/file-path';
 import { Camera } from '@ionic-native/camera';
+import { Http, Headers } from '@angular/http';
 
 declare var cordova: any;
 
@@ -27,7 +28,8 @@ export class Signup {
               public actionSheetCtrl: ActionSheetController,
               public toastCtrl: ToastController,
               public platform: Platform,
-              public loadingCtrl: LoadingController) {}
+              public loadingCtrl: LoadingController,
+              public http: Http) {}
 
   public ionViewDidLoad() {
     console.log('ionViewDidLoad SignupPagePage');
@@ -66,28 +68,36 @@ export class Signup {
     var options = {
       quality: 100,
       sourceType,
+      targetWidth: 150,
+      targetHeight: 150,
       saveToPhotoAlbum: false,
       encodingType: this.camera.EncodingType.JPEG,
       correctOrientation: true,
+      mediaType: this.camera.MediaType.PICTURE,
+      destinationType: this.camera.DestinationType.DATA_URL,
     };
     // Get the data of an image
-    this.camera.getPicture(options).then((imagePath) => {
-      // Special handling for Android library
-      if (this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY) {
-        this.filePath.resolveNativePath(imagePath)
-          .then(filePath => {
-            let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
-            let currentName = imagePath.substring(imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
-            this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
-          });
-      } else {
-        var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
-        var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
-        this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
-      }
-    }, (err) => {
-      this.presentToast('Error while selecting image.');
-    });
+     this.camera.getPicture(options).then((imageData) => {
+       console.log(imageData, "imageData in camera")
+       this.presentToast(JSON.stringify(imageData) + "  image data")
+        imageData = imageData.replace(/\r?\n|\r/g, "");
+        console.log(imageData, "imageData in camera")
+        this.lastImage = 'data:image/jpeg;base64,' + imageData;
+        console.log(this.lastImage, "last image in camera")
+        // var newForm = new FormData();
+        // newForm.append("file", this.base64Image);
+        // newForm.append("upload_preset", this.config.cloudinary.uploadPreset);
+        // this.photo = this.base64Image;
+        // return newForm;
+      })
+      // .then(imgFormatted => {
+      //   this.transImageService.sendPic(imgFormatted)
+      //   this.transImageService.showLoading(5000);
+      //   setTimeout(() => {
+      //     this.fourN = this.transImageService.getWord();
+      //     this.native = this.transImageService.getNativeWord();
+      //   }, 3000)
+      // })
   }
 
   public pathForImage(img) {
@@ -99,9 +109,10 @@ export class Signup {
   }
   public uploadImage() {
     // Destination URL
-    var url = "https://localhost:3030/avatar";
+    var url = "https://172.24.3.44:3030/avatar";
     // File for Upload
     var targetPath = this.pathForImage(this.lastImage);
+    console.log(targetPath);
 
     // File name only
     var filename = this.lastImage;
@@ -115,6 +126,7 @@ export class Signup {
     };
 
     const fileTransfer: TransferObject = this.transfer.create();
+    console.log(fileTransfer);
 
     this.loading = this.loadingCtrl.create({
       content: 'Uploading...',
@@ -122,10 +134,14 @@ export class Signup {
     this.loading.present();
 
     // Use the FileTransfer to upload the image
-    fileTransfer.upload(targetPath, url, options).then(data => {
+    fileTransfer.upload(targetPath, encodeURI(url), options).then(data => {
       this.loading.dismissAll();
       this.presentToast('Image succesful uploaded.');
+      console.log(targetPath, "PATH", "IMPOSSIBLE");
+      console.log(url, "URL", "IMPOSSIBLE");
+      console.log(options, "OPTIONS", "IMPOSSIBLE");
     }, err => {
+      console.log(err, "upload targetpath error");
       this.loading.dismissAll();
       this.presentToast('Error while uploading file.');
     });
@@ -140,7 +156,9 @@ export class Signup {
   private copyFileToLocalDir(namePath, currentName, newFileName) {
     this.file.copyFile(namePath, currentName, cordova.file.dataDirectory, newFileName).then(success => {
       this.lastImage = newFileName;
+      console.log("HIT THIS LITTLE PITTLE");
     }, error => {
+      console.log(error, "ERROR IN COPYFILE");
       this.presentToast('Error while storing file.');
     });
   }

@@ -15,7 +15,7 @@ export class PackService {
   public getPacks(cb) {
     this.storage.get('userId').then(val => {
       console.log(val, 'userId in get');
-      this.http.get(`${this.SERVER_ROSE}/groups?userId=${val}`)
+      this.http.get(`${this.SERVER_DEPLOY}/groups?userId=${val}`)
       .map(res => res.json())
       .subscribe(({data}) => {
         data = data.map((group) => group.pack)
@@ -28,7 +28,7 @@ export class PackService {
   }
   
   public addPacks(newPack) {
-    this.http.post(`${this.SERVER_ROSE}/packs`, newPack)
+    this.http.post(`${this.SERVER_DEPLOY}/packs`, newPack)
     .map((res) => res.json())
     .subscribe((data) => {
       console.log(data, 'post pack data');
