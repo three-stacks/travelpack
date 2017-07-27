@@ -1,16 +1,20 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, Events, ActionSheetController } from 'ionic-angular';
+import { NavController, NavParams, Events, ActionSheetController,
+  ToastController, Platform, LoadingController, Loading } from 'ionic-angular';
 import { Chat } from "../chat/chat";
 import { Storage } from "@ionic/storage";
 import { PackService } from "../../services/pack.service";
 import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { Camera } from '@ionic-native/camera';
+import { Http, Headers } from '@angular/http';
 
 @Component({
   selector: 'page-photos',
   templateUrl: 'photos.html',
 })
 export class Photos {
+  public loading: Loading;
+  public base64Image: string;
   public photos = {packId: "", url: ""};
   public gallery: any;
   // [
@@ -33,7 +37,11 @@ export class Photos {
               public packSvs: PackService,
               public photoView: PhotoViewer,
               private camera: Camera,
-              public actionSheetCtrl: ActionSheetController) {
+              public toastCtrl: ToastController,
+              public platform: Platform,
+              public loadingCtrl: LoadingController,
+              public actionSheetCtrl: ActionSheetController,
+              public http: Http) {
     this.storage.get('packId').then((id) => this.photos.packId = id);
   }
 
@@ -79,24 +87,57 @@ export class Photos {
   }
 
   public takePicture(sourceType) {
-  //   var options = {
-  //     quality: 100,
-  //     targetWidth: 300,
-  //     targetHeight: 300,
-  //     sourceType,
-  //     saveToPhotoAlbum: false,
-  //     encodingType: this.camera.EncodingType.JPEG,
-  //     mediaType: this.camera.MediaType.PICTURE,
-  //     destinationType: this.camera.DestinationType.DATA_URL,
-  //     correctOrientation: true,
-  //   };
-  //   // Get the data of an image
-  //   this.camera.getPicture(options).then((imageData) => {
-  //     this.base64Image = 'data:image/jpeg;base64,' + imageData;
-  //     // Special handling for Android library
-  //   }, (err) => {
-  //     this.presentToast('Error while selecting image.');
-  //   });
+    var options = {
+      quality: 100,
+      targetWidth: 300,
+      targetHeight: 300,
+      sourceType,
+      saveToPhotoAlbum: false,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      correctOrientation: true,
+    };
+    // Get the data of an image
+    this.camera.getPicture(options).then((imageData) => {
+      this.base64Image = 'data:image/jpeg;base64,' + imageData;
+      let newForm = new FormData();
+      newForm.append("file", this.base64Image);
+      newForm.append("upload_preset", 'lfgdxmzd');
+      return newForm;
+    }).then(form => {
+      this.uploadImage(form);
+    });
+  }
+
+  public uploadImage(form) {
+    var cloudinaryUpload = 'https://api.cloudinary.com/v1_1/djdelgado/image/upload';
+
+    this.loading = this.loadingCtrl.create({
+      content: 'Uploading...',
+    });
+    this.loading.present();
+
+    this.http.post(cloudinaryUpload, form)
+      .subscribe(data => {       
+        this.photos.url = JSON.parse(data["_body"]).secure_url;
+        this.loading.dismissAll();
+        this.presentToast('Image succesful uploaded.');
+        this.ionViewDidLoad();
+      }, err => {
+        console.log(err, "THIS IS POST ERROR");
+        this.loading.dismissAll();
+        this.presentToast('Error while uploading file.');
+      });
+  }
+
+  private presentToast(text) {
+    let toast = this.toastCtrl.create({
+      message: text,
+      duration: 3000,
+      position: 'top',
+    });
+    toast.present();
   }
 
 }
