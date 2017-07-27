@@ -6,6 +6,11 @@
         <ion-icon name="arrow-dropleft" style="font-size: 2.5em"></ion-icon>
       </button>
     </ion-buttons> 
+    <ion-buttons end>
+      <button ion-button (click)="submitPic()">
+        <ion-icon name="add" style="font-size: 25px"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title text-center>Pack Pics</ion-title>
   </ion-navbar>
 
@@ -13,5 +18,13 @@
 
 
 <ion-content padding>
-
+<ion-grid>
+  <ion-row wrap>
+    <ion-col width-33 *ngFor="let image of gallery">
+      <img [src]="image.url" (click)="zoomPic(image.url)">
+    </ion-col>
+  </ion-row>
+</ion-grid>
 </ion-content>
+
+

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ActionSheetController, ToastController, Platform, LoadingController, Loading } from 'ionic-angular';
+import { NavController, NavParams, ActionSheetController,
+        ToastController, Platform, LoadingController, Loading } from 'ionic-angular';
 import { AuthService } from "../../services/auth.service";
 import { Http, Headers } from '@angular/http';
 import { File } from '@ionic-native/file';
@@ -17,6 +18,7 @@ declare var cordova: any;
 export class Signup {
   public user: any = { email: "", username: "", password: "", avatar: ""};
   public lastImage: string = null;
+  public base64Image: string;
   public loading: Loading;
 
   constructor(public authSvs: AuthService,
@@ -80,22 +82,21 @@ export class Signup {
       correctOrientation: true,
     };
     // Get the data of an image
-    this.camera.getPicture(options).then((imagePath) => {
-      console.log(imagePath, "imgpath");
-      this.lastImage = "data:image/jpeg;base64," + imagePath;
+    this.camera.getPicture(options).then((imageData) => {
+      this.base64Image = 'data:image/jpeg;base64,' + imageData;
       // Special handling for Android library
-      // if (this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY) {
-        // this.filePath.resolveNativePath(imagePath)
-        //   .then(filePath => {
-        //     let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
-        //     let currentName = imagePath.substring(imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
-        //     this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
-        //   });
-      // } else {
-      //   var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
-      //   var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
-      //   this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
-      // }
+      if (this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY) {
+        this.filePath.resolveNativePath(imageData)
+          .then(filePath => {
+            let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
+            let currentName = imageData.substring(imageData.lastIndexOf('/') + 1, imageData.lastIndexOf('?'));
+            this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
+          });
+      } else {
+        var currentName = imageData.substr(imageData.lastIndexOf('/') + 1);
+        var correctPath = imageData.substr(0, imageData.lastIndexOf('/') + 1);
+        this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
+      }
     }, (err) => {
       this.presentToast('Error while selecting image.');
     });
@@ -108,7 +109,7 @@ export class Signup {
       return cordova.file.dataDirectory + img;
     }
   }
-  public uploadImage() {
+  public uploadImage(form) {
     // Destination URL
     var url = "https://localhost:3030/avatar";
     // File for Upload
@@ -134,8 +135,9 @@ export class Signup {
 
     // Use the FileTransfer to upload the image
     // fileTransfer.upload(targetPath, url, options).then(data => {
-    this.http.post('https://api.cloudinary.com/v1_1/djdelgado/image/upload', options)
+    this.http.post('https://api.cloudinary.com/v1_1/djdelgado/image/upload', form)
     .subscribe(data => {
+      // this.user.avatar = data.body["secure_url"];
       this.loading.dismissAll();
       this.presentToast('Image succesful uploaded.');
     }, err => {
@@ -153,6 +155,10 @@ export class Signup {
   private copyFileToLocalDir(namePath, currentName, newFileName) {
     this.file.copyFile(namePath, currentName, cordova.file.dataDirectory, newFileName).then(success => {
       this.lastImage = newFileName;
+      var newForm = new FormData();
+      newForm.append("file", this.base64Image);
+      newForm.append("upload_preset", 'lfgdxmzd');
+      this.uploadImage(newForm);
     }, error => {
       this.presentToast('Error while storing file.');
     });

@@ -17,11 +17,7 @@ export class AuthService {
 
   public loginUser(user, cb) {
     console.log(user);
-<<<<<<< HEAD
     this.http.post(`${this.SERVER_DEPLOY}/auth`, user)
-=======
-    this.http.post(`${this.SERVER_ROSE}/auth`, user)
->>>>>>> a3b2b42d8040d408d4848c449912b960c1ee858f
       .map(res => res.json())
       .subscribe((data) => {
         console.log(data.accessToken);
