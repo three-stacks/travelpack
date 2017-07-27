@@ -16,7 +16,7 @@ declare var cordova: any;
 })
 export class Signup {
   public user: any = { email: "", username: "", password: "", avatar: ""};
-  public lastImage: string = null;
+  public lastImage: any = null;
   public base64Image: string;
   public loading: Loading;
 
@@ -84,98 +84,40 @@ export class Signup {
     this.camera.getPicture(options).then((imageData) => {
       // imageData = imageData.replace(/\r?\n|\r/g, "");
       this.base64Image = 'data:image/jpeg;base64,' + imageData;
+      this.lastImage = this.base64Image;
       var newForm = new FormData();
       newForm.append("file", this.base64Image);
       newForm.append("upload_preset", 'lfgdxmzd');
-      console.log(this.base64Image, "THIS BASE64IMAGE");
       return newForm;
-      // Special handling for Android library
-      // if (this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY) {
-      //   this.filePath.resolveNativePath(imageData)
-      //     .then(filePath => {
-      //       let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
-      //       let currentName = imageData.substring(imageData.lastIndexOf('/') + 1, imageData.lastIndexOf('?'));
-      //       this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
-      //     });
-      // } else {
-      //   var currentName = imageData.substr(imageData.lastIndexOf('/') + 1);
-      //   var correctPath = imageData.substr(0, imageData.lastIndexOf('/') + 1);
-      //   this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
-      // }
-    // }, (err) => {
-    //   this.presentToast('Error while selecting image.');
     }).then(form => {
       this.uploadImage(form);
     });
-  }
-
-  public pathForImage(img) {
-    if (img === null) {
-      return '';
-    } else {
-      return cordova.file.dataDirectory + img;
-    }
   }
   public uploadImage(form) {
     // Destination URL
     var url = "https://localhost:3030/avatar";
     var testUrl = "http://172.24.3.44:3030/avatar";
     var cloudinaryUpload = 'https://api.cloudinary.com/v1_1/djdelgado/image/upload';
-    // File for Upload
-    var targetPath = this.pathForImage(this.lastImage);
-
-    // File name only
-    var filename = this.lastImage;
-
-    var options = {
-      fileKey: "file",
-      fileName: filename,
-      chunkedMode: false,
-      mimeType: "image/jpg",
-      params : {'fileName': filename},
-    };
-
-    const fileTransfer: TransferObject = this.transfer.create();
 
     this.loading = this.loadingCtrl.create({
       content: 'Uploading...',
     });
     this.loading.present();
 
-    // Use the FileTransfer to upload the image
-    // fileTransfer.upload(targetPath, url, options).then(data => {
     this.http.post(cloudinaryUpload, form)
-    .subscribe(data => {
-      this.loading.dismissAll();
-      this.presentToast('Image succesful uploaded.');
-    }, err => {
-      console.log(err, "THIS IS POST ERROR");
-      this.loading.dismissAll();
-      this.presentToast('Error while uploading file.');
-    });
-  }
-  private createFileName() {
-    let d = new Date();
-    let n = d.getTime();
-    let newFileName =  n + ".jpg";
-    return newFileName;
-  }
-  // Copy the image to a local folder
-  private copyFileToLocalDir(namePath, currentName, newFileName) {
-    this.file.copyFile(namePath, currentName, cordova.file.dataDirectory, newFileName).then(success => {
-      this.lastImage = newFileName;
-      var targetPath = this.pathForImage(this.lastImage);
-      var newForm = new FormData();
-      newForm.append("file", this.base64Image);
-      newForm.append("upload_preset", 'lfgdxmzd');
-      console.log(JSON.stringify(newForm), "NEW FORM");
-      console.log("NEW FORM");
-      console.log(this.base64Image, "THIS BASE64IMAGE");
-      this.uploadImage(newForm);
-    }, error => {
-      console.log(error, "this is error is copyfile");
-      this.presentToast('Error while storing file.');
-    });
+      .subscribe(data => {
+        console.log(data);
+        // console.log(JSON.parse(data), "THIS IS THE WORLD WE LIVE IN");      
+        // this.user.avatar = JSON.parse(data)._body["secure_url"];
+        // console.log(JSON.stringify(this.user));          
+        this.user.avatar = JSON.parse(data["_body"]).secure_url;
+        this.loading.dismissAll();
+        this.presentToast('Image succesful uploaded.');
+      }, err => {
+        console.log(err, "THIS IS POST ERROR");
+        this.loading.dismissAll();
+        this.presentToast('Error while uploading file.');
+      });
   }
 
   private presentToast(text) {
