@@ -3,6 +3,7 @@ import { NavController, NavParams, Events } from 'ionic-angular';
 import { Chat } from '../chat/chat';
 import { ItinerarySearch } from '../itinerary-search/itinerary-search';
 import { YelpService } from '../../services/yelp.service';
+import { LoadingController } from 'ionic-angular';
 
 @Component({
   selector: 'page-itinerary',
@@ -11,7 +12,9 @@ import { YelpService } from '../../services/yelp.service';
 })
 
 export class Itinerary {
-  public todos: any = []
+  public todos: any;
+  public year: any;
+  public month: any;
   
   constructor(
     public navCtrl: NavController, 
@@ -28,10 +31,15 @@ export class Itinerary {
       this.yelpSvs.fetchItinerary(this.getItinerary.bind(this))
   }
 
+
   public getItinerary(data){
-    if(data){ this.todos = data;
+    if(data){ 
+      console.log(data, 'before reassigned')
+      this.todos = data 
+      console.log(this.todos, 'after reassigned')
     }
   }
+
   public itinerarySearch(){
     this.navCtrl.push(ItinerarySearch);
   }
@@ -51,7 +59,7 @@ export class Itinerary {
   public postLike(id, likes){
     this.yelpSvs.like(id, likes)
   }
-  public updateLikes
+  
   public backClick(){
     this.navCtrl.push(Chat);
   }

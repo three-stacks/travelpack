@@ -13,13 +13,14 @@ import { Config } from '../app/config';
 
 export class YelpService {
   public SERVER_DEPLOY = 'http://ec2-18-220-15-216.us-east-2.compute.amazonaws.com:3030';
-  public SERVER_ROSE = 'http://192.168.1.113:3030';
+  public SERVER_ROSE = 'http://localhost:3030';
   public userId: string;
   public packID: number;
   public userID: number;
   public yelp: any;
   public countLikes: any;
   public countUnlikes: any;
+  public date: any;
 
   public header = new Headers({   
   'Content-Type' :'application/x-www-form-urlencoded',
@@ -80,17 +81,6 @@ constructor(
     prompt.present();
   }
 
-  // public pickDate(){
-  //   this.datePicker.show({
-  //     date: new Date(),
-  //     mode: 'date',
-  //     androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
-  //   }).then(
-  //     date => console.log('Got date: ', date),
-  //     err => console.log('Error occurred while getting date: ', err)
-  //   );
-  // }
-
   public addYelpData(yelp){
     let item = {
       name: this.yelp.name,
@@ -114,14 +104,29 @@ constructor(
 
   public fetchItinerary(cb){
     this.storage.get('packId').then(val => {
-      this.http.get(`${this.SERVER_ROSE}/itineraries?packId=${val}`)
+      this.http.get(`${this.SERVER_ROSE}/itineraries?packId=${val}&$sort[id]=-1`)
       .map(res => res.json())
-      .subscribe(({data}) => {
+      .subscribe(({ data }) => {
         console.log(data, 'itinerary data');
         cb(data)
       }, (err) => {
         console.error(err);
       });
+    })
+  }
+
+  public updatDates(id, selMonth, selYear){
+    console.log(id, selMonth, selYear);
+    this.date = { month: selMonth, year: selYear}
+    this.http.patch(`${this.SERVER_ROSE}/itineraries/${id}`, {})
+    .map(res=> res.json())
+    .subscribe((data) => {
+      if(data){
+        this.events.publish("update:like")
+      }
+      console.log('date updated')
+    }, (err) => {
+      console.error(err)
     })
   }
 
@@ -135,7 +140,7 @@ constructor(
       if(data){
         this.events.publish("update:like")
       }
-      console.log(data, 'likes');
+      console.log('likes submitted');
     }, (err) => {
       console.error(err);
     })
