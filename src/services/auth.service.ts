@@ -43,6 +43,7 @@ export class AuthService {
       .subscribe((data) => {
         cb(data);
         console.log(data, 'data');
+        cb(data)
       }, (err) => {
         console.error(err);
       });
