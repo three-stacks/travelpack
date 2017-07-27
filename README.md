@@ -39,7 +39,7 @@ Eazy peazy!
 ![img](https://i.imgur.com/Y8QPCve.png)
 
 ## Architecture
-![img](http://i65.tinypic.com/o5yl1v.png)
+![img](http://res.cloudinary.com/djdelgado/image/upload/v1501182320/Screen_Shot_2017-07-27_at_2.04.36_PM_wxblib.png)
 
 ## Development
 
