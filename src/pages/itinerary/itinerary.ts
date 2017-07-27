@@ -31,7 +31,6 @@ export class Itinerary {
       this.yelpSvs.fetchItinerary(this.getItinerary.bind(this))
   }
 
-
   public getItinerary(data){
     if(data){ 
       console.log(data, 'before reassigned')

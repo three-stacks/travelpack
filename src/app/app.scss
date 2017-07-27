@@ -28,3 +28,9 @@ ion-content {
   font-size: 3rem;
   font-weight: 300;
 }
+
+ion-menu {
+  ion-footer {
+    height: 50px,
+  }
+}

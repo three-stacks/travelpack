@@ -15,10 +15,10 @@ export class PackService {
   public getPacks(cb) {
     this.storage.get('userId').then(val => {
       console.log(val, 'userId in get');
-      this.http.get(`${this.SERVER_ROSE}/groups?userId=${val}`)
+      this.http.get(`${this.SERVER_DEPLOY}/groups?userId=${val}`)
       .map(res => res.json())
-      .subscribe(({ data }) => {
-        data = data.map((group) => group.pack)
+      .subscribe(({data}) => {
+        data = data.map((group) => group.pack);
         console.log(data, 'pack data');
         cb(data);
       }, (err) => {
@@ -26,9 +26,9 @@ export class PackService {
       });
     });
   }
-  
+
   public addPacks(newPack) {
-    this.http.post(`${this.SERVER_ROSE}/packs`, newPack)
+    this.http.post(`${this.SERVER_DEPLOY}/packs`, newPack)
     .map((res) => res.json())
     .subscribe((data) => {
       console.log(data, 'post pack data');
@@ -39,4 +39,31 @@ export class PackService {
       console.error(err);
     });
   }
+
+  public addPics(newPic) {
+    this.http.post(`${this.SERVER_DEPLOY}/photos`, newPic)
+    .map((res) => res.json())
+    .subscribe((data) => {
+      console.log(data, 'post pack data');
+      if (data) {
+        this.events.publish("pic:submited");
+      }
+    }, (err) => {
+      console.error(err);
+    });
+  }
+
+  public getPics(cb) {
+    this.storage.get('packId').then(val => {
+      this.http.get(`${this.SERVER_DEPLOY}/photos?packId=${val}`)
+      .map(res => res.json())
+      .subscribe(({data}) => {
+        console.log(data, 'pack data');
+        cb(data);
+      }, (err) => {
+        console.error(err);
+      });
+    });
+  }
+
 }

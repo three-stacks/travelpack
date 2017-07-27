@@ -41,7 +41,7 @@ export class Chat {
       console.log(msg, 'in chat message');
       this.zone.run(() => {
         this.messages.push(msg);
-        // this.scrollToBottom();
+        this.scrollToBottom();
       });
     });
   }

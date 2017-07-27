@@ -3,7 +3,6 @@ import { Storage } from '@ionic/storage';
 import { AlertController, Events, ModalController } from 'ionic-angular';
 import { NavController, NavParams } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
-import { DatePicker } from '@ionic-native/date-picker';
 import { JwtHelper } from 'angular2-jwt';
 import 'rxjs/add/operator/map';
 import { ItineraryForm } from '../pages/itinerary-form/itinerary-form';
@@ -34,8 +33,7 @@ constructor(
   public storage: Storage, 
   public events: Events, 
   public modalCtrl: ModalController,
-  public config: Config,
-  public datePicker: DatePicker){
+  public config: Config){
   this.storage.get('packId').then((val) => this.packID = val);
   this.storage.get('userId').then((val)=> this.userID = val);
 }
@@ -49,7 +47,6 @@ constructor(
     this.http.post(`${this.SERVER_ROSE}/yelp`, searchQuery)
       .map((res) => res.json())
       .subscribe((response) => {
-        // response = response
         response = JSON.parse(response)
         console.log(response, 'in service')
         cb(response);
@@ -93,7 +90,7 @@ constructor(
     }
 
     console.log(item, 'post to db')
-    this.http.post(`${this.SERVER_ROSE}/itineraries`, item)
+    this.http.post(`${this.SERVER_DEPLOY}/itineraries`, item)
     .map((res) => res.json())
     .subscribe((data) => {
       console.log(data);
@@ -104,7 +101,7 @@ constructor(
 
   public fetchItinerary(cb){
     this.storage.get('packId').then(val => {
-      this.http.get(`${this.SERVER_ROSE}/itineraries?packId=${val}&$sort[id]=-1`)
+      this.http.get(`${this.SERVER_DEPLOY}/itineraries?packId=${val}&$sort[id]=-1`)
       .map(res => res.json())
       .subscribe(({ data }) => {
         console.log(data, 'itinerary data');
@@ -118,7 +115,7 @@ constructor(
   public updatDates(id, selMonth, selYear){
     console.log(id, selMonth, selYear);
     this.date = { month: selMonth, year: selYear}
-    this.http.patch(`${this.SERVER_ROSE}/itineraries/${id}`, {})
+    this.http.patch(`${this.SERVER_DEPLOY}/itineraries/${id}`, {})
     .map(res=> res.json())
     .subscribe((data) => {
       if(data){
@@ -134,7 +131,7 @@ constructor(
     console.log(id, likes, 'in like')
     this.countLikes = { like: (likes += 1) };
     console.log(this.countLikes);
-    this.http.patch(`${this.SERVER_ROSE}/itineraries/${id}`, this.countLikes)
+    this.http.patch(`${this.SERVER_DEPLOY}/itineraries/${id}`, this.countLikes)
     .map(res => res.json())
     .subscribe((data) => {
       if(data){
@@ -150,7 +147,7 @@ constructor(
     console.log(unlikes, 'unliking')
     this.countUnlikes = { unlike: (unlikes += 1) };
     console.log(this.countUnlikes);
-    this.http.patch(`${this.SERVER_ROSE}/itineraries/${id}`, this.countUnlikes)
+    this.http.patch(`${this.SERVER_DEPLOY}/itineraries/${id}`, this.countUnlikes)
     .map(res => res.json())
     .subscribe((data) => {
       if(data){
