@@ -24,6 +24,7 @@
     "@angular/tsc-wrapped": "^4.3.1",
     "@ionic-native/camera": "^4.0.1",
     "@ionic-native/core": "^4.0.1",
+    "@ionic-native/date-picker": "^4.1.0",
     "@ionic-native/file": "^4.0.1",
     "@ionic-native/file-path": "^4.0.1",
     "@ionic-native/geolocation": "^4.0.1",

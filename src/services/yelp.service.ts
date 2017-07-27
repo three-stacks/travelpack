@@ -3,6 +3,7 @@ import { Storage } from '@ionic/storage';
 import { AlertController, Events, ModalController } from 'ionic-angular';
 import { NavController, NavParams } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
+import { DatePicker } from '@ionic-native/date-picker';
 import { JwtHelper } from 'angular2-jwt';
 import 'rxjs/add/operator/map';
 import { ItineraryForm } from '../pages/itinerary-form/itinerary-form';
@@ -32,7 +33,8 @@ constructor(
   public storage: Storage, 
   public events: Events, 
   public modalCtrl: ModalController,
-  public config: Config){
+  public config: Config,
+  public datePicker: DatePicker){
   this.storage.get('packId').then((val) => this.packID = val);
   this.storage.get('userId').then((val)=> this.userID = val);
 }
@@ -41,17 +43,15 @@ constructor(
     headers: this.header
   })
 
-  public fetchYelpData(searchQuery){
-    this.http.getBasicAuthHeader('Authorization', `${this.config.YELP_ACCESS_TOKEN}`).then(val => {
-      console.log(val, 'header')
-    })
-    // console.log(searchQuery,'search query')
-    //     console.log(this.header, 'headers')
-    //     console.log(this.g_options)
-    this.http.get(`https://api.yelp.com/v3/businesses/search`, this.g_options )
+  public yelpSearch(searchQuery, cb){
+    console.log(searchQuery,'search query in yelp svs')
+    this.http.post(`${this.SERVER_ROSE}/yelp`, searchQuery)
       .map((res) => res.json())
       .subscribe((response) => {
-        console.log(response, 'It worked');
+        // response = response
+        response = JSON.parse(response)
+        console.log(response, 'in service')
+        cb(response);
       }, error => {
         console.error(error);
       }); 
@@ -79,6 +79,17 @@ constructor(
     });
     prompt.present();
   }
+
+  // public pickDate(){
+  //   this.datePicker.show({
+  //     date: new Date(),
+  //     mode: 'date',
+  //     androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
+  //   }).then(
+  //     date => console.log('Got date: ', date),
+  //     err => console.log('Error occurred while getting date: ', err)
+  //   );
+  // }
 
   public addYelpData(yelp){
     let item = {

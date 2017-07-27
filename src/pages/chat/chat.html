@@ -23,7 +23,7 @@
         </ion-avatar>
         <h2>{{data.username}}</h2>
         <!-- <h2>{{data.date}}</h2> -->
-        <p>{{data.createdAt}}</p> 
+        <p>{{data.date | date: 'MM/dd/yyyy h:mm '}}</p> 
       </ion-item>
       <ion-card-content>
         {{data.message}}
