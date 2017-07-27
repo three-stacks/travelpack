@@ -18,7 +18,7 @@ export class ChatService {
 
   public getMessages(cb){
     this.storage.get('packId').then(val => {
-      this.http.get(`${this.SERVER_DEPLOY}/messages?packId=${val}`)
+      this.http.get(`${this.SERVER_ROSE}/messages?packId=${val}`)
         .map(res => res.json())
         .subscribe(({data}) => {
           console.log(data)
