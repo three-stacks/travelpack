@@ -30,7 +30,7 @@ Eazy peazy!
   - __Development Team Members__: Taijon Robinson, David Delgado, Rose Espiritu
 
 ## Wireframes 
-![img](http://imgh.us/Screen_Shot_2017-07-10_at_10.39.00_PM.png)
+![img](https://res.cloudinary.com/djdelgado/image/upload/v1501169154/Screen_Shot_2017-07-27_at_10.24.16_AM_hrrjmw.png)
 
 ## Database Schema 
 ![img](http://imgh.us/Screen_Shot_2017-07-12_at_10.53.34_AM.png)
