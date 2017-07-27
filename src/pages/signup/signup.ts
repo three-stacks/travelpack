@@ -16,7 +16,8 @@ declare var cordova: any;
 })
 export class Signup {
   public user: any = { email: "", username: "", password: "", avatar: ""};
-  public lastImage: string = null;
+  public lastImage: any = null;
+  public base64Image: string;
   public loading: Loading;
 
   constructor(public authSvs: AuthService,
@@ -74,88 +75,49 @@ export class Signup {
       targetHeight: 300,
       sourceType,
       saveToPhotoAlbum: false,
+      correctOrientation: true,
+      destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      correctOrientation: true,
     };
     // Get the data of an image
-    this.camera.getPicture(options).then((imagePath) => {
-      console.log(imagePath, "imgpath");
-      this.lastImage = "data:image/jpeg;base64," + imagePath;
-      // Special handling for Android library
-      // if (this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY) {
-        // this.filePath.resolveNativePath(imagePath)
-        //   .then(filePath => {
-        //     let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
-        //     let currentName = imagePath.substring(imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
-        //     this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
-        //   });
-      // } else {
-      //   var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
-      //   var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
-      //   this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
-      // }
-    }, (err) => {
-      this.presentToast('Error while selecting image.');
+    this.camera.getPicture(options).then((imageData) => {
+      // imageData = imageData.replace(/\r?\n|\r/g, "");
+      this.base64Image = 'data:image/jpeg;base64,' + imageData;
+      this.lastImage = this.base64Image;
+      var newForm = new FormData();
+      newForm.append("file", this.base64Image);
+      newForm.append("upload_preset", 'lfgdxmzd');
+      return newForm;
+    }).then(form => {
+      this.uploadImage(form);
     });
   }
-
-  public pathForImage(img) {
-    if (img === null) {
-      return '';
-    } else {
-      return cordova.file.dataDirectory + img;
-    }
-  }
-  public uploadImage() {
+  public uploadImage(form) {
     // Destination URL
     var url = "https://localhost:3030/avatar";
-    // File for Upload
-    var targetPath = this.pathForImage(this.lastImage);
-
-    // File name only
-    var filename = this.lastImage;
-
-    var options = {
-      fileKey: "file",
-      fileName: filename,
-      chunkedMode: false,
-      mimeType: "image/jpg",
-      params : {'fileName': filename},
-    };
-
-    const fileTransfer: TransferObject = this.transfer.create();
+    var testUrl = "http://172.24.3.44:3030/avatar";
+    var cloudinaryUpload = 'https://api.cloudinary.com/v1_1/djdelgado/image/upload';
 
     this.loading = this.loadingCtrl.create({
       content: 'Uploading...',
     });
     this.loading.present();
 
-    // Use the FileTransfer to upload the image
-    // fileTransfer.upload(targetPath, url, options).then(data => {
-    this.http.post('https://api.cloudinary.com/v1_1/djdelgado/image/upload', options)
-    .subscribe(data => {
-      this.loading.dismissAll();
-      this.presentToast('Image succesful uploaded.');
-    }, err => {
-      this.loading.dismissAll();
-      this.presentToast('Error while uploading file.');
-    });
-  }
-  private createFileName() {
-    let d = new Date();
-    let n = d.getTime();
-    let newFileName =  n + ".jpg";
-    return newFileName;
-  }
-  // Copy the image to a local folder
-  private copyFileToLocalDir(namePath, currentName, newFileName) {
-    this.file.copyFile(namePath, currentName, cordova.file.dataDirectory, newFileName).then(success => {
-      this.lastImage = newFileName;
-    }, error => {
-      this.presentToast('Error while storing file.');
-    });
+    this.http.post(cloudinaryUpload, form)
+      .subscribe(data => {
+        console.log(data);
+        // console.log(JSON.parse(data), "THIS IS THE WORLD WE LIVE IN");      
+        // this.user.avatar = JSON.parse(data)._body["secure_url"];
+        // console.log(JSON.stringify(this.user));          
+        this.user.avatar = JSON.parse(data["_body"]).secure_url;
+        this.loading.dismissAll();
+        this.presentToast('Image succesful uploaded.');
+      }, err => {
+        console.log(err, "THIS IS POST ERROR");
+        this.loading.dismissAll();
+        this.presentToast('Error while uploading file.');
+      });
   }
 
   private presentToast(text) {
