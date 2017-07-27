@@ -5,13 +5,14 @@ import { File } from '@ionic-native/file';
 import { Transfer } from '@ionic-native/transfer';
 import { FilePath } from '@ionic-native/file-path';
 import { Camera } from '@ionic-native/camera';
+// import { SplashScreen } from '@ionic-native/splash-screen';
+// import { StatusBar } from '@ionic-native/status-bar';
 import { IonicStorageModule } from '@ionic/storage';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { Packs } from '../pages/packs/packs';
 import { Chat } from '../pages/chat/chat';
 import { Itinerary } from '../pages/itinerary/itinerary';
-import { ItineraryForm } from '../pages/itinerary-form/itinerary-form';
 import { ItinerarySearch } from '../pages/itinerary-search/itinerary-search';
 import { Photos } from '../pages/photos/photos';
 import { PackForm } from "../pages/pack-form/pack-form";
@@ -22,10 +23,12 @@ import { BudgetAddon } from "../pages/budget-addon/budget-addon";
 import { AuthService } from "../services/auth.service";
 import { PackService } from "../services/pack.service";
 import { YelpService } from "../services/yelp.service";
+import { ChatService } from "../services/chat.service";
 import { BudgetService } from "../services/budget.service";
 import { Signup } from "../pages/signup/signup";
 import { Geolocation } from '@ionic-native/geolocation';
 import { JwtHelper } from 'angular2-jwt';
+import { Config } from './config';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
 
 @NgModule({
@@ -35,7 +38,6 @@ import { PhotoViewer } from '@ionic-native/photo-viewer';
     Packs,
     Chat,
     Itinerary,
-    ItineraryForm,
     ItinerarySearch,
     Photos,
     PackForm,
@@ -57,7 +59,6 @@ import { PhotoViewer } from '@ionic-native/photo-viewer';
     Packs,
     Chat,
     Itinerary,
-    ItineraryForm,
     ItinerarySearch,
     Photos,
     PackForm,
@@ -69,13 +70,14 @@ import { PhotoViewer } from '@ionic-native/photo-viewer';
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthService, PackService, BudgetService, YelpService,
+    AuthService, PackService, BudgetService, YelpService, ChatService,
     File,
     Transfer,
     Camera,
     FilePath,
     Geolocation,
     JwtHelper,
+    Config,
     PhotoViewer,
   ],
 })

@@ -8,7 +8,7 @@ import 'rxjs/add/operator/map';
 
 export class BudgetService {
   public SERVER_DEPLOY = 'http://ec2-18-220-15-216.us-east-2.compute.amazonaws.com:3030';
-  public SERVER_ROSE = 'http://192.168.1.113:3030';
+  public SERVER_ROSE = 'http://localhost:3030';
   public userId: string;
   public packID: number;
 
@@ -17,7 +17,7 @@ export class BudgetService {
   public getBudget(cb) {
     console.log("it hit getBudget")
     this.storage.get('packId').then(val => {
-      this.http.get(`${this.SERVER_DEPLOY}/budgets?packId=${val}`)
+      this.http.get(`${this.SERVER_ROSE}/budgets?packId=${val}`)
       .map(res => res.json())
       .subscribe(({data}) => {
         console.log(data, 'budget data');
@@ -31,7 +31,7 @@ export class BudgetService {
   public addBudget(ev, budg) {
     this.storage.get('packId').then((val) => {
       let myBudget = { packId: val, event: ev, price: budg };
-      this.http.post(`${this.SERVER_DEPLOY}/budgets`, myBudget)
+      this.http.post(`${this.SERVER_ROSE}/budgets`, myBudget)
       .map((res) => res.json())
       .subscribe((data) => {
         console.log(data, 'post budget data');
@@ -45,7 +45,7 @@ export class BudgetService {
   }
 
   public removeBud(id) {
-    this.http.delete(`${this.SERVER_DEPLOY}/budgets?id=${id}`)
+    this.http.delete(`${this.SERVER_ROSE}/budgets?id=${id}`)
       .map((res) => res.json())
       .subscribe((data) => {
         console.log(data, 'delete budget data');

@@ -36,3 +36,4 @@ UserInterfaceState.xcuserstate
 .env
 .eslintrc.js
 test
+src/app/config.ts

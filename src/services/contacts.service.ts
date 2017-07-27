@@ -8,7 +8,7 @@ import 'rxjs/add/operator/map';
 
 export class ContactsService {
   public SERVER_DEPLOY = 'http://ec2-18-220-15-216.us-east-2.compute.amazonaws.com:3030';
-  public SERVER_ROSE = 'http://192.168.1.113:3030';
+  public SERVER_ROSE = 'http://localhost:3030';
   public packID: number;
   constructor(public alertCtrl: AlertController, public http: Http, public storage: Storage, public events: Events) {
     this.storage.get('packId').then((val) => this.packID = val);
@@ -33,7 +33,7 @@ export class ContactsService {
           handler: (data) => {
             let contact = { packId: this.packID, username: data.contact };
             console.log(contact, 'contact');
-            this.http.post(`${this.SERVER_DEPLOY}/groups`, contact)
+            this.http.post(`${this.SERVER_ROSE}/groups`, contact)
               .subscribe((response) => {
                 console.log("All good");
                 if(response){ 
@@ -51,7 +51,7 @@ export class ContactsService {
 
   public getContacts(cb) {
     this.storage.get('packId').then((val) => {
-      this.http.get(`${this.SERVER_DEPLOY}/groups?packId=${val}`)
+      this.http.get(`${this.SERVER_ROSE}/groups?packId=${val}`)
         .map(res => res.json())
         .subscribe(({data}) => {
           data = data.map((group) => group.user)

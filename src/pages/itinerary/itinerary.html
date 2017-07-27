@@ -1,5 +1,4 @@
 <ion-header>
-
   <ion-navbar color="travel-nav">
     <ion-buttons left>
       <button ion-button (click)="backClick()">
@@ -13,9 +12,66 @@
     </ion-buttons>
     <ion-title text-center>Itinerary</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content>
+  <ion-card *ngFor="let todo of todos"> 
+
+  <ion-item> 
+    <h2>{{todo.name}}</h2>
+  </ion-item> 
+
+  <a ion-item href="{{todo.link}}">
+      <img src="{{todo.img}}"></a>   
+
+  
+  
+  <ion-row>
+    <ion-col>
+      <button ion-button icon-left clear small (click)="postLike(todo.id, todo.like)">
+        <ion-icon name="thumbs-up"></ion-icon>
+        <div>{{todo.like}} Good Idea </div>
+      </button>
+    </ion-col>
+
+    <ion-col>
+      <button ion-button icon-left clear small (click)="postUnlike(todo.id, todo.unlike)">
+        <ion-icon name="thumbs-down"></ion-icon>
+        <div>{{todo.unlike}} Nah</div>
+      </button>
+    </ion-col>
+    <ion-col center text-center>
+      <ion-note>
+
+      </ion-note>
+    </ion-col>
+  </ion-row>
+    <ion-item>
+      <ion-label>Date</ion-label>
+      <ion-select [(ngModel)]="month">
+        <ion-option value="01">January</ion-option>
+        <ion-option value="02">February</ion-option>
+        <ion-option value="03">March</ion-option>
+        <ion-option value="04">April</ion-option>
+        <ion-option value="05">May</ion-option>
+        <ion-option value="06">June</ion-option>
+        <ion-option value="07">July</ion-option>
+        <ion-option value="08">August</ion-option>
+        <ion-option value="09">September</ion-option>
+        <ion-option value="10">October</ion-option>
+        <ion-option value="11">November</ion-option>
+        <ion-option value="12" checked="true">December</ion-option>
+      </ion-select>
+      <ion-select [(ngModel)]="year">
+        <ion-option>2017</ion-option>
+        <ion-option>2018</ion-option>
+        <ion-option>2019</ion-option>
+        <ion-option checked="true">2020</ion-option>
+        <ion-option>2021</ion-option>
+      </ion-select>
+    </ion-item>
+
+</ion-card> 
+
 </ion-content>

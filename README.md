@@ -1,4 +1,4 @@
-# Travelpack #
+![img](https://i.imgur.com/qfsxiVq.png)
 
 ## About Travelpack
 
@@ -30,13 +30,13 @@ Eazy peazy!
   - __Development Team Members__: Taijon Robinson, David Delgado, Rose Espiritu
 
 ## Wireframes 
-![img](http://imgh.us/Screen_Shot_2017-07-10_at_10.39.00_PM.png)
+![img](https://res.cloudinary.com/djdelgado/image/upload/v1501169154/Screen_Shot_2017-07-27_at_10.24.16_AM_hrrjmw.png)
 
 ## Database Schema 
-![img](http://imgh.us/Screen_Shot_2017-07-12_at_10.53.34_AM.png)
+![img](https://i.imgur.com/bY9BorX.png)
 
 ## Tech Stack 
-![img](http://imgh.us/techstack1.png)
+![img](https://i.imgur.com/Y8QPCve.png)
 
 ## Architecture
 ![img](http://i65.tinypic.com/o5yl1v.png)
