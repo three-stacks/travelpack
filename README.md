@@ -1,4 +1,5 @@
 # Travelpack #
+![img](https://ibb.co/mGvSfQ)
 
 ## About Travelpack
 
@@ -33,10 +34,10 @@ Eazy peazy!
 ![img](https://res.cloudinary.com/djdelgado/image/upload/v1501169154/Screen_Shot_2017-07-27_at_10.24.16_AM_hrrjmw.png)
 
 ## Database Schema 
-![img](http://imgh.us/Screen_Shot_2017-07-12_at_10.53.34_AM.png)
+![img](https://ibb.co/iOm5Zk)
 
 ## Tech Stack 
-![img](http://imgh.us/techstack1.png)
+![img](https://ibb.co/fWgYLQ)
 
 ## Architecture
 ![img](http://i65.tinypic.com/o5yl1v.png)
