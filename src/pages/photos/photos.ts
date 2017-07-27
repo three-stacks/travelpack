@@ -43,12 +43,20 @@ export class Photos {
               public actionSheetCtrl: ActionSheetController,
               public http: Http) {
     this.storage.get('packId').then((id) => this.photos.packId = id);
+    this.events.subscribe('pic:submited', () => {
+      this.packSvs.getPics(this.showPics.bind(this));
+    })
   }
 
   public ionViewDidLoad() {
     console.log('ionViewDidLoad PhotosPagePage');
     this.packSvs.getPics(this.showPics.bind(this));
   }
+
+  public ionViewDidEnter() {
+    this.packSvs.getPics(this.showPics.bind(this));
+  }
+
   public backClick() {
     this.navCtrl.push(Chat);
   }
@@ -123,7 +131,7 @@ export class Photos {
         this.photos.url = JSON.parse(data["_body"]).secure_url;
         this.loading.dismissAll();
         this.presentToast('Image succesful uploaded.');
-        this.ionViewDidLoad();
+        this.packSvs.addPics(this.photos);
       }, err => {
         console.log(err, "THIS IS POST ERROR");
         this.loading.dismissAll();
