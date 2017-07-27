@@ -1,5 +1,5 @@
 # Travelpack #
-![img](https://ibb.co/mGvSfQ)
+![img](http://i65.tinypic.com/3358g8k.png)
 
 ## About Travelpack
 
@@ -37,7 +37,7 @@ Eazy peazy!
 ![img](https://i.imgur.com/bY9BorX.png)
 
 ## Tech Stack 
-![img](https://ibb.co/fWgYLQ)
+![img](http://i64.tinypic.com/23urfxd.png)
 
 ## Architecture
 ![img](http://i65.tinypic.com/o5yl1v.png)
