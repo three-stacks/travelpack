@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ActionSheetController, ToastController, Platform, LoadingController, Loading } from 'ionic-angular';
+import { NavController, NavParams, ActionSheetController,
+        ToastController, Platform, LoadingController, Loading } from 'ionic-angular';
 import { AuthService } from "../../services/auth.service";
 import { Http, Headers } from '@angular/http';
 import { File } from '@ionic-native/file';

@@ -5,8 +5,6 @@ import { File } from '@ionic-native/file';
 import { Transfer } from '@ionic-native/transfer';
 import { FilePath } from '@ionic-native/file-path';
 import { Camera } from '@ionic-native/camera';
-// import { SplashScreen } from '@ionic-native/splash-screen';
-// import { StatusBar } from '@ionic-native/status-bar';
 import { IonicStorageModule } from '@ionic/storage';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -28,6 +26,7 @@ import { BudgetService } from "../services/budget.service";
 import { Signup } from "../pages/signup/signup";
 import { Geolocation } from '@ionic-native/geolocation';
 import { JwtHelper } from 'angular2-jwt';
+import { PhotoViewer } from '@ionic-native/photo-viewer';
 
 @NgModule({
   declarations: [
@@ -77,6 +76,7 @@ import { JwtHelper } from 'angular2-jwt';
     FilePath,
     Geolocation,
     JwtHelper,
+    PhotoViewer,
   ],
 })
 export class AppModule {}
