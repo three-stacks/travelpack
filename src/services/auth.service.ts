@@ -11,7 +11,7 @@ export class AuthService {
   public payload: any;
   public headers = new Headers({ 'Content-Type': 'application/json' });
   public SERVER_DEPLOY = 'http://ec2-18-220-15-216.us-east-2.compute.amazonaws.com:3030';
-  public SERVER_ROSE = 'http://192.168.1.113:3030';
+  public SERVER_ROSE = 'http://localhost:3030';
 
   constructor(private storage: Storage, public http: Http, public reqOptions: RequestOptions) {}
 
@@ -56,7 +56,7 @@ export class AuthService {
       headers.append("Authorization", `Bearer ${val}`);
       let options = new RequestOptions({headers});
       console.log(headers, "headers")
-      this.http.delete(`${this.SERVER_ROSE}/auth`, options)
+      this.http.delete(`${this.SERVER_DEPLOY}/auth`, options)
       .map((res) => res.json())
       .subscribe((data) => {
         // cb(data);

@@ -3,11 +3,13 @@ import { NavController, NavParams, ModalController, Content } from 'ionic-angula
 import { Contacts } from "../contacts/contacts";
 import * as io from "socket.io-client";
 import { Storage } from '@ionic/storage';
+import { ChatService } from '../../services/chat.service'; 
 
 @Component({
   selector: 'page-chat',
   templateUrl: 'chat.html',
 })
+
 export class Chat {
   @ViewChild(Content) content: Content;
   public SERVER_DEPLOY = 'http://ec2-18-220-15-216.us-east-2.compute.amazonaws.com:3030';
@@ -19,15 +21,17 @@ export class Chat {
   public chat: any;
   public username: string;
   public avatar: string;
+  public date: string = new Date().toISOString();
   public zone: any;
   public userId: any;
   public packname: string;
   public packId: number;
-
+  
   constructor(public storage: Storage,
               public navCtrl: NavController,
               public navParams: NavParams,
-              public modalCtrl: ModalController) {
+              public modalCtrl: ModalController,
+              public chatSvs: ChatService) {
     this.storage.get('username').then(val => this.username = val);
     this.storage.get('userId').then(val => this.userId = val);
     this.storage.get('avatar').then(val => this.avatar = val);
@@ -37,14 +41,41 @@ export class Chat {
       console.log(msg, 'in chat message');
       this.zone.run(() => {
         this.messages.push(msg);
-        this.content.scrollToBottom();
+        this.scrollToBottom();
       });
     });
   }
 
   public ionViewDidLoad() {
     console.log('ionViewDidLoad ChatPagePage');
+    this.chatSvs.getMessages(this.loadMessages.bind(this))
   }
+
+  public loadMessages(allMessages){
+    if(allMessages){
+      for(var i = 0; i < allMessages.length; i++){
+        this.messages.push(this.processMessage(allMessages[i]));
+      }      
+    }
+    this.scrollToBottom();
+  }
+
+  public scrollToBottom(){
+    let dimensions = this.content.getContentDimensions();
+    this.content.scrollTo(0, dimensions.contentHeight, 300);
+  }
+
+  public processMessage(mes) {
+    let messageData = {
+      message: mes.text,
+      username: mes.users.username,
+      avatar: mes.users.avatar,
+      date: mes.users.createdAt,
+    }
+    console.log(messageData);
+    return messageData;
+  }
+
   public ionViewDidEnter() {
     this.storage.get('packName').then(val => this.packname = val);
     this.storage.get('packId').then(id => {
@@ -67,8 +98,8 @@ export class Chat {
       userId: this.userId,
       username: this.username,
       avatar: this.avatar,
+      date: this.date,
     };
-
     this.socket.emit('new message', data);
     this.chat = '';
   }

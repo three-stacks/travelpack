@@ -8,7 +8,7 @@ import 'rxjs/add/operator/map';
 
 export class BudgetService {
   public SERVER_DEPLOY = 'http://ec2-18-220-15-216.us-east-2.compute.amazonaws.com:3030';
-  public SERVER_ROSE = 'http://192.168.1.113:3030';
+  public SERVER_ROSE = 'http://localhost:3030';
   public userId: string;
   public packID: number;
 

@@ -13,7 +13,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding id="messagesContent">
   <ion-list class="cards">
     <!-- <ion-card> -->
     <ion-card *ngFor="let data of messages"> 
@@ -22,17 +22,18 @@
           <img src="{{data.avatar}}">
         </ion-avatar>
         <h2>{{data.username}}</h2>
-        <p>{{data.date | date: 'dd/MM/yyyy'}}</p>
+        <!-- <h2>{{data.date}}</h2> -->
+        <p>{{data.date | date: 'MM/dd/yyyy h:mm '}}</p> 
       </ion-item>
-
       <ion-card-content>
         {{data.message}}
       </ion-card-content>
-
     </ion-card>
   </ion-list>
+</ion-content>
 
-  <ion-footer>
+
+<ion-footer>
   <ion-grid>
     <ion-row class="msg-box">
       <ion-col col-10>
@@ -47,5 +48,4 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  </ion-footer>
-</ion-content>
+</ion-footer>

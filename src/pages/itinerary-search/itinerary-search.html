@@ -11,7 +11,7 @@
 
 <ion-content> 
 <ion-searchbar ionInput
-[(ngModel)]='search.term' type='text' placeholder='search restuaurants, museums, and more'> 
+[(ngModel)]='search.term' type='text' placeholder='search restuaurants, museums, and other activities'> 
 </ion-searchbar>
 <ion-searchbar ionInput
 [(ngModel)]='search.location' type='text' placeholder='desination'>
@@ -21,10 +21,16 @@
 
 <ion-list>
   <ion-item *ngFor="let result of yelpResults"> 
-    <ion-card (click)="yelpSvs.addItem(result)">
-      <img src="{{result.image_url}}">
-        <div class="card-title">{{result.name}}</div>
-        <div class="card-subtitle">{{result.rating}} Stars</div>
+    <ion-card>
+      <img src="{{result.image_url}}" (click)="yelpSvs.addItem(result)">
+        <ion-item>
+          <div class="card-title">{{result.name}}</div>
+          <div class="card-subtitle">{{result.rating}} Stars</div>
+        </ion-item>
+        <ion-item>
+          {{result.name}}
+          <!-- <div class="card-date" (click)="yelpSvs.pickDate()">Select Date</div>  -->
+        </ion-item>   
     </ion-card> 
   </ion-item>   
 </ion-list>  
