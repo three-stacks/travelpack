@@ -12,7 +12,7 @@ export class PackForm {
   public packName: any = { 
     name: "",
     url: "https://i.imgur.com/0rxFgqa.jpg",
-    userId: this.storage.get('userId')
+    userId: '',
   };
 
   constructor(public events: Events,
@@ -27,9 +27,11 @@ export class PackForm {
   }
   
   public submitPack() {
-    console.log(this.packName);
-    this.pkSvs.addPacks(this.packName);
-    this.navCtrl.pop();
+    this.storage.get('userId').then(id => {
+      this.packName.userId = id;
+      this.pkSvs.addPacks(this.packName);
+      this.navCtrl.pop();
+    });
   }
   public cancelPack() {
     this.navCtrl.pop();

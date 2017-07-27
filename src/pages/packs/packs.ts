@@ -35,7 +35,7 @@ export class Packs {
     });
   }
 
-  public ionViewWillEnter(){
+  public ionViewDidEnter(){
     console.log('should print after auth service')
     this.pkSvs.getPacks(this.newPacks.bind(this));
   }
