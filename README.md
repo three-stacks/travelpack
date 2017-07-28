@@ -4,7 +4,7 @@
 
 ### Travelpack aims to take the stress out of planning group trips by creating a central location for messaging, planning an itinerary, and managing a budget. Think of us as GroupMe for trips!
 
-Travelpack is a native, cross platform application that allows users search through activities, restaurants, as they create and manage their itinerary. Each item on the itinerary allows users to vote for or against the activity so that the pack knows what ideas are popular or unpopular. There is also a built in budget calculator that sources the price of hotels and flights to help the pack estimate the cost of the trip. 
+Travelpack is a native, cross platform application that allows users search through activities, restaurants, as they create and manage their itinerary. Each item on the itinerary allows users to vote for or against the activity so that the pack knows what ideas are popular or unpopular. There is also a built in budget calculator that helps packs estimate the cost of the trip as well as a list to help members pack
 
 During the trip users utilize travelpack's find my pack feature to pin point the real time locations of the pack members and upload photos to the pack photo album to keeps all of the photos from the trip in one place!
 
@@ -36,7 +36,7 @@ Eazy peazy!
 ![img](https://i.imgur.com/bY9BorX.png)
 
 ## Tech Stack 
-![img](https://i.imgur.com/Y8QPCve.png)
+![img](https://i.imgur.com/Dw9ptYs.png)
 
 ## Architecture
 ![img](http://res.cloudinary.com/djdelgado/image/upload/v1501182320/Screen_Shot_2017-07-27_at_2.04.36_PM_wxblib.png)
