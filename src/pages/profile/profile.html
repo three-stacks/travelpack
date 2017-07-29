@@ -1,0 +1,32 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title text-center>Profile</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list no-lines>
+    <ion-list-header text-center>
+      <img src="{{user.avatar}}" style="border-radius: 50%; width: 250px"/>
+      <p>{{user.username}}</p>
+    </ion-list-header>
+    <ion-item (click)="goToPackingList()">
+      Packing List
+      <ion-icon name="list" item-right></ion-icon>
+    </ion-item>
+    <ion-item (click)="goToFlights()">
+      Flight Estimater
+      <ion-icon name="plane" item-right></ion-icon>
+    </ion-item>
+    <!-- <ion-item>Settings</ion-item> -->
+</ion-list>
+  <ion-footer>
+      <button class="menuItems" menuClose ion-button (click)="logOut()" style="color: black; background-color: white">
+        Logout
+      </button>
+    </ion-footer>
+</ion-content>

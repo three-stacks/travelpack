@@ -30,6 +30,10 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { JwtHelper } from 'angular2-jwt';
 import { Config } from './config';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
+import { Profile } from "../pages/profile/profile";
+import { PackingList } from '../pages/packing-list/packing-list';
+import { Flights } from '../pages/flights/flights';
+import { PackingListService } from "../services/packingList.service";
 
 @NgModule({
   declarations: [
@@ -46,6 +50,9 @@ import { PhotoViewer } from '@ionic-native/photo-viewer';
     FindMyPack,
     BudgetAddon,
     Signup,
+    Profile,
+    PackingList,
+    Flights,
   ],
   imports: [
     BrowserModule,
@@ -67,10 +74,13 @@ import { PhotoViewer } from '@ionic-native/photo-viewer';
     FindMyPack,
     BudgetAddon,
     Signup,
+    Profile,
+    Flights,
+    PackingList,
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthService, PackService, BudgetService, YelpService, ChatService,
+    AuthService, PackService, BudgetService, YelpService, ChatService, PackingListService,
     File,
     Transfer,
     Camera,

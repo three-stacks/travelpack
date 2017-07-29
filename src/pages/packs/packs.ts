@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map';
 import { Chat } from '../chat/chat';
 import { PackForm } from "../pack-form/pack-form";
 import { PackService } from "../../services/pack.service";
+import { Profile } from "../profile/profile";
 
 @Component({
   selector: 'page-packs',
@@ -14,6 +15,7 @@ import { PackService } from "../../services/pack.service";
 export class Packs {
 
   public packNames: any;
+  public user: any = { avatar: ""};
 
   constructor(
     public navCtrl: NavController,
@@ -33,10 +35,12 @@ export class Packs {
     events.subscribe("pack:submited", () => {
       pkSvs.getPacks(this.newPacks.bind(this));
     });
+
   }
 
-  public ionViewWillEnter(){
-    console.log('should print after auth service')
+  public ionViewDidEnter() {
+    console.log('should print after auth service');
+    this.storage.get('avatar').then(val => this.user.avatar = val);
     this.pkSvs.getPacks(this.newPacks.bind(this));
   }
 
@@ -57,5 +61,9 @@ export class Packs {
       console.log(`your pack id is ${val}`);
     });
     this.navCtrl.push(Chat);
+  }
+
+  public profilePage() {
+    this.navCtrl.push(Profile);
   }
 }

@@ -1,0 +1,25 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>packing-list</ion-title>
+  </ion-navbar>
+  <ion-input [(ngModel)]="listItem" placeholder="add item..."></ion-input>
+  <button (click)="plSvs.addItem(listItem)" ion-button full>Submit Item</button>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item-sliding *ngFor="let obj of list">
+      <ion-item>
+        {{obj.item}}
+      </ion-item>
+      <ion-item-options>
+        <ion-buttons>  
+          <button ion-button color="danger" (click)="removeItem(bud)"><ion-icon trash></ion-icon> Delete</button>
+        </ion-buttons>  
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
