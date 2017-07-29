@@ -25,10 +25,10 @@ export class PackForm {
   public ionViewDidLoad() {
     console.log('ionViewDidLoad PackFormPagePage');
   }
-  
+
   public submitPack() {
-      this.pkSvs.addPacks(this.packName);
-      this.navCtrl.pop();
+    this.pkSvs.addPacks(this.packName);
+    this.navCtrl.pop();
   }
   public cancelPack() {
     this.navCtrl.pop();

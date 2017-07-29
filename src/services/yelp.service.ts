@@ -26,17 +26,17 @@ export class YelpService {
   });
 
 constructor(
-  public navCtrl: NavController, 
-  public alertCtrl: AlertController, 
-  public http: Http, 
-  public storage: Storage, 
-  public events: Events, 
+  public navCtrl: NavController,
+  public alertCtrl: AlertController,
+  public http: Http,
+  public storage: Storage,
+  public events: Events,
   public modalCtrl: ModalController,
-  public config: Config){
+  public config: Config) {
   this.storage.get('packId').then((val) => this.packID = val);
-  this.storage.get('userId').then((val)=> this.userID = val);
+  this.storage.get('userId').then((val) => this.userID = val);
 }
-  
+
   public g_options = new RequestOptions({
     headers: this.header
   })

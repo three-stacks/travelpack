@@ -33,8 +33,4 @@ export class MyApp {
     this.nav.setRoot(page.component);
   }
 
-  public logOut() {
-    this.authSvs.logoutUser();
-    this.nav.setRoot(this.rootPage);
-  }
 }
