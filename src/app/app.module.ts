@@ -30,6 +30,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { JwtHelper } from 'angular2-jwt';
 import { Config } from './config';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
+import { Profile } from "../pages/profile/profile";
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { PhotoViewer } from '@ionic-native/photo-viewer';
     FindMyPack,
     BudgetAddon,
     Signup,
+    Profile,
   ],
   imports: [
     BrowserModule,
@@ -67,6 +69,7 @@ import { PhotoViewer } from '@ionic-native/photo-viewer';
     FindMyPack,
     BudgetAddon,
     Signup,
+    Profile,
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},

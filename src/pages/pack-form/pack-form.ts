@@ -12,7 +12,7 @@ export class PackForm {
   public packName: any = { 
     name: "",
     url: "https://i.imgur.com/0rxFgqa.jpg",
-    userId: '',
+    userId: this.storage.get('userId'),
   };
 
   constructor(public events: Events,
@@ -25,13 +25,11 @@ export class PackForm {
   public ionViewDidLoad() {
     console.log('ionViewDidLoad PackFormPagePage');
   }
-  
+
   public submitPack() {
-    this.storage.get('userId').then(id => {
-      this.packName.userId = id;
-      this.pkSvs.addPacks(this.packName);
-      this.navCtrl.pop();
-    });
+    this.pkSvs.addPacks(this.packName);
+    this.navCtrl.pop();
+
   }
   public cancelPack() {
     this.navCtrl.pop();
