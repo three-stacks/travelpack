@@ -43,7 +43,7 @@ constructor(
 
   public yelpSearch(searchQuery, cb){
     console.log(searchQuery,'search query in yelp svs')
-    this.http.post(`${this.SERVER_ROSE}/yelp`, searchQuery)
+    this.http.post(`${this.SERVER_DEPLOY}/yelp`, searchQuery)
       .map((res) => res.json())
       .subscribe((response) => {
         response = JSON.parse(response)
@@ -89,7 +89,7 @@ constructor(
     }
 
     console.log(item, 'post to db')
-    this.http.post(`${this.SERVER_ROSE}/itineraries`, item)
+    this.http.post(`${this.SERVER_DEPLOY}/itineraries`, item)
     .map((res) => res.json())
     .subscribe((data) => {
       console.log(data);
@@ -100,7 +100,7 @@ constructor(
 
   public fetchItinerary(cb){
     this.storage.get('packId').then(val => {
-      this.http.get(`${this.SERVER_ROSE}/itineraries?packId=${val}&$sort[id]=-1`)
+      this.http.get(`${this.SERVER_DEPLOY}/itineraries?packId=${val}&$sort[id]=-1`)
       .map(res => res.json())
       .subscribe(({ data }) => {
         console.log(data, 'itinerary data');
@@ -114,7 +114,7 @@ constructor(
   public updatDates(id, selMonth, selYear){
     console.log(id, selMonth, selYear);
     this.date = { month: selMonth, year: selYear}
-    this.http.patch(`${this.SERVER_ROSE}/itineraries/${id}`, {})
+    this.http.patch(`${this.SERVER_DEPLOY}/itineraries/${id}`, {})
     .map(res=> res.json())
     .subscribe((data) => {
       if(data){
@@ -130,7 +130,7 @@ constructor(
     console.log(id, likes, 'in like')
     this.countLikes = { like: (likes += 1) };
     console.log(this.countLikes);
-    this.http.patch(`${this.SERVER_ROSE}/itineraries/${id}`, this.countLikes)
+    this.http.patch(`${this.SERVER_DEPLOY}/itineraries/${id}`, this.countLikes)
     .map(res => res.json())
     .subscribe((data) => {
       if(data){
@@ -146,7 +146,7 @@ constructor(
     console.log(unlikes, 'unliking')
     this.countUnlikes = { unlike: (unlikes += 1) };
     console.log(this.countUnlikes);
-    this.http.patch(`${this.SERVER_ROSE}/itineraries/${id}`, this.countUnlikes)
+    this.http.patch(`${this.SERVER_DEPLOY}/itineraries/${id}`, this.countUnlikes)
     .map(res => res.json())
     .subscribe((data) => {
       if(data){

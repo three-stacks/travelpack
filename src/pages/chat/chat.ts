@@ -16,7 +16,7 @@ export class Chat {
   public SERVER_ROSE = 'http://192.168.1.113:3030';
   public text: string;
   public messages: any = [];
-  public socketHost: string = this.SERVER_ROSE;
+  public socketHost: string = this.SERVER_DEPLOY;
   public socket: any;
   public chat: any;
   public username: string;
@@ -41,7 +41,9 @@ export class Chat {
       console.log(msg, 'in chat message');
       this.zone.run(() => {
         this.messages.push(msg);
-        this.scrollToBottom();
+        if(msg){
+          // this.scrollToBottom();
+        }
       });
     });
   }
