@@ -5,7 +5,7 @@
       <button ion-button (click)="backClick()">
       </button>
     </ion-buttons>
-    <ion-title text-center>Add to Your Activities</ion-title>
+    <ion-title text-center>Attractions</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -14,7 +14,7 @@
 [(ngModel)]='search.term' type='text' placeholder='search restuaurants, museums, and other activities'> 
 </ion-searchbar>
 <ion-searchbar ionInput
-[(ngModel)]='search.location' type='text' placeholder='destination'>
+[(ngModel)]='search.location' type='text' placeholder='location'>
 </ion-searchbar>
 <button (click)='submitSearch()' ion-button full> Enter </button>
 

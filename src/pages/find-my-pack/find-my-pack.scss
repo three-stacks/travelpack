@@ -2,10 +2,15 @@
 
 // }
 
+  ion-app._gmaps_cdv_ .nav-decor {
+        background-color: transparent !important;
+      }
+
 .ios, .md {
  
     page-find-my-pack {
- 
+
+    
       .scroll {
         height: 100%
       }
