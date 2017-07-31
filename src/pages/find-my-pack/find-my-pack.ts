@@ -77,7 +77,7 @@ export class FindMyPack {
     let location = new GoogleMapsLatLng(30.9290, -90.6010);
 
     this.gMap = new GoogleMap('map', {
-      'backgroundColor': 'white',
+      'backgroundColor': 'transparent',
       'controls': {
         'compass': true,
         'myLocationButton': true,

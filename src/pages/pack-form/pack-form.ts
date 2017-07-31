@@ -29,7 +29,6 @@ export class PackForm {
   public submitPack() {
     this.pkSvs.addPacks(this.packName);
     this.navCtrl.pop();
-
   }
   public cancelPack() {
     this.navCtrl.pop();
