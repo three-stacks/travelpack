@@ -2,6 +2,7 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, NavParams, Platform } from 'ionic-angular';
 import { Chat } from "../chat/chat";
 import { ChatService } from "../../services/chat.service";
+import { ContactsService } from "../../services/contacts.service";
 import { Storage } from '@ionic/storage';
 import { Geolocation } from '@ionic-native/geolocation';
 import * as io from "socket.io-client";
@@ -12,19 +13,20 @@ declare var google;
 @Component({
   selector: 'page-find-my-pack',
   templateUrl: 'find-my-pack.html',
+  providers: [ContactsService],
 })
 export class FindMyPack {
 
   @ViewChild('map') mapElement: ElementRef;
-  public SERVER_DEPLOY = 'http://ec2-18-220-15-216.us-east-2.compute.amazonaws.com:3030';
-  public socketHost: string = this.SERVER_DEPLOY;
+  // public SERVER_DEPLOY = 'http://ec2-18-220-15-216.us-east-2.compute.amazonaws.com:3030';
+  // public socketHost: string = this.SERVER_DEPLOY;
   public socket: any;
   public userId;
   public map: any;
   public gMap: GoogleMap;
   public usersLocations = {};
-  //  {
-  // Rose: {lat: 30, lng: -90},
+  // {
+  //   Rose: {lat: 30, lng: -90},
   //   TRob: {lat: 30.5, lng: -90.5},
   //   Ali: {lat: 29.8, lng: -90},
   // };
@@ -34,10 +36,11 @@ export class FindMyPack {
               public navParams: NavParams,
               public geolocation: Geolocation,
               public storage: Storage,
-              public chatSvs: ChatService) {
+              public chatSvs: ChatService,
+              public contactSvs: ContactsService) {
     this.storage.get('userId').then(val => this.userId = val);
     this.chatSvs.socket.on('pack locations', (msg) => {
-      console.log(msg, 'in location message');
+      console.log(JSON.stringify(msg), 'in location message');
       Object.assign(this.usersLocations, msg);
       if (this.platform.is('core')) {
         this.addMarker(this.usersLocations);
@@ -51,7 +54,19 @@ export class FindMyPack {
     console.log('ionViewDidLoad FindMyPackPagePage');
   }
   public ionViewDidEnter() {
+    this.contactSvs.getContacts(this.grabContactLoc.bind(this))
+    
+  }
+
+  public grabContactLoc(users) {
+    users.forEach(({lat, long, id, username}, i, arr) => {
+      if (lat){
+        this.usersLocations[username] = {lat: +lat, lng: +long, userId: id};
+      }
+    });
+    console.log(this.usersLocations, "all users")
     if (this.platform.is('core')) {
+      console.log('desktop hit')
       this.loadBrowserMap();
     } else {
       this.loadMap();
@@ -141,8 +156,7 @@ export class FindMyPack {
 
         this.gMap.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
           console.log('Map is ready!');
-          let locals = this.usersLocations;
-          this.androidMarkers(locals);
+          this.androidMarkers(this.usersLocations);
         });
 
       });
@@ -152,6 +166,8 @@ export class FindMyPack {
   }
 
   public androidMarkers(loc) {
+    this.gMap.clear();
+    console.log(JSON.stringify(loc), 'loc');
     for (let key in loc) {
       let location = new GoogleMapsLatLng(loc[key].lat, loc[key].lng);
       let markerOptions: GoogleMapsMarkerOptions = {

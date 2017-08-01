@@ -9,7 +9,7 @@ import { Storage } from '@ionic/storage';
 export class ChatService {
   public SERVER_DEPLOY = 'http://ec2-18-220-15-216.us-east-2.compute.amazonaws.com:3030';
   public SERVER_ROSE = 'http://192.168.1.113:3030';
-  public socketHost = this.SERVER_ROSE;
+  public socketHost = this.SERVER_DEPLOY;
   public userID: string;
   public packID: number;
   public socket = io.connect(this.socketHost);
