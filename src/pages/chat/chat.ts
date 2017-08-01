@@ -3,7 +3,7 @@ import { NavController, NavParams, ModalController, Content } from 'ionic-angula
 import { Contacts } from "../contacts/contacts";
 import * as io from "socket.io-client";
 import { Storage } from '@ionic/storage';
-import { ChatService } from '../../services/chat.service'; 
+import { ChatService } from '../../services/chat.service';
 
 @Component({
   selector: 'page-chat',
@@ -26,7 +26,7 @@ export class Chat {
   public userId: any;
   public packname: string;
   public packId: number;
-  
+
   constructor(public storage: Storage,
               public navCtrl: NavController,
               public navParams: NavParams,
@@ -35,9 +35,9 @@ export class Chat {
     this.storage.get('username').then(val => this.username = val);
     this.storage.get('userId').then(val => this.userId = val);
     this.storage.get('avatar').then(val => this.avatar = val);
-    this.socket = io.connect(this.socketHost);
+    // this.socket = io.connect(this.socketHost);
     this.zone = new NgZone({enableLongStackTrace: false});
-    this.socket.on('chat message', (msg) => {
+    this.chatSvs.socket.on('chat message', (msg) => {
       console.log(msg, 'in chat message');
       this.zone.run(() => {
         this.messages.push(msg);
@@ -53,16 +53,16 @@ export class Chat {
     this.chatSvs.getMessages(this.loadMessages.bind(this))
   }
 
-  public loadMessages(allMessages){
-    if(allMessages){
-      for(var i = 0; i < allMessages.length; i++){
+  public loadMessages(allMessages) {
+    if (allMessages) {
+      for (var i = 0; i < allMessages.length; i++) {
         this.messages.push(this.processMessage(allMessages[i]));
-      }      
+      }
     }
     this.scrollToBottom();
   }
 
-  public scrollToBottom(){
+  public scrollToBottom() {
     let dimensions = this.content.getContentDimensions();
     this.content.scrollTo(0, dimensions.contentHeight, 300);
   }
@@ -73,16 +73,16 @@ export class Chat {
       username: mes.users.username,
       avatar: mes.users.avatar,
       date: mes.users.createdAt,
-    }
-    console.log(messageData);
+    };
     return messageData;
   }
 
   public ionViewDidEnter() {
     this.storage.get('packName').then(val => this.packname = val);
     this.storage.get('packId').then(id => {
+      console.log(id, "did enter pack id")
       this.packId = id;
-      this.socket.emit('room', id);
+      this.chatSvs.socket.emit('room', id);
     });
   }
 
@@ -101,8 +101,9 @@ export class Chat {
       username: this.username,
       avatar: this.avatar,
       date: this.date,
+      packId: this.packId,
     };
-    this.socket.emit('new message', data);
+    this.chatSvs.socket.emit('new message', data);
     this.chat = '';
   }
 
