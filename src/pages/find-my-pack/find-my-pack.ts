@@ -111,38 +111,64 @@ export class FindMyPack {
 
   // this map is for native Android use only
   public loadMap() {
-    let location = new GoogleMapsLatLng(30.9290, -90.6010);
+    this.geolocation.getCurrentPosition().then((position) => {
+      let location = new GoogleMapsLatLng(position.coords.latitude, position.coords.longitude);
+      this.storage.get('username').then((val) => {
+        this.usersLocations[val] = {lat: position.coords.latitude, lng: position.coords.longitude, userId: this.userId};
+        this.locSend({[val]: this.usersLocations[val]});
 
-    this.gMap = new GoogleMap('map', {
-      'backgroundColor': 'transparent',
-      'controls': {
-        'compass': true,
-        'myLocationButton': true,
-        'indoorPicker': true,
-        'zoom': true
-      },
-      'gestures': {
-        'scroll': true,
-        'tilt': true,
-        'rotate': true,
-        'zoom': true
-      },
-      'camera': {
-        'latLng': location,
-        'tilt': 30,
-        'zoom': 15,
-        'bearing': 50
-      }
-    });
+        this.gMap = new GoogleMap('map', {
+          'backgroundColor': 'transparent',
+          'controls': {
+            'compass': true,
+            'myLocationButton': true,
+            'indoorPicker': true,
+            'zoom': true
+          },
+          'gestures': {
+            'scroll': true,
+            'tilt': true,
+            'rotate': true,
+            'zoom': true
+          },
+          'camera': {
+            'latLng': location,
+            'tilt': 30,
+            'zoom': 15,
+            'bearing': 50
+          }
+        });
 
-    this.gMap.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
-      console.log('Map is ready!');
+        this.gMap.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
+          console.log('Map is ready!');
+          let locals = this.usersLocations;
+
+          for (let key in locals) {
+            let location = new GoogleMapsLatLng(locals[key].lat, locals[key].lng);
+            let markerOptions: GoogleMapsMarkerOptions = {
+              position: location,
+              title: `${key}`,
+            };
+
+            this.gMap.addMarker(markerOptions)
+              .then((marker: GoogleMapsMarker) => {
+                marker.showInfoWindow();
+              });
+          };
+        });
+      });
+    }, (err) => {
+      console.error(err);
     });
+  }
+
+  public androidMarkers(marks){
+    
   }
 
   public locSend(val) {
     console.log(val, 'val');
-    this.chatSvs.socket.emit('geolocation', {djd: {lat: 80.5, lng: -90.5, userId: 1}});
+    this.chatSvs.socket.emit('geolocation', val);
   }
 
 }
