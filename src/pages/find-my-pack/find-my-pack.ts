@@ -35,15 +35,15 @@ export class FindMyPack {
               public geolocation: Geolocation,
               public storage: Storage,
               public chatSvs: ChatService) {
-    // this.zone = new NgZone({enableLongStackTrace: false});
     this.storage.get('userId').then(val => this.userId = val);
     this.chatSvs.socket.on('pack locations', (msg) => {
       console.log(msg, 'in location message');
       Object.assign(this.usersLocations, msg);
-      this.addMarker(this.usersLocations);
-      // this.zone.run(() => {
-
-      // });
+      if (this.platform.is('core')) {
+        this.addMarker(this.usersLocations);
+      } else {
+        this.androidMarkers(this.usersLocations);
+      }
     });
   }
 
@@ -142,28 +142,28 @@ export class FindMyPack {
         this.gMap.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
           console.log('Map is ready!');
           let locals = this.usersLocations;
-
-          for (let key in locals) {
-            let location = new GoogleMapsLatLng(locals[key].lat, locals[key].lng);
-            let markerOptions: GoogleMapsMarkerOptions = {
-              position: location,
-              title: `${key}`,
-            };
-
-            this.gMap.addMarker(markerOptions)
-              .then((marker: GoogleMapsMarker) => {
-                marker.showInfoWindow();
-              });
-          };
+          this.androidMarkers(locals);
         });
+
       });
     }, (err) => {
       console.error(err);
     });
   }
 
-  public androidMarkers(marks){
-    
+  public androidMarkers(loc) {
+    for (let key in loc) {
+      let location = new GoogleMapsLatLng(loc[key].lat, loc[key].lng);
+      let markerOptions: GoogleMapsMarkerOptions = {
+        position: location,
+        title: `${key}`,
+      };
+
+      this.gMap.addMarker(markerOptions)
+        .then((marker: GoogleMapsMarker) => {
+          marker.showInfoWindow();
+        });
+    };
   }
 
   public locSend(val) {
