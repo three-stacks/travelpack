@@ -41,16 +41,13 @@ export class Chat {
       console.log(msg, 'in chat message');
       this.zone.run(() => {
         this.messages.push(msg);
-        if(msg){
-          // this.scrollToBottom();
-        }
       });
     });
   }
 
   public ionViewDidLoad() {
     console.log('ionViewDidLoad ChatPagePage');
-    this.chatSvs.getMessages(this.loadMessages.bind(this))
+    this.chatSvs.getMessages(this.loadMessages.bind(this));
   }
 
   public loadMessages(allMessages) {
@@ -80,7 +77,7 @@ export class Chat {
   public ionViewDidEnter() {
     this.storage.get('packName').then(val => this.packname = val);
     this.storage.get('packId').then(id => {
-      console.log(id, "did enter pack id")
+      console.log(id, "did enter pack id");
       this.packId = id;
       this.chatSvs.socket.emit('room', id);
     });

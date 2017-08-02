@@ -36,8 +36,8 @@ export class ContactsService {
             this.http.post(`${this.SERVER_DEPLOY}/groups`, contact)
               .subscribe((response) => {
                 console.log("All good");
-                if(response){ 
-                  this.events.publish('get:contacts')
+                if (response) {
+                  this.events.publish('get:contacts');
                 }
               }, (error) => {
                 console.error(error, "ERROR");
@@ -54,7 +54,7 @@ export class ContactsService {
       this.http.get(`${this.SERVER_DEPLOY}/groups?packId=${val}`)
         .map(res => res.json())
         .subscribe(({data}) => {
-          data = data.map((group) => group.user)
+          data = data.map((group) => group.user);
           console.log(data, 'contact data');
           cb(data);
         }, error => {

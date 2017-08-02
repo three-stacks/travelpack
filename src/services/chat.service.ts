@@ -19,16 +19,15 @@ export class ChatService {
     this.storage.get('userId').then(val => this.userID = val);
   }
 
-  public getMessages(cb){
+  public getMessages(cb) {
     this.storage.get('packId').then(val => {
       this.http.get(`${this.SERVER_DEPLOY}/messages?packId=${val}`)
         .map(res => res.json())
         .subscribe(({data}) => {
-          console.log(data)
           cb(data);
-        }, (err) =>{
+        }, (err) => {
           console.error(err);
         });
-    })
+    });
   }
 }
