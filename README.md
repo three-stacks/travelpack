@@ -33,7 +33,7 @@ During the trip, users can utilize travelpack's find my pack feature to pin poin
 ## Tech Stack 
 ![img](https://i.imgur.com/Dw9ptYs.png)
 
-Summary of Tech Stack
+### Summary of Tech Stack
 * Front End: Ionic, Cordova, Angular 2, Typescript
 * Server: FeatherJS, Socket.io, Sequalize, Passport
 * Server 2: Apache Tomcat, Springboot-JPA, Maven
@@ -46,9 +46,9 @@ The schema for Travelpack was designed with packs in the center. Packs have a on
 
 ![img](https://i.imgur.com/bY9BorX.png)
 
-Summary of database schema:
+### Summary of database schema:
 * Packs have one to many relationship with itinerary, map, photo, budget, and message.
-* Users and Packs have a many to many relationship.
+* Users and Packs have a many to many relationship with Group as their join table.
 * Each Message belongs to a user and pack.
 
 ## Architecture
@@ -80,4 +80,5 @@ $ ionic serve
 ```
 ## Contributing 
 Check out our initial [Press Release](PRESS-RELEASE.md) . We prepared it the second day of our project in an effort to carve out a vision for our app. Do you think our final product was close to our initial vision? 
+
 If you'd like to contribute checkout our [Contributing Guidelines](_CONTRIBUTING.md)! 
