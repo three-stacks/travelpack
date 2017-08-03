@@ -22,7 +22,8 @@
     <h2>{{todo.name}}</h2>
   </ion-item> 
 
-  <a ion-item href="{{todo.link}}">
+  <!-- <a ion-item href="{{todo.link}}"> -->
+    <a ion-item (click)="goToLink(todo.link)"> 
       <img src="{{todo.img}}"></a>   
 
   
@@ -49,6 +50,9 @@
   </ion-row>
     <ion-item>
       <ion-label>Date</ion-label>
+      <ion-select [(ngModel)]="day">
+        <ion-option *ngFor="let n of allDays"value="{{n}}">{{n}}</ion-option>
+      </ion-select>
       <ion-select [(ngModel)]="month">
         <ion-option value="01">January</ion-option>
         <ion-option value="02">February</ion-option>
