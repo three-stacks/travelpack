@@ -67,10 +67,22 @@ export class Itinerary {
     this.yelpSvs.unlike(id, unlikes);
   }
   public postLike(id, likes) {
+    console.log(likes, 'likes')
     this.yelpSvs.like(id, likes);
   }
 
   public backClick() {
     this.navCtrl.push(Chat);
+  }
+
+  public submitDate(id) {
+    console.log(id, 'on submit');
+    if (this.day && this.month && this.year) {
+      let date = { "date": `${this.month} ${this.day}, ${this.year}`};
+      this.yelpSvs.updatDates(id, date);
+      this.day = '';
+      this.month = '';
+      this.year = '';
+    }
   }
 }

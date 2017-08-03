@@ -35,7 +35,7 @@ export class PackingListService {
     this.storage.get('username').then((name) => {
       this.storage.get('userId').then((id) => {
         let myList = { userId: id, agenda, name };
-        this.http.post(`${this.SERVER_ROSE}/agendas`, myList)
+        this.http.post(`/agendas`, myList)
         .map((res) => res.json())
         .subscribe((data) => {
           console.log(data, 'post budget data');

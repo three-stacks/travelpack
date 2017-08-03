@@ -10,6 +10,10 @@
     {
       "path": "/useragendas/1",
       "proxyUrl": "http://localhost:3030/useragendas/1"
+    },
+    {
+      "path": "/agendas",
+      "proxyUrl": "http://localhost:3030/agendas/"
     }
   ]
 }
