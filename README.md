@@ -29,6 +29,7 @@ During the trip, users can utilize travelpack's find my pack feature to pin poin
 
 ## Wireframes 
 ![img](https://res.cloudinary.com/djdelgado/image/upload/v1501169154/Screen_Shot_2017-07-27_at_10.24.16_AM_hrrjmw.png)
+![img](https://i.imgur.com/iUA3HPr.jpg)
 
 ## Tech Stack 
 ![img](https://i.imgur.com/Dw9ptYs.png)
