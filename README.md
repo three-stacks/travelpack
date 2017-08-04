@@ -53,7 +53,7 @@ The schema for Travelpack was designed with packs in the center. Packs have a on
 
 ## Architecture
 
-![img](http://res.cloudinary.com/djdelgado/image/upload/v1501182320/Screen_Shot_2017-07-27_at_2.04.36_PM_wxblib.png)
+![img](http://res.cloudinary.com/djdelgado/image/upload/v1501863439/Screen_Shot_2017-08-04_at_11.16.36_AM_syni3u.png)
 
 ## Development
 
