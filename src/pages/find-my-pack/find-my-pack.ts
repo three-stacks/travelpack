@@ -6,7 +6,7 @@ import { ContactsService } from "../../services/contacts.service";
 import { Storage } from '@ionic/storage';
 import { Geolocation } from '@ionic-native/geolocation';
 import * as io from "socket.io-client";
-import { GoogleMap, GoogleMapsEvent, GoogleMapsLatLng, GoogleMapsMarkerOptions, GoogleMapsMarker } from 'ionic-native';
+import { GoogleMap, GoogleMapsEvent, GoogleMapsLatLng, GoogleMapsMarkerOptions, GoogleMapsMarker} from 'ionic-native';
 
 declare var google;
 
@@ -164,15 +164,12 @@ export class FindMyPack {
     this.gMap.clear();
     console.log(JSON.stringify(loc), 'loc');
     for (let key in loc) {
+      let img = { url: loc[key].avatar, size: {width: 30, height: 30}};
       let location = new GoogleMapsLatLng(loc[key].lat, loc[key].lng);
       let markerOptions: GoogleMapsMarkerOptions = {
         position: location,
         title: `${key}`,
-        icon: {
-          url: `${loc[key].avatar}`,
-          scaledSize : new google.maps.Size(30, 30),
-          anchor: new google.maps.Point(0, 30),
-        },
+        icon: img,
       };
 
       this.gMap.addMarker(markerOptions)
