@@ -44,7 +44,7 @@ During the trip, users can utilize travelpack's find my pack feature to pin poin
 ## Database Schema 
 The schema for Travelpack was designed with packs in the center. Packs have a one to many relationship with the itinerary, map, photo, budget, and message to ensure that only members within each pack have access to the data thereby maintaining each pack(groups) privacy.
 
-![img](https://i.imgur.com/bY9BorX.png)
+![img](https://i.imgur.com/hTCLrUE.png)
 
 ### Summary of database schema:
 * Packs have one to many relationship with itinerary, map, photo, budget, and message.
