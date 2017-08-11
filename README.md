@@ -12,6 +12,7 @@ During the trip, users can utilize travelpack's find my pack feature to pin poin
 
 1. [What is Travelpack?](#travelpack)
 1. [Team](#Team)
+1. [Team Website](#Team Website)
 1. [Wireframes](#wireframes)
 1. [Tech Stack](#tech-stack)
 1. [Database Schema](#database-schema)
@@ -26,6 +27,9 @@ During the trip, users can utilize travelpack's find my pack feature to pin poin
   - __Product Owner__: Rose Espiritu
   - __Scrum Master__: David Delgado
   - __Development Team Members__: Taijon Robinson, David Delgado, Rose Espiritu
+  
+## Team Website
+https://three-stacks.github.io/
 
 ## Wireframes 
 ![img](https://res.cloudinary.com/djdelgado/image/upload/v1501169154/Screen_Shot_2017-07-27_at_10.24.16_AM_hrrjmw.png)
