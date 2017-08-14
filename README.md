@@ -4,9 +4,9 @@
 
 ### Travelpack takes the stress away from planning group trips by creating a central location for messaging and planning. Think of us as GroupMe for trips!
 
-Travelpack is a cross platform application that allows users to communicate in real time as they plan their trips. Users can search through tourist attractions and add items to the group(pack) itinerary. Once the item is on the group itinerary, pack members can gage the groups interest throught a polling feature. Travelpack comes with a built in budget calculator that helps packs estimate the cost of the trip as well as an agenda to help members track what anything what they need to do to prepare for the trip. 
+Travelpack is a cross platform application that allows users to communicate in real time as they plan their trips. Users can search through tourist attractions and add items to the group (pack) itinerary. Once the attractions are in the group itinerary, pack members can gage group interest through a polling feature. Travelpack comes with a built in budget calculator that helps packs estimate the cost of their trip as well as a packing list.
 
-During the trip, users can utilize travelpack's find my pack feature to pin point the real time locations of their pack members and upload photos to the pack photo album to keeps all of their memories in one place!
+During the trip, users can utilize Travelpack’s Find My Pack feature to pinpoint real time locations of pack members and upload photos to the pack photo album to keeps all of their memories in one place!
 
 ## Table of Contents
 
@@ -31,8 +31,6 @@ During the trip, users can utilize travelpack's find my pack feature to pin poin
 ## Team Website
 [three-stacks.github.io](https://three-stacks.github.io/)
 
-
-
 ## Wireframes 
 ![img](https://res.cloudinary.com/djdelgado/image/upload/v1501169154/Screen_Shot_2017-07-27_at_10.24.16_AM_hrrjmw.png)
 ![img](https://i.imgur.com/iUA3HPr.jpg)
@@ -49,14 +47,13 @@ During the trip, users can utilize travelpack's find my pack feature to pin poin
 * Testing: Travis CI, Mocha, Chai
 
 ## Database Schema 
-The schema for Travelpack was designed with packs in the center. Packs have a one to many relationship with the itinerary, map, photo, budget, and message to ensure that only members within each pack have access to the data thereby maintaining each pack(groups) privacy.
+The schema for Travelpack was designed with packs in the center. Packs have a one to many relationship with the itinerary, map, photo, budget, and message to ensure that only members within each pack have access to the data thereby maintaining each pack (group) privacy.
 
 ![img](https://i.imgur.com/hTCLrUE.png)
 
 ### Summary of database schema:
 * Packs have one to many relationship with itinerary, map, photo, budget, and message.
-* Users and Packs have a many to many relationship with Group as their join table.
-* Each Message belongs to a user and pack.
+* Group is a join table for Users and Paccks.
 
 ## Architecture
 
@@ -80,7 +77,6 @@ $ npm install -g ionic
 $ npm install -g typescript
 $ npm install
 ```
-
 To start front end run:
 ```bash
 $ ionic serve
@@ -88,4 +84,4 @@ $ ionic serve
 ## Contributing 
 Check out our initial [Press Release](PRESS-RELEASE.md) . We prepared it the second day of our project in an effort to carve out a vision for our app. Do you think our final product was close to our initial vision? 
 
-If you'd like to contribute checkout our [Contributing Guidelines](_CONTRIBUTING.md)! 
+If you'd like to contribute check out our [Contributing Guidelines](_CONTRIBUTING.md)! Thanks!! 
